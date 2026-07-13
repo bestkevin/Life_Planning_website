@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+:root {
+    --ivory: #f6f0e6;
+    --parchment: #e9dfcf;
+    --sage: #8f9d83;
+    --sage-dark: #5f6e58;
+    --rose: #b98b82;
+    --ink: #39352f;
+    --muted-ink: #6f685f;
+    --glass: rgba(255, 252, 246, 0.62);
+    --glass-border: rgba(255, 255, 255, 0.72);
+    --shadow: 0 18px 45px rgba(77, 66, 52, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
+    line-height: 1.7;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(185, 139, 130, 0.18), transparent 28rem),
+        radial-gradient(circle at 85% 35%, rgba(143, 157, 131, 0.22), transparent 30rem),
+        linear-gradient(145deg, var(--ivory), var(--parchment));
+    background-attachment: fixed;
+}
+
+header {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 14px 20px;
+    background: rgba(246, 240, 230, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 30px rgba(77, 66, 52, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: clamp(8px, 3vw, 36px);
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+nav a {
+    position: relative;
+    padding: 8px 12px;
+    color: var(--ink);
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: #fff;
+    background: var(--sage-dark);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+main {
+    display: grid;
+    gap: 34px;
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 130px 0 72px;
+}
+
+section,
+.interactive-box,
+.display-box {
+    padding: clamp(28px, 5vw, 58px);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+section:hover,
+.interactive-box:hover,
+.display-box:hover {
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 24px 60px rgba(77, 66, 52, 0.18);
+    transform: translateY(-7px);
+}
+
+#home {
+    display: grid;
+    min-height: 52vh;
+    align-content: center;
+    text-align: center;
+}
+
+h1,
+h2 {
+    margin: 0 0 14px;
+    color: var(--sage-dark);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+h1 {
+    font-size: clamp(2.4rem, 8vw, 5.2rem);
+}
+
+h2 {
+    font-size: clamp(1.6rem, 4vw, 2.35rem);
+}
+
+p {
+    max-width: 680px;
+    margin: 0;
+    color: var(--muted-ink);
+}
+
+#home p {
+    margin-inline: auto;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+button,
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 20px;
+    color: #fff;
+    font: inherit;
+    background: var(--sage-dark);
+    border: 0;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(95, 110, 88, 0.24);
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+button:hover,
+.button:hover {
+    background: var(--rose);
+    box-shadow: 0 12px 25px rgba(185, 139, 130, 0.3);
+    transform: translateY(-2px);
+}
+
+footer {
+    padding: 28px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+footer p {
+    margin-inline: auto;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 10px 8px;
+    }
+
+    nav {
+        justify-content: flex-start;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav a {
+        flex: 0 0 auto;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    main {
+        width: min(100% - 24px, 1080px);
+        gap: 20px;
+        padding-top: 96px;
+    }
+
+    section,
+    .interactive-box,
+    .display-box {
+        padding: 26px 20px;
+        border-radius: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+}
