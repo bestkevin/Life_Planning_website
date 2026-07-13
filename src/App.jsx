@@ -15,8 +15,8 @@ import { navigation, projects } from "../script";
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
 const liquidGlassDefaults = {
-    blurAmount: 0.32,
-    refraction: 0.62,
+    blurAmount: 0.52,
+    refraction: 0.48,
     chromAberration: 0.028,
     edgeHighlight: 0.12,
     specular: 0.1,
@@ -25,7 +25,7 @@ const liquidGlassDefaults = {
     cornerRadius: 28,
     zRadius: 20,
     opacity: 0.5,
-    saturation: -0.2,
+    saturation: -0.28,
     brightness: -0.24,
     shadowOpacity: 0.48,
     shadowSpread: 20,

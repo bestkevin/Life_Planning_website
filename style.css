@@ -136,9 +136,9 @@ main {
 
 .liquid-root[data-liquid-ready="true"] > .liquid-glass-panel {
     background:
-        radial-gradient(circle, rgba(255, 241, 218, 0.045) 0 0.7px, transparent 0.9px)
-            0 0 / 4px 4px,
-        rgba(54, 37, 26, 0.035);
+        radial-gradient(circle, rgba(255, 241, 218, 0.075) 0 0.8px, transparent 1px)
+            0 0 / 3px 3px,
+        rgba(54, 37, 26, 0.065);
     border-color: rgba(220, 177, 105, 0.16);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
