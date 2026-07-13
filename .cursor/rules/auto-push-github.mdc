@@ -1,0 +1,15 @@
+---
+description: Automatically publish completed website changes to GitHub
+alwaysApply: true
+---
+
+# Publish Changes
+
+After completing and validating each user-requested modification:
+
+1. Review all pending changes and ensure generated files, dependencies, and secrets are not included.
+2. Create a concise Git commit describing the completed modification.
+3. Push the commit to the tracked `origin/main` branch.
+4. Verify the GitHub Pages deployment when the modification affects the website.
+
+Do not push incomplete, failing, unrelated, or secret-containing changes.

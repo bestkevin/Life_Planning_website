@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     ArrowRight,
     BookOpen,
@@ -13,8 +13,27 @@ import { navigation, projects } from "../script";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
+function getPageFromHash() {
+    const hash = window.location.hash || "#home";
+    const matchedPage = navigation.find((item) => item.href === hash);
+
+    return matchedPage ? matchedPage.href.slice(1) : "home";
+}
+
 function App() {
     const [expandedProject, setExpandedProject] = useState(null);
+    const [activePage, setActivePage] = useState(getPageFromHash);
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            setActivePage(getPageFromHash());
+            setExpandedProject(null);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
+    }, []);
 
     return (
         <>
@@ -27,7 +46,14 @@ function App() {
                             <a
                                 key={item.href}
                                 href={item.href}
-                                className="flex items-center gap-2"
+                                className={`flex items-center gap-2 ${
+                                    activePage === item.href.slice(1)
+                                        ? "nav-link-active"
+                                        : ""
+                                }`}
+                                aria-current={
+                                    activePage === item.href.slice(1) ? "page" : undefined
+                                }
                             >
                                 <Icon aria-hidden="true" size={17} strokeWidth={1.8} />
                                 <span>{item.label}</span>
@@ -38,7 +64,7 @@ function App() {
             </header>
 
             <main>
-                <section id="home">
+                {activePage === "home" && <section id="home" className="page-enter">
                     <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-white/70 bg-white/45 px-4 py-2 text-sm tracking-[0.16em] text-[#5f6e58] shadow-sm backdrop-blur">
                         <Sparkles aria-hidden="true" size={16} />
                         向理想生活缓缓生长
@@ -54,14 +80,14 @@ function App() {
                         查看我的计划
                         <ArrowRight aria-hidden="true" size={18} />
                     </a>
-                </section>
+                </section>}
 
-                {projects.map((project) => {
+                {projects.filter((project) => project.id === activePage).map((project) => {
                     const Icon = icons[project.icon];
                     const isExpanded = expandedProject === project.id;
 
                     return (
-                        <section id={project.id} key={project.id}>
+                        <section id={project.id} key={project.id} className="page-enter">
                             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
                                 <div>
                                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#dfe6d8] text-[#5f6e58] shadow-inner">
@@ -128,7 +154,7 @@ function App() {
                     );
                 })}
 
-                <section id="summary">
+                {activePage === "summary" && <section id="summary" className="page-enter">
                     <div className="mb-6 flex items-center gap-3">
                         <Target aria-hidden="true" className="text-[#b98b82]" size={28} />
                         <p className="text-xs font-semibold tracking-[0.22em] text-[#b07870]">
@@ -160,7 +186,7 @@ function App() {
                             <p className="text-sm">珍视过程，让细小的进步也被认真看见。</p>
                         </div>
                     </div>
-                </section>
+                </section>}
             </main>
 
             <footer>
