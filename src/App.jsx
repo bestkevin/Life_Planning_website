@@ -16,7 +16,7 @@ const icons = { Home, Sprout, BookOpen, Sparkles };
 
 const liquidGlassDefaults = {
     blurAmount: 0.46,
-    refraction: 1.18,
+    refraction: 3,
     chromAberration: 0.05,
     edgeHighlight: 0.18,
     specular: 0.1,
