@@ -35,6 +35,15 @@ body {
     background-attachment: fixed;
 }
 
+body[data-page="home"] {
+    background-image:
+        linear-gradient(rgba(5, 4, 3, 0.48), rgba(8, 6, 4, 0.66)),
+        url("./cafe1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 header {
     position: fixed;
     z-index: 1000;
@@ -104,6 +113,15 @@ main {
         );
     border-radius: 48px;
     pointer-events: none;
+}
+
+.liquid-root[data-page="home"] > .liquid-scene {
+    background-image:
+        linear-gradient(rgba(7, 5, 3, 0.36), rgba(10, 7, 5, 0.52)),
+        url("./cafe1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .liquid-glass-panel {

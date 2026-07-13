@@ -56,6 +56,11 @@ function App() {
     }, []);
 
     useEffect(() => {
+        document.body.dataset.page = activePage;
+        return () => delete document.body.dataset.page;
+    }, [activePage]);
+
+    useEffect(() => {
         const root = mainRef.current;
         if (!root || !window.WebGLRenderingContext) return;
 
@@ -124,7 +129,7 @@ function App() {
                 </nav>
             </header>
 
-            <main ref={mainRef} className="liquid-root">
+            <main ref={mainRef} className="liquid-root" data-page={activePage}>
                 <div className="liquid-scene" aria-hidden="true" />
 
                 {activePage === "home" && <section id="home" className="liquid-glass-panel page-enter">
