@@ -137,7 +137,7 @@ main {
 .liquid-root[data-liquid-ready="true"] > .liquid-glass-panel {
     background:
         radial-gradient(circle, rgba(255, 241, 218, 0.075) 0 0.8px, transparent 1px)
-            0 0 / 3px 3px,
+            0 0 / 2.12px 2.12px,
         rgba(54, 37, 26, 0.065);
     border-color: rgba(220, 177, 105, 0.16);
     backdrop-filter: none;
@@ -320,6 +320,16 @@ footer p {
     margin-inline: auto;
     font-size: 0.78rem;
     letter-spacing: 0.08em;
+}
+
+@media (min-width: 768px) {
+    .liquid-glass-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
 }
 
 @media (max-width: 600px) {
