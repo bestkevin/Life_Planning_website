@@ -149,8 +149,9 @@ main {
     background:
         radial-gradient(circle, rgba(255, 241, 218, 0.075) 0 0.8px, transparent 1px)
             0 0 / 2.12px 2.12px,
-        rgba(54, 37, 26, 0.065);
-    border-color: rgba(220, 177, 105, 0.16);
+        rgba(54, 37, 26, 0.1);
+    border-width: 2px;
+    border-color: rgba(220, 177, 105, 0.35);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
