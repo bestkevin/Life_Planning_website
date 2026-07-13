@@ -8,6 +8,7 @@ import {
     Home,
     Sparkles,
     Sprout,
+    Star,
     Target,
 } from "lucide-react";
 import { navigation, projects } from "../script";
@@ -161,7 +162,7 @@ function App() {
 
                 {activePage === "home" && <section id="home" className="liquid-glass-panel page-enter">
                     <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
-                        <Sparkles aria-hidden="true" size={16} />
+                        <Star aria-hidden="true" size={16} />
                         向理想生活缓缓生长
                     </div>
                     <h1>人生规划</h1>
