@@ -135,6 +135,19 @@ main {
     background-repeat: no-repeat;
 }
 
+.liquid-root[data-page="home"][data-rain-ready="true"] > .liquid-scene {
+    background-image: none;
+}
+
+.heartfelt-rain-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
 .liquid-glass-panel {
     z-index: 1;
     background-color: rgba(54, 36, 25, 0.2);

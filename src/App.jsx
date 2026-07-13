@@ -11,6 +11,7 @@ import {
     Target,
 } from "lucide-react";
 import { navigation, projects } from "../script";
+import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
@@ -41,8 +42,10 @@ function getPageFromHash() {
 
 function App() {
     const mainRef = useRef(null);
+    const liquidGlassRef = useRef(null);
     const [expandedProject, setExpandedProject] = useState(null);
     const [activePage, setActivePage] = useState(getPageFromHash);
+    const [rainReady, setRainReady] = useState(false);
 
     useEffect(() => {
         const handleHashChange = () => {
@@ -83,6 +86,7 @@ function App() {
                     nextInstance.destroy();
                 } else {
                     instance = nextInstance;
+                    liquidGlassRef.current = nextInstance;
                     root.dataset.liquidReady = "true";
                 }
             } catch (error) {
@@ -97,9 +101,20 @@ function App() {
             cancelled = true;
             window.cancelAnimationFrame(animationFrame);
             instance?.destroy();
+            liquidGlassRef.current = null;
             delete root.dataset.liquidReady;
         };
     }, [activePage]);
+
+    useEffect(() => {
+        if (activePage !== "home") {
+            setRainReady(false);
+        }
+    }, [activePage]);
+
+    const handleRainFrame = (target) => {
+        liquidGlassRef.current?.markChanged(target);
+    };
 
     return (
         <>
@@ -129,8 +144,20 @@ function App() {
                 </nav>
             </header>
 
-            <main ref={mainRef} className="liquid-root" data-page={activePage}>
-                <div className="liquid-scene" aria-hidden="true" />
+            <main
+                ref={mainRef}
+                className="liquid-root"
+                data-page={activePage}
+                data-rain-ready={activePage === "home" && rainReady ? "true" : undefined}
+            >
+                <div className="liquid-scene" aria-hidden="true">
+                    {activePage === "home" && (
+                        <HeartfeltRainCanvas
+                            onReady={setRainReady}
+                            onFrame={handleRainFrame}
+                        />
+                    )}
+                </div>
 
                 {activePage === "home" && <section id="home" className="liquid-glass-panel page-enter">
                     <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
