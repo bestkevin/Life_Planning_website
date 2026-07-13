@@ -78,11 +78,42 @@ nav a.nav-link-active {
 }
 
 main {
+    position: relative;
+    isolation: isolate;
     display: grid;
     gap: 34px;
     width: min(1080px, calc(100% - 40px));
     margin: 0 auto;
     padding: 130px 0 72px;
+}
+
+.liquid-scene {
+    position: absolute;
+    z-index: 0;
+    inset: 72px -8vw 24px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 24%, rgba(171, 119, 52, 0.34), transparent 18rem),
+        radial-gradient(circle at 82% 68%, rgba(102, 62, 35, 0.42), transparent 22rem),
+        repeating-linear-gradient(
+            118deg,
+            rgba(255, 239, 207, 0.018) 0,
+            rgba(255, 239, 207, 0.018) 1px,
+            transparent 1px,
+            transparent 18px
+        );
+    border-radius: 48px;
+    pointer-events: none;
+}
+
+.liquid-glass-panel {
+    z-index: 1;
+    background-color: rgba(54, 36, 25, 0.2);
+}
+
+.liquid-glass-panel::before,
+.liquid-glass-panel::after {
+    opacity: 0.48;
 }
 
 .page-enter {

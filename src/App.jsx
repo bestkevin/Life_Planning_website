@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { LiquidGlass } from "@ybouane/liquidglass";
 import {
     ArrowRight,
     BookOpen,
@@ -13,6 +14,24 @@ import { navigation, projects } from "../script";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
+const liquidGlassDefaults = {
+    blurAmount: 0.2,
+    refraction: 0.86,
+    chromAberration: 0.045,
+    edgeHighlight: 0.16,
+    specular: 0.2,
+    fresnel: 1.1,
+    distortion: 0.012,
+    cornerRadius: 28,
+    zRadius: 20,
+    opacity: 0.92,
+    saturation: -0.12,
+    brightness: -0.26,
+    shadowOpacity: 0.48,
+    shadowSpread: 20,
+    shadowOffsetY: 10,
+};
+
 function getPageFromHash() {
     const hash = window.location.hash || "#home";
     const matchedPage = navigation.find((item) => item.href === hash);
@@ -21,6 +40,7 @@ function getPageFromHash() {
 }
 
 function App() {
+    const mainRef = useRef(null);
     const [expandedProject, setExpandedProject] = useState(null);
     const [activePage, setActivePage] = useState(getPageFromHash);
 
@@ -34,6 +54,44 @@ function App() {
         window.addEventListener("hashchange", handleHashChange);
         return () => window.removeEventListener("hashchange", handleHashChange);
     }, []);
+
+    useEffect(() => {
+        let instance;
+        let cancelled = false;
+
+        const initializeGlass = async () => {
+            const root = mainRef.current;
+            if (!root || !window.WebGLRenderingContext) return;
+
+            try {
+                await document.fonts?.ready;
+                const glassElements = root.querySelectorAll(
+                    ":scope > .liquid-glass-panel",
+                );
+                const nextInstance = await LiquidGlass.init({
+                    root,
+                    glassElements,
+                    defaults: liquidGlassDefaults,
+                });
+
+                if (cancelled) {
+                    nextInstance.destroy();
+                } else {
+                    instance = nextInstance;
+                }
+            } catch (error) {
+                console.warn("LiquidGlass initialization failed; using CSS fallback.", error);
+            }
+        };
+
+        const animationFrame = window.requestAnimationFrame(initializeGlass);
+
+        return () => {
+            cancelled = true;
+            window.cancelAnimationFrame(animationFrame);
+            instance?.destroy();
+        };
+    }, [activePage]);
 
     return (
         <>
@@ -63,8 +121,10 @@ function App() {
                 </nav>
             </header>
 
-            <main>
-                {activePage === "home" && <section id="home" className="page-enter">
+            <main ref={mainRef} className="liquid-root">
+                <div className="liquid-scene" aria-hidden="true" />
+
+                {activePage === "home" && <section id="home" className="liquid-glass-panel page-enter">
                     <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
                         <Sparkles aria-hidden="true" size={16} />
                         向理想生活缓缓生长
@@ -87,7 +147,11 @@ function App() {
                     const isExpanded = expandedProject === project.id;
 
                     return (
-                        <section id={project.id} key={project.id} className="page-enter">
+                        <section
+                            id={project.id}
+                            key={project.id}
+                            className="liquid-glass-panel page-enter"
+                        >
                             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
                                 <div>
                                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3a291d]/70 text-[#d5b77d] shadow-inner">
@@ -154,7 +218,7 @@ function App() {
                     );
                 })}
 
-                {activePage === "summary" && <section id="summary" className="page-enter">
+                {activePage === "summary" && <section id="summary" className="liquid-glass-panel page-enter">
                     <div className="mb-6 flex items-center gap-3">
                         <Target aria-hidden="true" className="text-[#c8a86b]" size={28} />
                         <p className="text-xs font-semibold tracking-[0.22em] !text-[#c8a86b]">
