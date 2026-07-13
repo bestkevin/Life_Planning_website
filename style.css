@@ -51,7 +51,7 @@ header {
     right: 0;
     left: 0;
     padding: 14px 20px;
-    background: rgba(7, 6, 5, 0.72);
+    background: #000;
     border-bottom: 1px solid rgba(184, 150, 89, 0.18);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.32);
     backdrop-filter: blur(18px);
@@ -312,7 +312,7 @@ footer {
     padding: 12px 20px;
     text-align: center;
     font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
-    background: rgba(7, 6, 5, 0.42);
+    background: #000;
     border-top: 1px solid rgba(184, 150, 89, 0.16);
 }
 
