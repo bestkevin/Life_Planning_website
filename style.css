@@ -116,6 +116,21 @@ main {
     opacity: 0.48;
 }
 
+.liquid-root[data-liquid-ready="true"] > .liquid-glass-panel {
+    background: rgba(45, 29, 20, 0.06);
+    border-color: rgba(220, 177, 105, 0.22);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.liquid-root[data-liquid-ready="true"] > .liquid-glass-panel::before {
+    display: none;
+}
+
+.liquid-root[data-liquid-ready="true"] > .liquid-glass-panel::after {
+    opacity: 0.24;
+}
+
 .page-enter {
     animation: page-enter 760ms ease-in-out both;
 }

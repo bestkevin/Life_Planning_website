@@ -56,13 +56,13 @@ function App() {
     }, []);
 
     useEffect(() => {
+        const root = mainRef.current;
+        if (!root || !window.WebGLRenderingContext) return;
+
         let instance;
         let cancelled = false;
 
         const initializeGlass = async () => {
-            const root = mainRef.current;
-            if (!root || !window.WebGLRenderingContext) return;
-
             try {
                 await document.fonts?.ready;
                 const glassElements = root.querySelectorAll(
@@ -78,8 +78,10 @@ function App() {
                     nextInstance.destroy();
                 } else {
                     instance = nextInstance;
+                    root.dataset.liquidReady = "true";
                 }
             } catch (error) {
+                delete root.dataset.liquidReady;
                 console.warn("LiquidGlass initialization failed; using CSS fallback.", error);
             }
         };
@@ -90,6 +92,7 @@ function App() {
             cancelled = true;
             window.cancelAnimationFrame(animationFrame);
             instance?.destroy();
+            delete root.dataset.liquidReady;
         };
     }, [activePage]);
 
