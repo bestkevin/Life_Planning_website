@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-    --ivory: #f6f0e6;
-    --parchment: #e9dfcf;
-    --sage: #8f9d83;
-    --sage-dark: #5f6e58;
-    --rose: #b98b82;
-    --ink: #39352f;
-    --muted-ink: #6f685f;
-    --glass: rgba(255, 252, 246, 0.62);
-    --glass-border: rgba(255, 255, 255, 0.72);
-    --shadow: 0 18px 45px rgba(77, 66, 52, 0.12);
+    --black: #070605;
+    --soft-black: #11100e;
+    --charcoal: #1a1714;
+    --gold: #8c692f;
+    --gold-light: #b89659;
+    --ink: #f1eadf;
+    --muted-ink: #c6bbab;
+    --glass: rgba(82, 55, 36, 0.38);
+    --glass-border: rgba(190, 151, 91, 0.28);
+    --shadow: 0 22px 55px rgba(0, 0, 0, 0.48);
 }
 
 * {
@@ -29,9 +29,9 @@ body {
     font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
     line-height: 1.7;
     background:
-        radial-gradient(circle at 15% 10%, rgba(185, 139, 130, 0.18), transparent 28rem),
-        radial-gradient(circle at 85% 35%, rgba(143, 157, 131, 0.22), transparent 30rem),
-        linear-gradient(145deg, var(--ivory), var(--parchment));
+        radial-gradient(circle at 15% 10%, rgba(115, 78, 42, 0.22), transparent 30rem),
+        radial-gradient(circle at 85% 35%, rgba(65, 45, 31, 0.3), transparent 32rem),
+        linear-gradient(145deg, var(--black), var(--charcoal));
     background-attachment: fixed;
 }
 
@@ -42,9 +42,9 @@ header {
     right: 0;
     left: 0;
     padding: 14px 20px;
-    background: rgba(246, 240, 230, 0.7);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 30px rgba(77, 66, 52, 0.08);
+    background: rgba(7, 6, 5, 0.72);
+    border-bottom: 1px solid rgba(184, 150, 89, 0.18);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.32);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 }
@@ -71,8 +71,8 @@ nav a {
 nav a:hover,
 nav a:focus-visible,
 nav a.nav-link-active {
-    color: #fff;
-    background: var(--sage-dark);
+    color: var(--ink);
+    background: var(--gold);
     outline: none;
     transform: translateY(-2px);
 }
@@ -117,8 +117,8 @@ section,
 section:hover,
 .interactive-box:hover,
 .display-box:hover {
-    border-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 24px 60px rgba(77, 66, 52, 0.18);
+    border-color: rgba(190, 151, 91, 0.48);
+    box-shadow: 0 26px 65px rgba(0, 0, 0, 0.58);
     transform: translateY(-7px);
 }
 
@@ -132,7 +132,7 @@ section:hover,
 h1,
 h2 {
     margin: 0 0 14px;
-    color: var(--sage-dark);
+    color: var(--ink);
     font-weight: 600;
     letter-spacing: 0.08em;
 }
@@ -164,32 +164,34 @@ button,
     gap: 8px;
     min-height: 44px;
     padding: 10px 20px;
-    color: #fff;
+    color: var(--ink);
     font: inherit;
-    background: var(--sage-dark);
+    background: var(--gold);
     border: 0;
     border-radius: 999px;
-    box-shadow: 0 8px 20px rgba(95, 110, 88, 0.24);
+    box-shadow: 0 8px 22px rgba(140, 105, 47, 0.28);
     cursor: pointer;
     transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 button:hover,
 .button:hover {
-    background: var(--rose);
-    box-shadow: 0 12px 25px rgba(185, 139, 130, 0.3);
+    background: var(--gold-light);
+    box-shadow: 0 12px 28px rgba(184, 150, 89, 0.32);
     transform: translateY(-2px);
 }
 
 footer {
-    padding: 28px 20px;
+    padding: 12px 20px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(7, 6, 5, 0.42);
+    border-top: 1px solid rgba(184, 150, 89, 0.16);
 }
 
 footer p {
     margin-inline: auto;
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
 }
 
 @media (max-width: 600px) {

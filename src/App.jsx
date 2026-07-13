@@ -65,7 +65,7 @@ function App() {
 
             <main>
                 {activePage === "home" && <section id="home" className="page-enter">
-                    <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-white/70 bg-white/45 px-4 py-2 text-sm tracking-[0.16em] text-[#5f6e58] shadow-sm backdrop-blur">
+                    <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
                         <Sparkles aria-hidden="true" size={16} />
                         向理想生活缓缓生长
                     </div>
@@ -90,29 +90,29 @@ function App() {
                         <section id={project.id} key={project.id} className="page-enter">
                             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
                                 <div>
-                                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#dfe6d8] text-[#5f6e58] shadow-inner">
+                                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3a291d]/70 text-[#d5b77d] shadow-inner">
                                         <Icon aria-hidden="true" size={24} strokeWidth={1.6} />
                                     </div>
-                                    <p className="mb-2 text-xs font-semibold tracking-[0.22em] text-[#b07870]">
+                                    <p className="mb-2 text-xs font-semibold tracking-[0.22em] !text-[#c8a86b]">
                                         {project.eyebrow}
                                     </p>
                                     <h2>{project.title}</h2>
                                     <p>{project.description}</p>
                                 </div>
 
-                                <div className="rounded-2xl border border-white/70 bg-white/40 px-5 py-4 text-center backdrop-blur">
-                                    <span className="block text-3xl font-semibold text-[#5f6e58]">
+                                <div className="rounded-2xl border border-[#b89659]/25 bg-[#2d2018]/45 px-5 py-4 text-center backdrop-blur">
+                                    <span className="block text-3xl font-semibold text-[#d5b77d]">
                                         {project.progress}%
                                     </span>
-                                    <span className="text-xs tracking-wider text-[#6f685f]">
+                                    <span className="text-xs tracking-wider text-[#c6bbab]">
                                         当前进度
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="mt-8 h-2 overflow-hidden rounded-full bg-[#d8d1c6]/70">
+                            <div className="mt-8 h-2 overflow-hidden rounded-full bg-[#2a231d]/80">
                                 <div
-                                    className="h-full rounded-full bg-gradient-to-r from-[#8f9d83] to-[#b98b82]"
+                                    className="h-full rounded-full bg-gradient-to-r from-[#765622] to-[#c29b57]"
                                     style={{ width: `${project.progress}%` }}
                                 />
                             </div>
@@ -140,7 +140,7 @@ function App() {
                                     <div className="flex items-start gap-3">
                                         <CheckCircle2
                                             aria-hidden="true"
-                                            className="mt-1 shrink-0 text-[#8f9d83]"
+                                            className="mt-1 shrink-0 text-[#c8a86b]"
                                             size={20}
                                         />
                                         <p>
@@ -156,8 +156,8 @@ function App() {
 
                 {activePage === "summary" && <section id="summary" className="page-enter">
                     <div className="mb-6 flex items-center gap-3">
-                        <Target aria-hidden="true" className="text-[#b98b82]" size={28} />
-                        <p className="text-xs font-semibold tracking-[0.22em] text-[#b07870]">
+                        <Target aria-hidden="true" className="text-[#c8a86b]" size={28} />
+                        <p className="text-xs font-semibold tracking-[0.22em] !text-[#c8a86b]">
                             REFLECTION
                         </p>
                     </div>
@@ -170,19 +170,19 @@ function App() {
                         <div className="interactive-box !rounded-2xl !p-5">
                             <CalendarDays
                                 aria-hidden="true"
-                                className="mb-3 text-[#5f6e58]"
+                                className="mb-3 text-[#c8a86b]"
                                 size={22}
                             />
-                            <h3 className="mb-1 font-semibold text-[#39352f]">定期回顾</h3>
+                            <h3 className="mb-1 font-semibold text-[#f1eadf]">定期回顾</h3>
                             <p className="text-sm">每月整理进展，温和地调整下一阶段。</p>
                         </div>
                         <div className="interactive-box !rounded-2xl !p-5">
                             <Sparkles
                                 aria-hidden="true"
-                                className="mb-3 text-[#b98b82]"
+                                className="mb-3 text-[#c8a86b]"
                                 size={22}
                             />
-                            <h3 className="mb-1 font-semibold text-[#39352f]">庆祝成长</h3>
+                            <h3 className="mb-1 font-semibold text-[#f1eadf]">庆祝成长</h3>
                             <p className="text-sm">珍视过程，让细小的进步也被认真看见。</p>
                         </div>
                     </div>
@@ -190,7 +190,7 @@ function App() {
             </main>
 
             <footer>
-                <p>© 2026 人生规划 · 愿每一步都从容而坚定</p>
+                <p>© 2026 人生规划 · 制作人：LYU</p>
             </footer>
         </>
     );
