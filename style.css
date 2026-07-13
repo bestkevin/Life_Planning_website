@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
     margin: 0;
     color: var(--ink);
-    font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
+    font-family: "KingHwa_OldSong", "京華老宋体", "京华老宋体", "STSong", serif;
     line-height: 1.7;
     background:
         radial-gradient(circle at 15% 10%, rgba(115, 78, 42, 0.22), transparent 30rem),
@@ -184,6 +184,7 @@ button:hover,
 footer {
     padding: 12px 20px;
     text-align: center;
+    font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
     background: rgba(7, 6, 5, 0.42);
     border-top: 1px solid rgba(184, 150, 89, 0.16);
 }
