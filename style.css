@@ -686,7 +686,7 @@ body[data-home-reveal="intro"] #home .home-panel-content > * {
 body[data-page="project-1"] #root {
     background:
         linear-gradient(rgba(5, 4, 3, 0.42), rgba(8, 6, 4, 0.55)),
-        url("./project1-bg-extended.jpg") center / cover no-repeat fixed;
+        url("./project1-bg.jpg") center / cover no-repeat fixed;
 }
 
 .liquid-root--project-one {
