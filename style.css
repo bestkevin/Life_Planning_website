@@ -975,7 +975,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-dialog-wrap {
     display: grid;
-    gap: 28px;
+    gap: 5.5cm;
     width: 100%;
     padding: 0;
     background: transparent;
