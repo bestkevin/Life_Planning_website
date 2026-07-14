@@ -261,14 +261,16 @@ function App() {
                         : undefined
                 }
             >
-                <div className="liquid-scene" aria-hidden="true">
-                    {activePage === "home" && rainEnabled && (
-                        <HeartfeltRainCanvas
-                            onReady={setRainReady}
-                            onFrame={handleRainFrame}
-                        />
-                    )}
-                </div>
+                {activePage === "home" && (
+                    <div className="liquid-scene" aria-hidden="true">
+                        {rainEnabled && (
+                            <HeartfeltRainCanvas
+                                onReady={setRainReady}
+                                onFrame={handleRainFrame}
+                            />
+                        )}
+                    </div>
+                )}
 
                 {activePage === "home" && (
                     <section id="home" className="liquid-glass-panel page-enter">
@@ -293,9 +295,9 @@ function App() {
                 )}
 
                 {activePage === "project-1" && (
-                    <section id="project-1" className="project-one-section page-enter">
+                    <div id="project-1" className="project-one-section page-enter">
                         <ProjectOnePage />
-                    </section>
+                    </div>
                 )}
 
                 {projects
