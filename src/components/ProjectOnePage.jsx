@@ -2,6 +2,7 @@ import { ChevronDown, Send, Undo2 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
+    PADLET_BOARD_URL,
     PADLET_EMBED_URL,
     projectOneInputHint,
     projectOneIntroText,
@@ -483,10 +484,22 @@ export default function ProjectOnePage() {
                                     src={PADLET_EMBED_URL}
                                     title="普鲁斯特问卷照片墙"
                                     loading="lazy"
-                                    allow="camera; microphone; clipboard-write; fullscreen"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allow="camera; microphone; clipboard-write; encrypted-media; display-capture; fullscreen; storage-access"
                                     allowFullScreen
                                 />
                             </div>
+                            <p className="project-one-padlet-fallback">
+                                若嵌入墙无法互动，可
+                                <a
+                                    href={PADLET_BOARD_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    在新标签页打开照片墙
+                                </a>
+                                。
+                            </p>
                         </div>
                     </div>
                 </div>

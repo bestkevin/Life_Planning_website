@@ -83,5 +83,8 @@ export const projectOneInputHint = "输入任意字符开始对话";
 export const projectOnePhotoWallText =
     "如果你希望，可以将你的答案记录在这个照片墙中。普鲁斯特问卷的意义不仅是让你了解现在的自己，也是给未来的你一个了解过去的机会。你的答案会作为成长变化发生的原点，成为你规划未来的重要参考";
 
-export const PADLET_EMBED_URL =
-    "https://padlet.com/embed/thelightofchina/padlet-r3sy9x18patd9im7";
+export const PADLET_BOARD_URL =
+    "https://padlet.com/thelightofchina/padlet-r3sy9x18patd9im7";
+
+/** Official embed URL uses the board key only (username/slug paths 404). */
+export const PADLET_EMBED_URL = "https://padlet.com/embed/r3sy9x18patd9im7";
