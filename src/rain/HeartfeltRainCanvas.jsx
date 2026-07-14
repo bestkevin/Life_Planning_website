@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import cafeBg from "../../cafe1.jpg";
+import cafeBg from "../../cafe1-extended.jpg";
 import { createHeartfeltRain } from "./heartfeltRain.js";
 
 export default function HeartfeltRainCanvas({ onReady, onFrame }) {

@@ -62,6 +62,7 @@ export function createHeartfeltRain(canvas, imageSrc, options = {}) {
     const program = createProgram(gl, heartfeltVertexShader, heartfeltFragmentShader);
     const positionLocation = gl.getAttribLocation(program, "a_position");
     const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+    const texSizeLocation = gl.getUniformLocation(program, "u_texSize");
     const timeLocation = gl.getUniformLocation(program, "u_time");
     const rainAmountLocation = gl.getUniformLocation(program, "u_rainAmount");
     const textureLocation = gl.getUniformLocation(program, "u_texture_0");
@@ -86,6 +87,8 @@ export function createHeartfeltRain(canvas, imageSrc, options = {}) {
     let running = true;
     let width = 0;
     let height = 0;
+    let texWidth = 1;
+    let texHeight = 1;
     let startTime = performance.now();
     let rainAmount = options.rainAmount ?? 0.55;
     let animateRainAmount = options.animateRainAmount ?? true;
@@ -127,6 +130,7 @@ export function createHeartfeltRain(canvas, imageSrc, options = {}) {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.uniform1i(textureLocation, 0);
         gl.uniform2f(resolutionLocation, width, height);
+        gl.uniform2f(texSizeLocation, texWidth, texHeight);
         gl.uniform1f(timeLocation, elapsed);
         gl.uniform1f(rainAmountLocation, currentRainAmount);
 
@@ -138,6 +142,8 @@ export function createHeartfeltRain(canvas, imageSrc, options = {}) {
 
     const init = async () => {
         const image = await loadImage(imageSrc);
+        texWidth = image.naturalWidth || image.width || 1;
+        texHeight = image.naturalHeight || image.height || 1;
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
         gl.generateMipmap(gl.TEXTURE_2D);

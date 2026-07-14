@@ -12,6 +12,7 @@ export const heartfeltFragmentShader = `#version 300 es
 precision highp float;
 
 uniform vec2 u_resolution;
+uniform vec2 u_texSize;
 uniform float u_time;
 uniform float u_rainAmount;
 uniform sampler2D u_texture_0;
@@ -106,17 +107,33 @@ vec2 Drops(vec2 uv, float t, float l0, float l1, float l2) {
     return vec2(c, max(m1.y * l0, m2.y * l1));
 }
 
+vec2 coverUv(vec2 screenUv) {
+    float rs = u_resolution.x / max(u_resolution.y, 1.0);
+    float ts = u_texSize.x / max(u_texSize.y, 1.0);
+    vec2 scaled = screenUv;
+
+    if (rs > ts) {
+        float scale = rs / ts;
+        scaled.y = (screenUv.y - 0.5) / scale + 0.5;
+    } else {
+        float scale = ts / rs;
+        scaled.x = (screenUv.x - 0.5) / scale + 0.5;
+    }
+
+    return clamp(scaled, 0.0, 1.0);
+}
+
 void main() {
     vec2 fragCoord = v_uv * u_resolution;
     vec2 uv = (fragCoord - 0.5 * u_resolution.xy) / u_resolution.y;
-    vec2 UV = fragCoord / u_resolution.xy;
+    vec2 UV = coverUv(fragCoord / u_resolution.xy);
 
     float T = u_time;
     float t = T * 0.2;
 
     float rainAmount = u_rainAmount;
-    float maxBlur = mix(3.0, 6.0, rainAmount);
-    float minBlur = 2.0;
+    float maxBlur = mix(1.2, 4.0, rainAmount);
+    float minBlur = 0.35;
 
     float staticDrops = S(-0.5, 1.0, rainAmount) * 2.0;
     float layer1 = S(0.25, 0.75, rainAmount);
@@ -130,7 +147,7 @@ void main() {
     vec2 n = vec2(cx - c.x, cy - c.x);
 
     float focus = mix(maxBlur - c.y, minBlur, S(0.1, 0.2, c.x));
-    vec3 col = textureLod(u_texture_0, UV + n, focus).rgb;
+    vec3 col = textureLod(u_texture_0, UV + n * 0.55, focus).rgb;
 
     outColor = vec4(col, 1.0);
 }

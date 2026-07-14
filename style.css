@@ -47,11 +47,12 @@ body {
 
 body[data-page="home"] #root {
     background-image:
-        linear-gradient(rgba(5, 4, 3, 0.48), rgba(8, 6, 4, 0.66)),
-        url("./cafe1.jpg");
+        linear-gradient(rgba(5, 4, 3, 0.28), rgba(8, 6, 4, 0.4)),
+        url("./cafe1-extended.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 header {
@@ -127,12 +128,26 @@ main {
 }
 
 .liquid-root[data-page="home"] > .liquid-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
     background-image: none;
     background-color: transparent;
+    overflow: hidden;
 }
 
 .liquid-root[data-page="home"][data-rain-ready="true"] > .liquid-scene {
     background-image: none;
+}
+
+.liquid-root[data-page="home"] > .liquid-glass-panel,
+.liquid-root[data-page="home"] > #home {
+    position: relative;
+    z-index: 1;
 }
 
 .heartfelt-rain-layer {
@@ -142,6 +157,7 @@ main {
     height: 100%;
     border-radius: inherit;
     pointer-events: none;
+    object-fit: cover;
 }
 
 .liquid-glass-panel {
@@ -668,7 +684,7 @@ body[data-home-reveal="intro"] #home .home-panel-content > * {
 body[data-page="project-1"] #root {
     background-image:
         linear-gradient(rgba(5, 4, 3, 0.5), rgba(8, 6, 4, 0.62)),
-        url("./cafe1.jpg");
+        url("./cafe1-extended.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
