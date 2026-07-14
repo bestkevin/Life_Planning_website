@@ -739,6 +739,7 @@ body[data-page="project-1"] .project-one-section.page-enter {
     min-height: calc(100vh - 180px);
     --project-one-text: #f7e8a8;
     --project-one-text-soft: rgba(247, 232, 168, 0.62);
+    --project-one-text-cream: #f5f0e6;
     color: var(--project-one-text);
 }
 
@@ -941,9 +942,13 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-collapse-body {
     padding-bottom: 12px;
-    color: var(--project-one-text);
+    color: var(--project-one-text-cream);
     font-size: 0.92rem;
     line-height: 1.8;
+}
+
+.project-one-collapse-body :is(p, span, strong, li) {
+    color: var(--project-one-text-cream) !important;
 }
 
 .project-one-collapse-body p {
@@ -1041,7 +1046,8 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-message--me {
     padding-left: 12px;
-    border-left: 2px solid rgba(247, 232, 168, 0.45);
+    color: var(--project-one-text-cream) !important;
+    border-left: 2px solid rgba(245, 240, 230, 0.5);
 }
 
 .project-one-input-row {
@@ -1056,7 +1062,8 @@ body[data-project-one-intro="true"] footer {
     width: 100%;
     min-height: 48px;
     padding: 12px 16px;
-    color: var(--project-one-text);
+    color: var(--project-one-text-cream);
+    caret-color: var(--project-one-text-cream);
     font: inherit;
     background: #090909;
     border: 1px solid rgba(247, 232, 168, 0.28);
