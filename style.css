@@ -547,8 +547,8 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(94px, 14vw);
-    transform: translateX(-50%);
+    width: min(63px, 9.5vw);
+    transform: translateX(calc(-50% + 5mm));
     pointer-events: none;
 }
 
@@ -556,9 +556,9 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     position: relative;
     z-index: 3;
     flex: 0 0 auto;
-    width: 5px;
+    width: 3px;
     height: 0;
-    margin-bottom: -6px;
+    margin-bottom: -4px;
     border-radius: 999px;
     background-color: #8a6238;
     background-repeat: repeat-y;
@@ -567,7 +567,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     box-shadow:
         inset 1px 0 1px rgba(255, 230, 190, 0.28),
         inset -1px 0 1px rgba(40, 24, 10, 0.4),
-        0 0 8px rgba(255, 200, 120, 0.14);
+        0 0 6px rgba(255, 200, 120, 0.12);
     transform-origin: top center;
     transition: height 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -575,20 +575,20 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
 .home-intro-lamp-cord::before {
     content: "";
     position: absolute;
-    top: -2px;
+    top: -1px;
     left: 50%;
-    width: 7px;
-    height: 7px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #e2c49a, #7a5530 70%);
     transform: translateX(-50%);
-    box-shadow: 0 0 6px rgba(255, 210, 140, 0.22);
+    box-shadow: 0 0 5px rgba(255, 210, 140, 0.2);
 }
 
 .home-intro-overlay--lamp .home-intro-lamp-cord,
 .home-intro-overlay--text .home-intro-lamp-cord,
 .home-intro-overlay--hold .home-intro-lamp-cord {
-    height: min(26vh, 210px);
+    height: min(28vh, 220px);
 }
 
 .home-intro-overlay--blackout .home-intro-lamp-cord {
@@ -627,7 +627,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 0 18px rgba(255, 208, 120, 0.4));
+    filter: drop-shadow(0 0 12px rgba(255, 208, 120, 0.38));
 }
 
 .home-intro-lamp-beam {
@@ -635,13 +635,13 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     top: 78%;
     left: 50%;
     z-index: 1;
-    width: min(70vw, 560px);
-    height: min(58vh, 460px);
+    width: min(52vw, 420px);
+    height: min(48vh, 360px);
     pointer-events: none;
     opacity: 0;
     transform: translateX(-50%);
     transition: opacity 2.2s ease 1.4s;
-    clip-path: polygon(50% 0%, 12% 100%, 88% 100%);
+    clip-path: polygon(50% 0%, 14% 100%, 86% 100%);
     background:
         conic-gradient(
             from 180deg at 50% 0%,
