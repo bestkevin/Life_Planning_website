@@ -129,20 +129,24 @@ function App() {
 
         let instance;
         let cancelled = false;
-        let retryTimer = 0;
 
         const initializeGlass = async () => {
             try {
                 await document.fonts?.ready;
                 if (cancelled) return;
 
+                // Project 1 has no glass panels — skip LiquidGlass entirely.
+                if (activePage === "project-1") {
+                    delete root.dataset.liquidReady;
+                    return;
+                }
+
                 const glassElements = root.querySelectorAll(
                     ":scope .liquid-glass-panel",
                 );
 
-                // Project 1 intro mounts before glass panels exist — wait for them.
-                if (activePage === "project-1" && glassElements.length === 0) {
-                    retryTimer = window.setTimeout(initializeGlass, 200);
+                if (glassElements.length === 0) {
+                    delete root.dataset.liquidReady;
                     return;
                 }
 
@@ -170,7 +174,6 @@ function App() {
         return () => {
             cancelled = true;
             window.cancelAnimationFrame(animationFrame);
-            window.clearTimeout(retryTimer);
             instance?.destroy();
             liquidGlassRef.current = null;
             delete root.dataset.liquidReady;

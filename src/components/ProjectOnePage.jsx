@@ -289,7 +289,7 @@ export default function ProjectOnePage() {
 
             {phase === PHASE.READY && (
                 <div className="project-one-layout">
-                    <aside className="project-one-sidebar liquid-glass-panel">
+                    <aside className="project-one-sidebar">
                         <div className="project-one-portrait" aria-hidden="true">
                             <img
                                 src={`${import.meta.env.BASE_URL}img/proust-portrait.png`}
@@ -317,8 +317,8 @@ export default function ProjectOnePage() {
                         </CollapsiblePanel>
                     </aside>
 
-                    <section className="project-one-dialog-wrap">
-                        <div className="project-one-dialog liquid-glass-panel">
+                    <div className="project-one-dialog-wrap">
+                        <div className="project-one-dialog">
                             <div className="project-one-dialog-scroll" ref={dialogRef}>
                                 {showOpeningLine && (
                                     <p className="project-one-message project-one-message--mystery">
@@ -366,7 +366,7 @@ export default function ProjectOnePage() {
                             </form>
                         </div>
 
-                        <section className="project-one-photo-wall">
+                        <div className="project-one-photo-wall">
                             <p className="project-one-photo-wall-text">
                                 {projectOnePhotoWallText}
                             </p>
@@ -379,8 +379,8 @@ export default function ProjectOnePage() {
                                     allowFullScreen
                                 />
                             </div>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
