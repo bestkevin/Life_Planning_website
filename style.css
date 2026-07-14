@@ -1028,6 +1028,9 @@ body[data-project-one-intro="true"] footer {
 }
 
 .project-one-dialog-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     max-height: min(62vh, 640px);
     padding: 12px 4px 18px;
     overflow-y: auto;
@@ -1035,7 +1038,8 @@ body[data-project-one-intro="true"] footer {
 }
 
 .project-one-message {
-    margin: 0 0 16px;
+    max-width: min(82%, 42rem);
+    margin: 0 0 12px;
     color: var(--project-one-text) !important;
     font-size: clamp(1rem, 2.2vw, 1.12rem);
     line-height: 1.85;
@@ -1044,10 +1048,22 @@ body[data-project-one-intro="true"] footer {
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
 }
 
+.project-one-message--mystery {
+    align-self: flex-start;
+    text-align: left;
+}
+
 .project-one-message--me {
-    padding-left: 12px;
+    align-self: flex-end;
+    margin-left: auto;
+    padding-right: 12px;
     color: var(--project-one-text-cream) !important;
-    border-left: 2px solid rgba(245, 240, 230, 0.5);
+    text-align: right;
+    border-right: 2px solid rgba(245, 240, 230, 0.5);
+}
+
+.project-one-message--typing {
+    min-height: 1.85em;
 }
 
 .project-one-input-row {

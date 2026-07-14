@@ -27,6 +27,11 @@ const INTRO_BLACK_MS = 2000;
 const INTRO_HOLD_MS = 5000;
 const INTRO_FAILSAFE_MS = 24000;
 const OPENING_TYPE_SPEED = 104;
+const QUESTION_TYPE_SPEED = 104;
+const SPEAKER_HOLD_MS = 320;
+const MYSTERY_SPEAKER = "神秘人：";
+const CLOSING_LINE =
+    "谢谢你愿意分享。愿这些问题成为你认识自己、也拥抱未来自己的起点。";
 
 function loadChatState() {
     try {
@@ -114,8 +119,13 @@ export default function ProjectOnePage() {
     const [openingDone, setOpeningDone] = useState(
         () => Boolean(savedChat?.openingDone || (savedChat?.messages?.length ?? 0) > 0),
     );
+    const [typingBody, setTypingBody] = useState(null);
+    const [speakerVisible, setSpeakerVisible] = useState(false);
+    const [typedQuestion, setTypedQuestion] = useState("");
     const dialogRef = useRef(null);
     const inputRef = useRef(null);
+    const typingDoneHandlerRef = useRef(null);
+    const isTypingQuestion = typingBody !== null;
 
     const playIntro = phase === PHASE.BLACK || phase === PHASE.RIPPLE;
     const typeOpening = phase === PHASE.READY && !openingDone;
@@ -185,7 +195,15 @@ export default function ProjectOnePage() {
     useEffect(() => {
         if (!dialogRef.current) return;
         dialogRef.current.scrollTop = dialogRef.current.scrollHeight;
-    }, [messages, openingDisplayed, questionIndex, openingDone]);
+    }, [
+        messages,
+        openingDisplayed,
+        questionIndex,
+        openingDone,
+        speakerVisible,
+        typedQuestion,
+        typingBody,
+    ]);
 
     useEffect(() => {
         saveChatState({
@@ -207,14 +225,62 @@ export default function ProjectOnePage() {
         openingDone,
     ]);
 
+    const poseMysteryQuestion = useCallback((body, onComplete) => {
+        typingDoneHandlerRef.current = onComplete;
+        setAwaitingAnswer(false);
+        setSpeakerVisible(false);
+        setTypedQuestion("");
+        setTypingBody(body);
+    }, []);
+
+    useEffect(() => {
+        if (typingBody === null) return undefined;
+
+        let cancelled = false;
+        let intervalId = 0;
+        setSpeakerVisible(true);
+
+        const holdId = window.setTimeout(() => {
+            if (cancelled) return;
+            let index = 0;
+            intervalId = window.setInterval(() => {
+                if (cancelled) {
+                    window.clearInterval(intervalId);
+                    return;
+                }
+                index += 1;
+                setTypedQuestion(typingBody.slice(0, index));
+                if (index >= typingBody.length) {
+                    window.clearInterval(intervalId);
+                    setMessages((current) => [
+                        ...current,
+                        { role: "mystery", text: `${MYSTERY_SPEAKER}${typingBody}` },
+                    ]);
+                    setTypingBody(null);
+                    setSpeakerVisible(false);
+                    setTypedQuestion("");
+                    const onComplete = typingDoneHandlerRef.current;
+                    typingDoneHandlerRef.current = null;
+                    onComplete?.();
+                }
+            }, QUESTION_TYPE_SPEED);
+        }, SPEAKER_HOLD_MS);
+
+        return () => {
+            cancelled = true;
+            window.clearTimeout(holdId);
+            window.clearInterval(intervalId);
+        };
+    }, [typingBody]);
+
     const startChat = () => {
         if (chatStarted) return;
         setChatStarted(true);
         setInputHint("");
         setInputValue("");
         setQuestionIndex(0);
-        setMessages([{ role: "mystery", text: `神秘人：${proustQuestions[0]}` }]);
-        setAwaitingAnswer(true);
+        setMessages([]);
+        poseMysteryQuestion(proustQuestions[0], () => setAwaitingAnswer(true));
     };
 
     const handleInputChange = (event) => {
@@ -228,32 +294,23 @@ export default function ProjectOnePage() {
 
     const submitAnswer = () => {
         const trimmed = inputValue.trim();
-        if (!chatStarted || !awaitingAnswer || !trimmed) return;
+        if (!chatStarted || !awaitingAnswer || isTypingQuestion || !trimmed) return;
 
-        const nextMessages = [...messages, { role: "me", text: `我：${trimmed}` }];
+        setMessages((current) => [...current, { role: "me", text: `我：${trimmed}` }]);
+        setInputValue("");
         const nextIndex = questionIndex + 1;
 
         if (nextIndex < proustQuestions.length) {
-            nextMessages.push({
-                role: "mystery",
-                text: `神秘人：${proustQuestions[nextIndex]}`,
-            });
-            setMessages(nextMessages);
             setQuestionIndex(nextIndex);
-            setInputValue("");
-            setAwaitingAnswer(true);
+            poseMysteryQuestion(proustQuestions[nextIndex], () => setAwaitingAnswer(true));
             return;
         }
 
-        nextMessages.push({
-            role: "mystery",
-            text: "神秘人：谢谢你愿意分享。愿这些问题成为你认识自己、也拥抱未来自己的起点。",
-        });
-        setMessages(nextMessages);
         setQuestionIndex(nextIndex);
-        setInputValue("");
-        setAwaitingAnswer(false);
-        setInputHint("问卷已完成，欢迎继续浏览下方照片墙。");
+        poseMysteryQuestion(CLOSING_LINE, () => {
+            setAwaitingAnswer(false);
+            setInputHint("问卷已完成，欢迎继续浏览下方照片墙。");
+        });
     };
 
     const handleKeyDown = (event) => {
@@ -333,6 +390,12 @@ export default function ProjectOnePage() {
                                         {message.text}
                                     </p>
                                 ))}
+                                {isTypingQuestion && (
+                                    <p className="project-one-message project-one-message--mystery project-one-message--typing">
+                                        {speakerVisible ? MYSTERY_SPEAKER : ""}
+                                        {typedQuestion}
+                                    </p>
+                                )}
                             </div>
 
                             <form
@@ -350,13 +413,18 @@ export default function ProjectOnePage() {
                                     onKeyDown={handleKeyDown}
                                     placeholder={inputHint || "在此输入你的回答"}
                                     aria-label="对话输入框"
-                                    disabled={!openingDone || (!awaitingAnswer && chatStarted)}
+                                    disabled={
+                                        !openingDone ||
+                                        isTypingQuestion ||
+                                        (!awaitingAnswer && chatStarted)
+                                    }
                                 />
                                 <button
                                     type="submit"
                                     aria-label="发送回答"
                                     disabled={
                                         !openingDone ||
+                                        isTypingQuestion ||
                                         !inputValue.trim() ||
                                         (!awaitingAnswer && chatStarted)
                                     }
