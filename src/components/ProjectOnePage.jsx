@@ -291,7 +291,10 @@ export default function ProjectOnePage() {
                 <div className="project-one-layout">
                     <aside className="project-one-sidebar liquid-glass-panel">
                         <div className="project-one-portrait" aria-hidden="true">
-                            <span>MP</span>
+                            <img
+                                src={`${import.meta.env.BASE_URL}img/proust-portrait.png`}
+                                alt=""
+                            />
                         </div>
                         <p className="project-one-sidebar-title">普鲁斯特问卷</p>
                         <p className="project-one-sidebar-subtitle">你是谁？</p>
