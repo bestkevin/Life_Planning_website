@@ -1,5 +1,6 @@
 import { ChevronDown, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
     PADLET_EMBED_URL,
     projectOneInputHint,
@@ -69,6 +70,16 @@ export default function ProjectOnePage() {
         const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
         return () => window.clearTimeout(blackTimer);
     }, []);
+
+    useEffect(() => {
+        const introActive = phase === PHASE.BLACK || phase === PHASE.RIPPLE;
+        if (introActive) {
+            document.body.dataset.projectOneIntro = "true";
+        } else {
+            delete document.body.dataset.projectOneIntro;
+        }
+        return () => delete document.body.dataset.projectOneIntro;
+    }, [phase]);
 
     useEffect(() => {
         if (!introDone || phase !== PHASE.RIPPLE) return undefined;
@@ -146,20 +157,25 @@ export default function ProjectOnePage() {
 
     return (
         <div className="project-one-page">
-            {(phase === PHASE.BLACK || phase === PHASE.RIPPLE) && (
-                <div className={`project-one-intro project-one-intro--${phase}`}>
-                    {phase === PHASE.RIPPLE && (
-                        <>
-                            <div className="project-one-ripple" aria-hidden="true">
-                                <span />
-                                <span />
-                                <span />
-                            </div>
-                            <p className="project-one-ripple-text">{introDisplayed}</p>
-                        </>
-                    )}
-                </div>
-            )}
+            {(phase === PHASE.BLACK || phase === PHASE.RIPPLE) &&
+                createPortal(
+                    <div
+                        className={`project-one-intro project-one-intro--${phase}`}
+                        aria-hidden="true"
+                    >
+                        {phase === PHASE.RIPPLE && (
+                            <>
+                                <div className="project-one-ripple">
+                                    <span />
+                                    <span />
+                                    <span />
+                                </div>
+                                <p className="project-one-ripple-text">{introDisplayed}</p>
+                            </>
+                        )}
+                    </div>,
+                    document.body,
+                )}
 
             {phase === PHASE.READY && (
                 <div className="project-one-layout">

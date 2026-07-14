@@ -715,6 +715,10 @@ body[data-page="project-1"] #root {
     border-color: transparent;
 }
 
+body[data-page="project-1"] .project-one-section.page-enter {
+    animation: none;
+}
+
 .project-one-page {
     position: relative;
     min-height: calc(100vh - 180px);
@@ -722,11 +726,16 @@ body[data-page="project-1"] #root {
 
 .project-one-intro {
     position: fixed;
-    z-index: 1100;
+    z-index: 1300;
     inset: 0;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
     display: grid;
     place-items: center;
     background: #000;
+    overflow: hidden;
 }
 
 .project-one-intro--ripple {
@@ -743,8 +752,8 @@ body[data-page="project-1"] #root {
 
 .project-one-ripple span {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: min(18vw, 160px);
+    height: min(18vw, 160px);
     border: 1px solid rgba(210, 180, 130, 0.28);
     border-radius: 50%;
     animation: project-one-ripple 3.2s ease-out infinite;
@@ -766,8 +775,14 @@ body[data-page="project-1"] #root {
 
     100% {
         opacity: 0;
-        transform: scale(8);
+        transform: scale(18);
     }
+}
+
+body[data-project-one-intro="true"] header,
+body[data-project-one-intro="true"] footer,
+body[data-project-one-intro="true"] main {
+    visibility: hidden;
 }
 
 .project-one-ripple-text {
