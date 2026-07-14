@@ -125,18 +125,11 @@ export default function ProjectOnePage() {
     );
 
     useEffect(() => {
-        // First visit plays intro once; mark immediately so refresh won't replay.
-        if (!introAlreadySeen) {
-            markIntroSeen();
-        }
-    }, [introAlreadySeen]);
-
-    useEffect(() => {
-        if (introAlreadySeen || phase !== PHASE.BLACK) return undefined;
+        if (hasSeenIntro() || phase !== PHASE.BLACK) return undefined;
 
         const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
         return () => window.clearTimeout(blackTimer);
-    }, [introAlreadySeen, phase]);
+    }, [phase]);
 
     useEffect(() => {
         if (playIntro) {
@@ -150,7 +143,11 @@ export default function ProjectOnePage() {
     useEffect(() => {
         if (!introDone || phase !== PHASE.RIPPLE) return undefined;
 
-        const readyTimer = window.setTimeout(() => setPhase(PHASE.READY), 3000);
+        const readyTimer = window.setTimeout(() => {
+            markIntroSeen();
+            setPhase(PHASE.READY);
+        }, 3000);
+
         return () => window.clearTimeout(readyTimer);
     }, [introDone, phase]);
 
