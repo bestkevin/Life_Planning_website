@@ -5,7 +5,7 @@ import { useTypewriter } from "../hooks/useTypewriter.js";
 const INTRO_TEXT =
     "你来了？我们都在等你。刚好我们在聊一个有趣的话题……";
 
-const sconceSrc = `${import.meta.env.BASE_URL}img/wall-sconce.png`;
+const pendantLampSrc = `${import.meta.env.BASE_URL}img/pendant-lamp.png`;
 
 const PHASE = {
     DARK: "dark",
@@ -17,8 +17,9 @@ const PHASE = {
 };
 
 const TIMING = {
-    darkHold: 1800,
-    lampHold: 2800,
+    darkHold: 1200,
+    lampDrop: 3600,
+    lampHold: 1200,
     typeSpeed: 72,
     textHold: 3200,
     blackoutFade: 1200,
@@ -43,7 +44,10 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
     useEffect(() => {
         if (phase !== PHASE.LAMP) return undefined;
 
-        const textTimer = window.setTimeout(() => setPhase(PHASE.TEXT), TIMING.lampHold);
+        const textTimer = window.setTimeout(
+            () => setPhase(PHASE.TEXT),
+            TIMING.lampDrop + TIMING.lampHold,
+        );
         return () => window.clearTimeout(textTimer);
     }, [phase]);
 
@@ -81,14 +85,17 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
             className={`home-intro-overlay home-intro-overlay--${phase}`}
             aria-hidden="true"
         >
-            <div className="home-intro-lamp-wrap">
-                <img
-                    className="home-intro-lamp-image"
-                    src={sconceSrc}
-                    alt=""
-                    draggable="false"
-                />
-                <div className="home-intro-lamp-beam" />
+            <div className="home-intro-lamp-anchor">
+                <div className="home-intro-lamp-cord" />
+                <div className="home-intro-lamp-wrap">
+                    <img
+                        className="home-intro-lamp-image"
+                        src={pendantLampSrc}
+                        alt=""
+                        draggable="false"
+                    />
+                    <div className="home-intro-lamp-beam" />
+                </div>
             </div>
             <p className="home-intro-text">{displayed}</p>
         </div>,
