@@ -981,6 +981,7 @@ body[data-project-one-intro="true"] footer {
     background: transparent;
     border: 0;
     box-shadow: none;
+    transform: translateX(3cm);
 }
 
 .project-one-photo-wall {
@@ -1168,6 +1169,10 @@ body[data-project-one-intro="true"] footer {
     .project-one-dialog,
     .project-one-photo-wall {
         width: 100%;
+    }
+
+    .project-one-dialog-wrap {
+        transform: none;
     }
 
     .project-one-dialog {
