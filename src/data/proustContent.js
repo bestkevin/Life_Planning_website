@@ -63,13 +63,34 @@ export const proustIntroSections = [
 ];
 
 export const proustAnswerComparison = [
-    { question: "你最看重朋友的哪些品质？", answer: "体贴、坦诚，尤其是一种不愿让人失望的心意。" },
-    { question: "你最大的恐惧是什么？", answer: "痛苦，尤其是精神上的痛苦。" },
-    { question: "你最喜欢哪一种活动？", answer: "阅读、做梦与写诗。" },
-    { question: "你认为自己最突出的品质是什么？", answer: "理解他人的感受，并愿意温柔地对待它们。" },
-    { question: "你理想中的幸福是什么？", answer: "在安静中被理解，并与所爱的人共度时光。" },
-    { question: "你最喜欢哪些作家？", answer: "圣西蒙、波德莱尔、陀思妥耶夫斯基、米什莱、乔治·桑。" },
-    { question: "你目前的心境是什么？", answer: "在期待与回忆之间，带着一点淡淡的忧郁。" },
+    {
+        question: "你认为最完美的幸福是怎样的？",
+        answer: "在安静中被理解，并与所爱的人共度时光。",
+    },
+    {
+        question: "你最大的恐惧是什么？",
+        answer: "痛苦，尤其是精神上的痛苦。",
+    },
+    {
+        question: "你最看重朋友的什么特点？",
+        answer: "体贴、坦诚，尤其是一种不愿让人失望的心意。",
+    },
+    {
+        question: "你最显著的特点是什么？",
+        answer: "理解他人的感受，并愿意温柔地对待它们。",
+    },
+    {
+        question: "你最喜欢的作家是谁？",
+        answer: "圣西蒙、波德莱尔、陀思妥耶夫斯基、米什莱、乔治·桑。",
+    },
+    {
+        question: "你目前的心境怎样？",
+        answer: "在期待与回忆之间，带着一点淡淡的忧郁。",
+    },
+    {
+        question: "你的座右铭是什么？",
+        answer: "宁可聪明地做梦，也不要愚蠢地清醒。",
+    },
 ];
 
 export const projectOneIntroText =
