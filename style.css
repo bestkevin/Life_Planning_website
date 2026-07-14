@@ -695,42 +695,9 @@ body[data-page="project-1"] #root {
     padding-top: 108px;
 }
 
-/* Soft highlight card fitted exactly to the left intro column.
-   Clear the default liquid-scene radial glow so only this pale layer remains. */
+/* Project 1: no background tip/highlight overlay. */
 .liquid-root--project-one > .liquid-scene {
-    background: transparent;
-    background-image: none;
-    border-radius: 0;
-}
-
-.liquid-root--project-one > .liquid-scene::before {
-    content: "";
-    position: absolute;
-    top: 28px;
-    left: calc(8vw - 1cm);
-    width: 300px;
-    height: min(68%, 560px);
-    border-radius: 28px;
-    background:
-        radial-gradient(
-            ellipse 85% 70% at 50% 32%,
-            rgba(220, 190, 130, 0.11),
-            rgba(160, 120, 70, 0.04) 55%,
-            transparent 78%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(140, 100, 55, 0.05),
-            rgba(90, 60, 35, 0.02) 55%,
-            transparent
-        );
-    box-shadow: none;
-    pointer-events: none;
-}
-
-.liquid-root--project-one > .liquid-scene::after {
     display: none;
-    content: none;
 }
 
 .project-one-section {
