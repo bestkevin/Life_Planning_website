@@ -1004,6 +1004,8 @@ body[data-project-one-intro="true"] footer {
 }
 
 .project-one-dialog {
+    position: relative;
+    z-index: 0;
     display: grid;
     grid-template-rows: 1fr auto;
     width: calc((100% - 324px) * 2 / 3);
@@ -1012,28 +1014,107 @@ body[data-project-one-intro="true"] footer {
     height: auto;
     min-height: min(72vh, 760px);
     aspect-ratio: auto;
-    padding: 0;
+    padding: 28px 30px 22px;
     color: var(--project-one-text);
     overflow: visible;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
+    isolation: isolate;
+    border: 1px solid rgba(92, 68, 36, 0.55);
+    border-radius: 3px 4px 2px 5px;
+    background-color: #3a2816;
+    background-image:
+        radial-gradient(
+            ellipse 78% 58% at 46% 16%,
+            rgba(255, 196, 110, 0.42) 0%,
+            rgba(196, 128, 52, 0.22) 32%,
+            rgba(80, 48, 22, 0.08) 58%,
+            transparent 74%
+        ),
+        radial-gradient(
+            ellipse 90% 70% at 50% 100%,
+            rgba(12, 7, 3, 0.72) 0%,
+            transparent 62%
+        ),
+        linear-gradient(
+            155deg,
+            #6b4d2e 0%,
+            #523820 38%,
+            #3d2a16 72%,
+            #2a1c0f 100%
+        );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.48),
+        0 2px 0 rgba(255, 220, 160, 0.08),
+        inset 0 0 90px rgba(18, 10, 4, 0.45),
+        inset 0 1px 0 rgba(255, 226, 170, 0.18);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    isolation: auto;
 }
 
-.project-one-dialog::before,
+/* Parchment fiber / grain that scrolls with the dialog sheet. */
+.project-one-dialog::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: inherit;
+    background-image:
+        repeating-linear-gradient(
+            92deg,
+            rgba(255, 230, 180, 0.035) 0 1px,
+            transparent 1px 7px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(40, 22, 8, 0.05) 0 1px,
+            transparent 1px 9px
+        ),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.3 0 0 0 0 0.14 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: auto, auto, 180px 180px;
+    opacity: 0.55;
+    mix-blend-mode: soft-light;
+    content: "";
+    pointer-events: none;
+}
+
+/* Soft candle falloff vignette on the archive sheet. */
 .project-one-dialog::after {
-    display: none;
-    content: none;
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        radial-gradient(
+            circle at 44% 12%,
+            rgba(255, 210, 130, 0.16) 0%,
+            transparent 28%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(255, 220, 160, 0.06),
+            transparent 18%,
+            rgba(10, 6, 2, 0.28) 100%
+        );
+    box-shadow: inset 0 0 0 1px rgba(255, 226, 170, 0.06);
+    content: "";
+    pointer-events: none;
 }
 
 .project-one-dialog:hover {
     transform: none;
-    border-color: transparent;
-    box-shadow: none;
+    border-color: rgba(92, 68, 36, 0.55);
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.48),
+        0 2px 0 rgba(255, 220, 160, 0.08),
+        inset 0 0 90px rgba(18, 10, 4, 0.45),
+        inset 0 1px 0 rgba(255, 226, 170, 0.18);
+}
+
+.project-one-dialog-scroll,
+.project-one-input-row {
+    position: relative;
+    z-index: 1;
 }
 
 .project-one-dialog-scroll {
@@ -1041,7 +1122,7 @@ body[data-project-one-intro="true"] footer {
     flex-direction: column;
     gap: 4px;
     max-height: min(62vh, 640px);
-    padding: 12px 4px 18px;
+    padding: 8px 6px 18px;
     overflow-y: auto;
     scrollbar-width: thin;
 }
@@ -1080,7 +1161,7 @@ body[data-project-one-intro="true"] footer {
     grid-template-columns: 1fr auto auto;
     gap: 10px;
     padding: 12px 0 0;
-    border-top: 1px solid rgba(247, 232, 168, 0.22);
+    border-top: 1px solid rgba(196, 154, 90, 0.28);
 }
 
 .project-one-input-row input {
@@ -1090,18 +1171,19 @@ body[data-project-one-intro="true"] footer {
     color: var(--project-one-text-cream);
     caret-color: var(--project-one-text-cream);
     font: inherit;
-    background: #090909;
-    border: 1px solid rgba(247, 232, 168, 0.28);
-    border-radius: 14px;
+    background: rgba(18, 10, 5, 0.58);
+    border: 1px solid rgba(170, 125, 70, 0.38);
+    border-radius: 10px;
     outline: none;
 }
 
 .project-one-input-row input::placeholder {
-    color: var(--project-one-text-soft);
+    color: rgba(245, 240, 230, 0.45);
 }
 
 .project-one-input-row input:focus-visible {
-    border-color: rgba(247, 232, 168, 0.7);
+    border-color: rgba(230, 180, 100, 0.7);
+    box-shadow: 0 0 0 1px rgba(255, 196, 110, 0.18);
 }
 
 .project-one-input-row button {
