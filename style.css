@@ -983,9 +983,9 @@ body[data-project-one-intro="true"] footer {
     grid-row: 1;
     gap: 5.5cm;
     width: 100%;
-    /* Cancel main top padding, then sit flush under the fixed header. */
+    /* Cancel main top padding, sit under header, then shift down 2cm. */
     margin-top: -108px;
-    padding-top: 71px;
+    padding-top: calc(71px + 2cm);
     background: transparent;
     border: 0;
     box-shadow: none;
