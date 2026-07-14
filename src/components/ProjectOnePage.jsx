@@ -31,8 +31,14 @@ const OPENING_TYPE_SPEED = 104;
 const QUESTION_TYPE_SPEED = 104;
 const SPEAKER_HOLD_MS = 320;
 const MYSTERY_SPEAKER = "友人A：";
+const LEGACY_SPEAKER = "神秘人：";
 const CLOSING_LINE =
     "谢谢你愿意分享。愿这些问题成为你认识自己、也拥抱未来自己的起点。";
+
+function normalizeSpeakerLabel(text) {
+    if (typeof text !== "string") return text;
+    return text.split(LEGACY_SPEAKER).join(MYSTERY_SPEAKER);
+}
 
 function loadChatState() {
     try {
@@ -41,7 +47,13 @@ function loadChatState() {
         const parsed = JSON.parse(raw);
         if (!parsed || typeof parsed !== "object") return null;
         return {
-            messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+            messages: Array.isArray(parsed.messages)
+                ? parsed.messages.map((message) =>
+                      message && typeof message === "object"
+                          ? { ...message, text: normalizeSpeakerLabel(message.text) }
+                          : message,
+                  )
+                : [],
             questionIndex:
                 typeof parsed.questionIndex === "number" ? parsed.questionIndex : -1,
             chatStarted: Boolean(parsed.chatStarted),
@@ -418,7 +430,7 @@ export default function ProjectOnePage() {
                                         key={`${message.role}-${index}`}
                                         className={`project-one-message project-one-message--${message.role}`}
                                     >
-                                        {message.text}
+                                        {normalizeSpeakerLabel(message.text)}
                                     </p>
                                 ))}
                                 {isTypingQuestion && (
