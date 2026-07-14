@@ -71,16 +71,34 @@ function App() {
     );
 
     useEffect(() => {
-        // Mark on first actual home intro so refresh / later visits skip it.
-        if (activePage === "home" && showHomeIntro) {
+        if (activePage === "home") {
+            if (showHomeIntro) {
+                // First entry into home: mark immediately so later nav returns skip it.
+                markHomeIntroSeen();
+            }
+            return;
+        }
+
+        // Left home via nav (or elsewhere): end intro so returning won't replay.
+        if (showHomeIntro) {
             markHomeIntroSeen();
+            setShowHomeIntro(false);
+            setHomeRevealPhase(HOME_REVEAL_PHASE.DONE);
         }
     }, [activePage, showHomeIntro]);
 
     useEffect(() => {
         const handleHashChange = () => {
-            setActivePage(getPageFromHash());
+            const nextPage = getPageFromHash();
+            setActivePage(nextPage);
             setExpandedProject(null);
+
+            // Navigating back to home after the first visit must never restart intro.
+            if (nextPage === "home" && hasSeenHomeIntro()) {
+                setShowHomeIntro(false);
+                setHomeRevealPhase(HOME_REVEAL_PHASE.DONE);
+            }
+
             window.scrollTo({ top: 0, behavior: "smooth" });
         };
 
