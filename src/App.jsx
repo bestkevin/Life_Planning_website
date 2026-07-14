@@ -19,7 +19,7 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
 /** Bump this when intro/homepage deploy must invalidate session intro cache. */
-const SITE_BUILD = "20260714-lamp-instant";
+const SITE_BUILD = "20260714-panel-clear";
 
 function syncSiteBuild() {
     const previous = sessionStorage.getItem("siteBuild");
@@ -41,9 +41,9 @@ const liquidGlassDefaults = {
     distortion: 0.035,
     cornerRadius: 28,
     zRadius: 50,
-    opacity: 0.66,
+    opacity: 0.42,
     saturation: -0.28,
-    brightness: -0.24,
+    brightness: -0.12,
     shadowOpacity: 0.48,
     shadowSpread: 20,
     shadowOffsetY: 10,
@@ -145,7 +145,7 @@ function App() {
             liquidGlassRef.current = null;
             delete root.dataset.liquidReady;
         };
-    }, [activePage, showHomeIntro, homeRevealPhase]);
+    }, [activePage]);
 
     useEffect(() => {
         if (activePage !== "home") {
