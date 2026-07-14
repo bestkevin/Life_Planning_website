@@ -781,9 +781,12 @@ body[data-page="project-1"] .project-one-section.page-enter {
     }
 }
 
-body[data-project-one-intro="true"] header,
-body[data-project-one-intro="true"] footer,
-body[data-project-one-intro="true"] main {
+/* Intro overlay covers the page; keep chrome clickable as an escape hatch. */
+body[data-project-one-intro="true"] header {
+    z-index: 1400;
+}
+
+body[data-project-one-intro="true"] footer {
     visibility: hidden;
 }
 

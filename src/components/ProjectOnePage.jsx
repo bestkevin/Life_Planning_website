@@ -1,5 +1,5 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
     PADLET_EMBED_URL,
@@ -21,6 +21,11 @@ const PHASE = {
 
 const INTRO_SEEN_KEY = "projectOneIntroSeen";
 const CHAT_STATE_KEY = "projectOneChatState";
+
+const INTRO_TYPE_SPEED = 58;
+const INTRO_BLACK_MS = 1000;
+const INTRO_HOLD_MS = 2500;
+const INTRO_FAILSAFE_MS = 12000;
 
 function loadChatState() {
     try {
@@ -84,10 +89,12 @@ function CollapsiblePanel({ title, children, defaultOpen = false }) {
 
 export default function ProjectOnePage() {
     const savedChat = loadChatState();
-    const introAlreadySeen = hasSeenIntro();
+    // Lock once per mount: never re-read localStorage mid-intro (avoids black-screen race).
+    const shouldPlayIntroRef = useRef(!hasSeenIntro());
+    const introFinishedRef = useRef(!shouldPlayIntroRef.current);
 
     const [phase, setPhase] = useState(() =>
-        introAlreadySeen ? PHASE.READY : PHASE.BLACK,
+        shouldPlayIntroRef.current ? PHASE.BLACK : PHASE.READY,
     );
     const [messages, setMessages] = useState(() => savedChat?.messages ?? []);
     const [questionIndex, setQuestionIndex] = useState(
@@ -112,10 +119,10 @@ export default function ProjectOnePage() {
     const playIntro = phase === PHASE.BLACK || phase === PHASE.RIPPLE;
     const typeOpening = phase === PHASE.READY && !openingDone;
 
-    const { displayed: introDisplayed, done: introDone } = useTypewriter(
+    const { displayed: introDisplayed } = useTypewriter(
         projectOneIntroText,
         phase === PHASE.RIPPLE,
-        58,
+        INTRO_TYPE_SPEED,
     );
 
     const { displayed: openingDisplayed, done: openingTypedDone } = useTypewriter(
@@ -124,12 +131,37 @@ export default function ProjectOnePage() {
         52,
     );
 
-    useEffect(() => {
-        if (hasSeenIntro() || phase !== PHASE.BLACK) return undefined;
+    const finishIntro = useCallback(() => {
+        if (introFinishedRef.current) return;
+        introFinishedRef.current = true;
+        markIntroSeen();
+        setPhase(PHASE.READY);
+    }, []);
 
-        const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
-        return () => window.clearTimeout(blackTimer);
-    }, [phase]);
+    // Fixed timeline — do not gate on localStorage or typewriter completion.
+    useEffect(() => {
+        if (!shouldPlayIntroRef.current) return undefined;
+
+        const typeMs = projectOneIntroText.length * INTRO_TYPE_SPEED;
+        const readyAt = INTRO_BLACK_MS + typeMs + INTRO_HOLD_MS;
+
+        const toRipple = window.setTimeout(() => {
+            setPhase((current) => (current === PHASE.READY ? current : PHASE.RIPPLE));
+        }, INTRO_BLACK_MS);
+
+        const toReady = window.setTimeout(finishIntro, readyAt);
+        const failsafe = window.setTimeout(finishIntro, INTRO_FAILSAFE_MS);
+
+        const onHashChange = () => finishIntro();
+        window.addEventListener("hashchange", onHashChange);
+
+        return () => {
+            window.clearTimeout(toRipple);
+            window.clearTimeout(toReady);
+            window.clearTimeout(failsafe);
+            window.removeEventListener("hashchange", onHashChange);
+        };
+    }, [finishIntro]);
 
     useEffect(() => {
         if (playIntro) {
@@ -139,17 +171,6 @@ export default function ProjectOnePage() {
         }
         return () => delete document.body.dataset.projectOneIntro;
     }, [playIntro]);
-
-    useEffect(() => {
-        if (!introDone || phase !== PHASE.RIPPLE) return undefined;
-
-        const readyTimer = window.setTimeout(() => {
-            markIntroSeen();
-            setPhase(PHASE.READY);
-        }, 3000);
-
-        return () => window.clearTimeout(readyTimer);
-    }, [introDone, phase]);
 
     useEffect(() => {
         if (openingTypedDone && !openingDone) {

@@ -19,7 +19,6 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
 const HOME_INTRO_SEEN_KEY = "homeIntroSeen";
-const PROJECT_ONE_INTRO_SEEN_KEY = "projectOneIntroSeen";
 
 function hasSeenHomeIntro() {
     return localStorage.getItem(HOME_INTRO_SEEN_KEY) === "1";
@@ -27,10 +26,6 @@ function hasSeenHomeIntro() {
 
 function markHomeIntroSeen() {
     localStorage.setItem(HOME_INTRO_SEEN_KEY, "1");
-}
-
-function markProjectOneIntroSeen() {
-    localStorage.setItem(PROJECT_ONE_INTRO_SEEN_KEY, "1");
 }
 
 const liquidGlassDefaults = {
@@ -75,8 +70,6 @@ function App() {
         introSeen ? HOME_REVEAL_PHASE.DONE : null,
     );
 
-    const previousPageRef = useRef(activePage);
-
     useEffect(() => {
         if (activePage === "home") {
             if (showHomeIntro) {
@@ -89,12 +82,6 @@ function App() {
             setShowHomeIntro(false);
             setHomeRevealPhase(HOME_REVEAL_PHASE.DONE);
         }
-
-        const previousPage = previousPageRef.current;
-        if (previousPage === "project-1" && activePage !== "project-1") {
-            markProjectOneIntroSeen();
-        }
-        previousPageRef.current = activePage;
     }, [activePage, showHomeIntro]);
 
     useEffect(() => {
@@ -142,13 +129,23 @@ function App() {
 
         let instance;
         let cancelled = false;
+        let retryTimer = 0;
 
         const initializeGlass = async () => {
             try {
                 await document.fonts?.ready;
+                if (cancelled) return;
+
                 const glassElements = root.querySelectorAll(
                     ":scope .liquid-glass-panel",
                 );
+
+                // Project 1 intro mounts before glass panels exist — wait for them.
+                if (activePage === "project-1" && glassElements.length === 0) {
+                    retryTimer = window.setTimeout(initializeGlass, 200);
+                    return;
+                }
+
                 const nextInstance = await LiquidGlass.init({
                     root,
                     glassElements,
@@ -173,6 +170,7 @@ function App() {
         return () => {
             cancelled = true;
             window.cancelAnimationFrame(animationFrame);
+            window.clearTimeout(retryTimer);
             instance?.destroy();
             liquidGlassRef.current = null;
             delete root.dataset.liquidReady;
