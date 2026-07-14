@@ -832,13 +832,17 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-layout {
     position: relative;
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .project-one-sidebar {
     position: sticky;
     top: 108px;
-    float: left;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -975,18 +979,21 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-dialog-wrap {
     display: grid;
+    grid-column: 1;
+    grid-row: 1;
     gap: 5.5cm;
     width: 100%;
-    padding: 0;
+    /* Cancel main top padding, then sit flush under the fixed header. */
+    margin-top: -108px;
+    padding-top: 71px;
     background: transparent;
     border: 0;
     box-shadow: none;
-    /* Keep sidebar put; lift dialog to the page top (cancel main top padding). */
-    transform: translate(3cm, -108px);
+    transform: translateX(3cm);
+    z-index: 1;
 }
 
 .project-one-photo-wall {
-    clear: both;
     width: min(100%, calc((100% - 324px) * 2 / 3));
     margin: 0 auto;
     padding: 0 0 48px;
@@ -1249,6 +1256,8 @@ body[data-project-one-intro="true"] footer {
         width: 100%;
         max-width: none;
         transform: none;
+        grid-column: auto;
+        grid-row: auto;
     }
 
     .project-one-sidebar:hover {
@@ -1261,6 +1270,9 @@ body[data-project-one-intro="true"] footer {
     }
 
     .project-one-dialog-wrap {
+        grid-column: auto;
+        grid-row: auto;
+        margin-top: 0;
         transform: none;
     }
 
