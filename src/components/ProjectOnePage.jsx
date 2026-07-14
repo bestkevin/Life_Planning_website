@@ -22,10 +22,11 @@ const PHASE = {
 const INTRO_SEEN_KEY = "projectOneIntroSeen";
 const CHAT_STATE_KEY = "projectOneChatState";
 
-const INTRO_TYPE_SPEED = 58;
-const INTRO_BLACK_MS = 1000;
-const INTRO_HOLD_MS = 2500;
-const INTRO_FAILSAFE_MS = 12000;
+const INTRO_TYPE_SPEED = 116;
+const INTRO_BLACK_MS = 2000;
+const INTRO_HOLD_MS = 5000;
+const INTRO_FAILSAFE_MS = 24000;
+const OPENING_TYPE_SPEED = 104;
 
 function loadChatState() {
     try {
@@ -128,7 +129,7 @@ export default function ProjectOnePage() {
     const { displayed: openingDisplayed, done: openingTypedDone } = useTypewriter(
         projectOneOpeningLine,
         typeOpening,
-        52,
+        OPENING_TYPE_SPEED,
     );
 
     const finishIntro = useCallback(() => {
