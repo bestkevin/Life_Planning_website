@@ -30,7 +30,7 @@ const INTRO_FAILSAFE_MS = 24000;
 const OPENING_TYPE_SPEED = 104;
 const QUESTION_TYPE_SPEED = 104;
 const SPEAKER_HOLD_MS = 320;
-const MYSTERY_SPEAKER = "神秘人：";
+const MYSTERY_SPEAKER = "友人A：";
 const CLOSING_LINE =
     "谢谢你愿意分享。愿这些问题成为你认识自己、也拥抱未来自己的起点。";
 
