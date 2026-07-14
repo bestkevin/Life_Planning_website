@@ -683,8 +683,8 @@ body[data-home-reveal="intro"] #home .home-panel-content > * {
 
 body[data-page="project-1"] #root {
     background-image:
-        linear-gradient(rgba(5, 4, 3, 0.5), rgba(8, 6, 4, 0.62)),
-        url("./cafe1-extended.jpg");
+        linear-gradient(rgba(5, 4, 3, 0.42), rgba(8, 6, 4, 0.55)),
+        url("./project1-bg-extended.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
