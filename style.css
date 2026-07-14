@@ -685,16 +685,10 @@ body[data-home-reveal="intro"] #home .home-panel-content > * {
 
 body[data-page="project-1"] #root {
     background-image:
-        linear-gradient(
-            to right,
-            rgba(5, 4, 3, 0.08) 0%,
-            rgba(5, 4, 3, 0.2) 30%,
-            rgba(8, 6, 4, 0.46) 55%,
-            rgba(8, 6, 4, 0.55) 100%
-        ),
+        linear-gradient(rgba(5, 4, 3, 0.42), rgba(8, 6, 4, 0.55)),
         url("./project1-bg-extended.jpg");
-    background-position: center, -12vw 44%;
-    background-size: auto, cover;
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -703,6 +697,24 @@ body[data-page="project-1"] #root {
     display: block;
     width: min(1380px, calc(100% - 32px));
     padding-top: 108px;
+}
+
+/* Align the warm highlight with the left intro column; leave dialog layout unchanged. */
+.liquid-root--project-one > .liquid-scene {
+    background:
+        radial-gradient(
+            circle at calc(8vw + 150px - 1cm) 18%,
+            rgba(171, 119, 52, 0.44),
+            transparent 26rem
+        ),
+        radial-gradient(circle at 84% 72%, rgba(102, 62, 35, 0.26), transparent 22rem),
+        repeating-linear-gradient(
+            118deg,
+            rgba(255, 239, 207, 0.018) 0,
+            rgba(255, 239, 207, 0.018) 1px,
+            transparent 1px,
+            transparent 18px
+        );
 }
 
 .project-one-section {
@@ -832,7 +844,6 @@ body[data-project-one-intro="true"] footer {
 .project-one-sidebar {
     position: sticky;
     top: 108px;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -850,38 +861,18 @@ body[data-project-one-intro="true"] footer {
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    isolation: isolate;
-    transform: translateX(5cm);
+    isolation: auto;
+    transform: translateX(-1cm);
 }
 
-.project-one-sidebar::before {
-    position: absolute;
-    z-index: 0;
-    inset: -40px -60px -80px -48px;
-    display: block;
-    pointer-events: none;
-    content: "";
-    background: radial-gradient(
-        ellipse 120% 90% at 45% 35%,
-        rgba(255, 220, 150, 0.48) 0%,
-        rgba(255, 185, 95, 0.28) 34%,
-        rgba(255, 150, 60, 0.1) 58%,
-        transparent 78%
-    );
-}
-
+.project-one-sidebar::before,
 .project-one-sidebar::after {
     display: none;
     content: none;
 }
 
-.project-one-sidebar > * {
-    position: relative;
-    z-index: 1;
-}
-
 .project-one-sidebar:hover {
-    transform: translateX(5cm);
+    transform: translateX(-1cm);
     border-color: transparent;
     box-shadow: none;
 }
