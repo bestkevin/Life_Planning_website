@@ -9,7 +9,6 @@ const pendantSrc = `${import.meta.env.BASE_URL}img/pendant-lamp.png`;
 const cordSrc = `${import.meta.env.BASE_URL}img/pendant-cord.png`;
 
 const PHASE = {
-    DARK: "dark",
     LAMP: "lamp",
     DROP: "drop",
     TEXT: "text",
@@ -19,8 +18,7 @@ const PHASE = {
 };
 
 const TIMING = {
-    darkHold: 1200,
-    lampAppearHold: 1800,
+    lampHold: 1200,
     dropHold: 3600,
     typeSpeed: 72,
     textHold: 3200,
@@ -28,7 +26,7 @@ const TIMING = {
 };
 
 export default function HomeIntroOverlay({ onRevealHome, onBlackoutComplete }) {
-    const [phase, setPhase] = useState(PHASE.DARK);
+    const [phase, setPhase] = useState(PHASE.LAMP);
     const { displayed, done } = useTypewriter(
         INTRO_TEXT,
         phase === PHASE.TEXT || phase === PHASE.HOLD,
@@ -36,16 +34,9 @@ export default function HomeIntroOverlay({ onRevealHome, onBlackoutComplete }) {
     );
 
     useEffect(() => {
-        if (phase !== PHASE.DARK) return undefined;
-
-        const timer = window.setTimeout(() => setPhase(PHASE.LAMP), TIMING.darkHold);
-        return () => window.clearTimeout(timer);
-    }, [phase]);
-
-    useEffect(() => {
         if (phase !== PHASE.LAMP) return undefined;
 
-        const timer = window.setTimeout(() => setPhase(PHASE.DROP), TIMING.lampAppearHold);
+        const timer = window.setTimeout(() => setPhase(PHASE.DROP), TIMING.lampHold);
         return () => window.clearTimeout(timer);
     }, [phase]);
 

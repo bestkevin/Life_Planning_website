@@ -19,7 +19,7 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
 /** Bump this when intro/homepage deploy must invalidate session intro cache. */
-const SITE_BUILD = "20260714-home-rain-now";
+const SITE_BUILD = "20260714-lamp-instant";
 
 function syncSiteBuild() {
     const previous = sessionStorage.getItem("siteBuild");
