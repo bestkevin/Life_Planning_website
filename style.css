@@ -832,6 +832,7 @@ body[data-project-one-intro="true"] footer {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     isolation: auto;
+    transform: translateX(-1cm);
 }
 
 .project-one-sidebar::before,
@@ -841,7 +842,7 @@ body[data-project-one-intro="true"] footer {
 }
 
 .project-one-sidebar:hover {
-    transform: none;
+    transform: translateX(-1cm);
     border-color: transparent;
     box-shadow: none;
 }
