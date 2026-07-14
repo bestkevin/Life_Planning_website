@@ -385,7 +385,7 @@ export default function ProjectOnePage() {
                             />
                         </div>
                         <p className="project-one-sidebar-title">普鲁斯特问卷</p>
-                        <p className="project-one-sidebar-subtitle">了解你自己</p>
+                        <p className="project-one-sidebar-subtitle">“了解你自己”</p>
 
                         {proustIntroSections.map((section) => (
                             <CollapsiblePanel key={section.id} title={section.title}>
