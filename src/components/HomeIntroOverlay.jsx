@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTypewriter } from "../hooks/useTypewriter.js";
 
 const INTRO_TEXT =
@@ -75,7 +76,7 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
         return null;
     }
 
-    return (
+    return createPortal(
         <div
             className={`home-intro-overlay home-intro-overlay--${phase}`}
             aria-hidden="true"
@@ -90,6 +91,7 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
                 <div className="home-intro-lamp-beam" />
             </div>
             <p className="home-intro-text">{displayed}</p>
-        </div>
+        </div>,
+        document.body,
     );
 }

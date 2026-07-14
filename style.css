@@ -435,11 +435,16 @@ body[data-home-reveal] #home.page-enter {
     animation: none;
 }
 
-body[data-home-reveal="intro"] #root,
-body[data-home-reveal="black"] #root,
 body[data-home-reveal="intro"] .liquid-root[data-page="home"] > .liquid-scene,
+body[data-home-reveal="black"] #root,
 body[data-home-reveal="black"] .liquid-root[data-page="home"] > .liquid-scene {
     opacity: 0;
+}
+
+body[data-home-reveal="intro"] header,
+body[data-home-reveal="intro"] main,
+body[data-home-reveal="intro"] footer {
+    visibility: hidden;
 }
 
 body[data-home-reveal="background"] #root,

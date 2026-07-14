@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { LiquidGlass } from "@ybouane/liquidglass";
 import {
     ArrowRight,
@@ -183,11 +183,11 @@ function App() {
         return () => window.clearTimeout(rainTimer);
     }, [activePage, showHomeIntro, homeRevealPhase]);
 
-    const handleHomeBlackoutComplete = () => {
+    const handleHomeBlackoutComplete = useCallback(() => {
         sessionStorage.setItem("homeIntroSeen", "1");
         setShowHomeIntro(false);
         setHomeRevealPhase(HOME_REVEAL_PHASE.BLACK);
-    };
+    }, []);
 
     const handleRainFrame = (target) => {
         liquidGlassRef.current?.markChanged(target);
