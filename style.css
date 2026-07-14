@@ -684,13 +684,9 @@ body[data-home-reveal="intro"] #home .home-panel-content > * {
 }
 
 body[data-page="project-1"] #root {
-    background-image:
+    background:
         linear-gradient(rgba(5, 4, 3, 0.42), rgba(8, 6, 4, 0.55)),
-        url("./project1-bg-extended.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+        url("./project1-bg-extended.jpg") center / cover no-repeat fixed;
 }
 
 .liquid-root--project-one {
@@ -699,16 +695,12 @@ body[data-page="project-1"] #root {
     padding-top: 108px;
 }
 
-/* Soft highlight card fitted exactly to the left intro column. */
+/* Soft highlight card fitted exactly to the left intro column.
+   Clear the default liquid-scene radial glow so only this pale layer remains. */
 .liquid-root--project-one > .liquid-scene {
-    background:
-        repeating-linear-gradient(
-            118deg,
-            rgba(255, 239, 207, 0.012) 0,
-            rgba(255, 239, 207, 0.012) 1px,
-            transparent 1px,
-            transparent 18px
-        );
+    background: transparent;
+    background-image: none;
+    border-radius: 0;
 }
 
 .liquid-root--project-one > .liquid-scene::before {
@@ -722,18 +714,23 @@ body[data-page="project-1"] #root {
     background:
         radial-gradient(
             ellipse 85% 70% at 50% 32%,
-            rgba(210, 170, 100, 0.34),
-            rgba(140, 95, 45, 0.12) 58%,
+            rgba(220, 190, 130, 0.11),
+            rgba(160, 120, 70, 0.04) 55%,
             transparent 78%
         ),
         linear-gradient(
             180deg,
-            rgba(120, 82, 42, 0.16),
-            rgba(80, 54, 30, 0.08) 55%,
+            rgba(140, 100, 55, 0.05),
+            rgba(90, 60, 35, 0.02) 55%,
             transparent
         );
-    box-shadow: inset 0 0 40px rgba(255, 220, 150, 0.06);
+    box-shadow: none;
     pointer-events: none;
+}
+
+.liquid-root--project-one > .liquid-scene::after {
+    display: none;
+    content: none;
 }
 
 .project-one-section {
