@@ -24,11 +24,10 @@ const TIMING = {
     dropHold: 3600,
     typeSpeed: 72,
     textHold: 3200,
-    blackoutFade: 1200,
-    blackoutHold: 800,
+    fadeOut: 1400,
 };
 
-export default function HomeIntroOverlay({ onBlackoutComplete }) {
+export default function HomeIntroOverlay({ onRevealHome, onBlackoutComplete }) {
     const [phase, setPhase] = useState(PHASE.DARK);
     const { displayed, done } = useTypewriter(
         INTRO_TEXT,
@@ -74,13 +73,15 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
     useEffect(() => {
         if (phase !== PHASE.BLACKOUT) return undefined;
 
+        onRevealHome?.();
+
         const timer = window.setTimeout(() => {
             setPhase(PHASE.DONE);
             onBlackoutComplete?.();
-        }, TIMING.blackoutFade + TIMING.blackoutHold);
+        }, TIMING.fadeOut);
 
         return () => window.clearTimeout(timer);
-    }, [phase, onBlackoutComplete]);
+    }, [phase, onRevealHome, onBlackoutComplete]);
 
     if (phase === PHASE.DONE) {
         return null;

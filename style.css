@@ -435,9 +435,7 @@ body[data-home-reveal] #home.page-enter {
     animation: none;
 }
 
-body[data-home-reveal="intro"] .liquid-root[data-page="home"] > .liquid-scene,
-body[data-home-reveal="black"] #root,
-body[data-home-reveal="black"] .liquid-root[data-page="home"] > .liquid-scene {
+body[data-home-reveal="intro"] .liquid-root[data-page="home"] > .liquid-scene {
     opacity: 0;
 }
 
@@ -447,73 +445,10 @@ body[data-home-reveal="intro"] footer {
     visibility: hidden;
 }
 
-body[data-home-reveal="background"] #root,
-body[data-home-reveal="background"] .liquid-root[data-page="home"] > .liquid-scene,
-body[data-home-reveal="panel"] #root,
-body[data-home-reveal="panel"] .liquid-root[data-page="home"] > .liquid-scene,
-body[data-home-reveal="text"] #root,
-body[data-home-reveal="text"] .liquid-root[data-page="home"] > .liquid-scene,
-body[data-home-reveal="done"] #root,
-body[data-home-reveal="done"] .liquid-root[data-page="home"] > .liquid-scene {
-    opacity: 1;
-    transition: opacity 3s ease;
-}
-
 body[data-home-reveal="intro"] #home,
-body[data-home-reveal="black"] #home,
-body[data-home-reveal="background"] #home {
+body[data-home-reveal="intro"] #home .home-panel-content > * {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(18px);
-}
-
-body[data-home-reveal="panel"] #home,
-body[data-home-reveal="text"] #home,
-body[data-home-reveal="done"] #home {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition:
-        opacity 2.4s ease,
-        transform 2.4s ease,
-        visibility 0s linear 0s;
-}
-
-body[data-home-reveal="panel"] #home .home-panel-content > *,
-body[data-home-reveal="intro"] #home .home-panel-content > *,
-body[data-home-reveal="black"] #home .home-panel-content > *,
-body[data-home-reveal="background"] #home .home-panel-content > * {
-    opacity: 0;
-    transform: translateY(12px);
-}
-
-body[data-home-reveal="text"] #home .home-panel-content > *,
-body[data-home-reveal="done"] #home .home-panel-content > * {
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-        opacity 1.8s ease,
-        transform 1.8s ease;
-}
-
-body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(1),
-body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(1) {
-    transition-delay: 0.15s;
-}
-
-body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(2),
-body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(2) {
-    transition-delay: 0.45s;
-}
-
-body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(3),
-body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(3) {
-    transition-delay: 0.75s;
-}
-
-body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(4),
-body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
-    transition-delay: 1.05s;
 }
 
 .home-intro-overlay {
@@ -523,16 +458,20 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: grid;
     place-items: center;
     background: #000;
-    transition: background 1.2s ease, opacity 1.2s ease;
+    transition: background 1.4s ease, opacity 1.4s ease;
 }
 
 .home-intro-overlay--dark,
 .home-intro-overlay--lamp,
 .home-intro-overlay--drop,
 .home-intro-overlay--text,
-.home-intro-overlay--hold,
-.home-intro-overlay--blackout {
+.home-intro-overlay--hold {
     background: #000;
+}
+
+.home-intro-overlay--blackout {
+    background: transparent;
+    pointer-events: none;
 }
 
 .home-intro-overlay--done {
@@ -549,8 +488,10 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     flex-direction: column;
     align-items: center;
     width: min(63px, 9.5vw);
+    opacity: 1;
     transform: translateX(calc(-50% + 5mm));
     pointer-events: none;
+    transition: opacity 1.4s ease;
 }
 
 .home-intro-lamp-cord {
@@ -594,14 +535,14 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
 /* Phase 2: cord and lamp move downward together */
 .home-intro-overlay--drop .home-intro-lamp-cord,
 .home-intro-overlay--text .home-intro-lamp-cord,
-.home-intro-overlay--hold .home-intro-lamp-cord {
+.home-intro-overlay--hold .home-intro-lamp-cord,
+.home-intro-overlay--blackout .home-intro-lamp-cord {
     height: min(28vh, 220px);
 }
 
-.home-intro-overlay--blackout .home-intro-lamp-cord {
-    height: 0;
+.home-intro-overlay--blackout .home-intro-lamp-wrap {
     opacity: 0;
-    transition: height 1.2s ease, opacity 1.2s ease;
+    transition: opacity 1.4s ease;
 }
 
 .home-intro-lamp-body {
@@ -622,16 +563,11 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
 
 .home-intro-overlay--drop .home-intro-lamp-body,
 .home-intro-overlay--text .home-intro-lamp-body,
-.home-intro-overlay--hold .home-intro-lamp-body {
+.home-intro-overlay--hold .home-intro-lamp-body,
+.home-intro-overlay--blackout .home-intro-lamp-body {
     opacity: 1;
     transform: translateY(0);
     transition: none;
-}
-
-.home-intro-overlay--blackout .home-intro-lamp-body {
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .home-intro-lamp-image {
@@ -685,7 +621,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
 
 .home-intro-overlay--blackout .home-intro-lamp-beam {
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transition: opacity 1.4s ease;
 }
 
 .home-intro-text {
@@ -711,7 +647,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
 
 .home-intro-overlay--blackout .home-intro-text {
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transition: opacity 1.4s ease;
 }
 
 body[data-page="project-1"] #root {

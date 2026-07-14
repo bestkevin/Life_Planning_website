@@ -19,7 +19,7 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
 /** Bump this when intro/homepage deploy must invalidate session intro cache. */
-const SITE_BUILD = "20260714-pendant-drop";
+const SITE_BUILD = "20260714-home-rain-now";
 
 function syncSiteBuild() {
     const previous = sessionStorage.getItem("siteBuild");
@@ -50,18 +50,7 @@ const liquidGlassDefaults = {
 };
 
 const HOME_REVEAL_PHASE = {
-    BLACK: "black",
-    BACKGROUND: "background",
-    PANEL: "panel",
-    TEXT: "text",
     DONE: "done",
-};
-
-const HOME_REVEAL_TIMING = {
-    [HOME_REVEAL_PHASE.BLACK]: 700,
-    [HOME_REVEAL_PHASE.BACKGROUND]: 3200,
-    [HOME_REVEAL_PHASE.PANEL]: 2400,
-    [HOME_REVEAL_PHASE.TEXT]: 2600,
 };
 
 function getPageFromHash() {
@@ -106,10 +95,8 @@ function App() {
             return undefined;
         }
 
-        if (showHomeIntro) {
+        if (showHomeIntro && homeRevealPhase !== HOME_REVEAL_PHASE.DONE) {
             document.body.dataset.homeReveal = "intro";
-        } else if (homeRevealPhase) {
-            document.body.dataset.homeReveal = homeRevealPhase;
         } else {
             delete document.body.dataset.homeReveal;
         }
@@ -158,27 +145,7 @@ function App() {
             liquidGlassRef.current = null;
             delete root.dataset.liquidReady;
         };
-    }, [activePage]);
-
-    useEffect(() => {
-        if (activePage !== "home" || !homeRevealPhase) return undefined;
-
-        const nextPhase = {
-            [HOME_REVEAL_PHASE.BLACK]: HOME_REVEAL_PHASE.BACKGROUND,
-            [HOME_REVEAL_PHASE.BACKGROUND]: HOME_REVEAL_PHASE.PANEL,
-            [HOME_REVEAL_PHASE.PANEL]: HOME_REVEAL_PHASE.TEXT,
-            [HOME_REVEAL_PHASE.TEXT]: HOME_REVEAL_PHASE.DONE,
-        }[homeRevealPhase];
-
-        if (!nextPhase) return undefined;
-
-        const revealTimer = window.setTimeout(
-            () => setHomeRevealPhase(nextPhase),
-            HOME_REVEAL_TIMING[homeRevealPhase],
-        );
-
-        return () => window.clearTimeout(revealTimer);
-    }, [activePage, homeRevealPhase]);
+    }, [activePage, showHomeIntro, homeRevealPhase]);
 
     useEffect(() => {
         if (activePage !== "home") {
@@ -187,19 +154,23 @@ function App() {
             return undefined;
         }
 
-        if (showHomeIntro || homeRevealPhase !== HOME_REVEAL_PHASE.DONE) {
+        if (showHomeIntro && homeRevealPhase !== HOME_REVEAL_PHASE.DONE) {
             setRainEnabled(false);
             return undefined;
         }
 
-        const rainTimer = window.setTimeout(() => setRainEnabled(true), 3000);
-        return () => window.clearTimeout(rainTimer);
+        setRainEnabled(true);
+        return undefined;
     }, [activePage, showHomeIntro, homeRevealPhase]);
 
-    const handleHomeBlackoutComplete = useCallback(() => {
+    const handleRevealHome = useCallback(() => {
         sessionStorage.setItem("homeIntroSeen", "1");
+        setHomeRevealPhase(HOME_REVEAL_PHASE.DONE);
+        setRainEnabled(true);
+    }, []);
+
+    const handleHomeBlackoutComplete = useCallback(() => {
         setShowHomeIntro(false);
-        setHomeRevealPhase(HOME_REVEAL_PHASE.BLACK);
     }, []);
 
     const handleRainFrame = (target) => {
@@ -208,12 +179,16 @@ function App() {
 
     const hideChrome =
         activePage === "home" &&
-        (showHomeIntro || homeRevealPhase !== HOME_REVEAL_PHASE.DONE);
+        showHomeIntro &&
+        homeRevealPhase !== HOME_REVEAL_PHASE.DONE;
 
     return (
         <>
             {showHomeIntro && activePage === "home" && (
-                <HomeIntroOverlay onBlackoutComplete={handleHomeBlackoutComplete} />
+                <HomeIntroOverlay
+                    onRevealHome={handleRevealHome}
+                    onBlackoutComplete={handleHomeBlackoutComplete}
+                />
             )}
 
             <header className={hideChrome ? "site-chrome-hidden" : ""}>
