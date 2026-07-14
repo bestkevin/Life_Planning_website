@@ -5,7 +5,8 @@ import { useTypewriter } from "../hooks/useTypewriter.js";
 const INTRO_TEXT =
     "你来了？我们都在等你。刚好我们在聊一个有趣的话题……";
 
-const pendantLampSrc = `${import.meta.env.BASE_URL}img/pendant-lamp.png`;
+const pendantSrc = `${import.meta.env.BASE_URL}img/pendant-lamp.png`;
+const cordSrc = `${import.meta.env.BASE_URL}img/pendant-cord.png`;
 
 const PHASE = {
     DARK: "dark",
@@ -17,9 +18,8 @@ const PHASE = {
 };
 
 const TIMING = {
-    darkHold: 1200,
-    lampDrop: 3600,
-    lampHold: 1200,
+    darkHold: 1400,
+    lampHold: 3600,
     typeSpeed: 72,
     textHold: 3200,
     blackoutFade: 1200,
@@ -44,10 +44,7 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
     useEffect(() => {
         if (phase !== PHASE.LAMP) return undefined;
 
-        const textTimer = window.setTimeout(
-            () => setPhase(PHASE.TEXT),
-            TIMING.lampDrop + TIMING.lampHold,
-        );
+        const textTimer = window.setTimeout(() => setPhase(PHASE.TEXT), TIMING.lampHold);
         return () => window.clearTimeout(textTimer);
     }, [phase]);
 
@@ -85,12 +82,15 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
             className={`home-intro-overlay home-intro-overlay--${phase}`}
             aria-hidden="true"
         >
-            <div className="home-intro-lamp-anchor">
-                <div className="home-intro-lamp-cord" />
-                <div className="home-intro-lamp-wrap">
+            <div className="home-intro-lamp-wrap">
+                <div
+                    className="home-intro-lamp-cord"
+                    style={{ backgroundImage: `url(${cordSrc})` }}
+                />
+                <div className="home-intro-lamp-body">
                     <img
                         className="home-intro-lamp-image"
-                        src={pendantLampSrc}
+                        src={pendantSrc}
                         alt=""
                         draggable="false"
                     />

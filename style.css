@@ -516,12 +516,6 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     transition-delay: 1.05s;
 }
 
-@property --home-lamp-drop {
-    syntax: "<length>";
-    inherits: true;
-    initial-value: 0px;
-}
-
 .home-intro-overlay {
     position: fixed;
     z-index: 1200;
@@ -530,7 +524,6 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     place-items: center;
     background: #000;
     transition: background 1.2s ease, opacity 1.2s ease;
-    overflow: hidden;
 }
 
 .home-intro-overlay--dark,
@@ -546,90 +539,85 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     pointer-events: none;
 }
 
-.home-intro-lamp-anchor {
-    position: fixed;
+.home-intro-lamp-wrap {
+    position: absolute;
     top: 0;
     left: 50%;
-    z-index: 3;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: min(188px, 28vw);
     transform: translateX(-50%);
     pointer-events: none;
 }
 
 .home-intro-lamp-cord {
     position: relative;
-    width: 7px;
-    height: var(--home-lamp-drop);
+    z-index: 3;
+    flex: 0 0 auto;
+    width: 8px;
+    height: 0;
     border-radius: 999px;
-    background:
-        repeating-linear-gradient(
-            128deg,
-            #3b2a1d 0 5px,
-            #745236 5px 10px,
-            #4a3426 10px 15px,
-            #8a6445 15px 20px
-        );
+    background-color: #8a6238;
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-size: 100% auto;
     box-shadow:
-        inset -1px 0 1px rgba(255, 255, 255, 0.1),
-        inset 1px 0 2px rgba(0, 0, 0, 0.35);
-    transition: height 3.6s cubic-bezier(0.33, 1, 0.32, 1);
+        inset 1px 0 1px rgba(255, 230, 190, 0.28),
+        inset -1px 0 1px rgba(40, 24, 10, 0.4),
+        0 0 10px rgba(255, 200, 120, 0.16);
+    transform-origin: top center;
+    transition: height 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.home-intro-lamp-cord::after {
+.home-intro-lamp-cord::before {
     content: "";
     position: absolute;
-    bottom: -5px;
+    top: -2px;
     left: 50%;
-    width: 12px;
-    height: 9px;
-    background: linear-gradient(180deg, #c9a45c, #8f6d36);
-    border-radius: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #e2c49a, #7a5530 70%);
     transform: translateX(-50%);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 8px rgba(255, 210, 140, 0.25);
 }
 
-.home-intro-lamp-wrap {
-    position: relative;
-    width: min(200px, 30vw);
+.home-intro-overlay--lamp .home-intro-lamp-cord,
+.home-intro-overlay--text .home-intro-lamp-cord,
+.home-intro-overlay--hold .home-intro-lamp-cord {
+    height: min(22vh, 190px);
+}
+
+.home-intro-overlay--blackout .home-intro-lamp-cord {
+    height: 0;
     opacity: 0;
-    transform: translateY(calc(-100% - 24px));
+    transition: height 1.2s ease, opacity 1.2s ease;
+}
+
+.home-intro-lamp-body {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-12px);
     transition:
-        opacity 1.2s ease 0.15s,
-        transform 3.6s cubic-bezier(0.33, 1, 0.32, 1);
+        opacity 1.2s ease 0.35s,
+        transform 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.home-intro-overlay--dark {
-    --home-lamp-drop: 0px;
-}
-
-.home-intro-overlay--lamp,
-.home-intro-overlay--text,
-.home-intro-overlay--hold {
-    --home-lamp-drop: clamp(76px, 13vh, 128px);
-}
-
-.home-intro-overlay--lamp .home-intro-lamp-wrap,
-.home-intro-overlay--text .home-intro-lamp-wrap,
-.home-intro-overlay--hold .home-intro-lamp-wrap {
+.home-intro-overlay--lamp .home-intro-lamp-body,
+.home-intro-overlay--text .home-intro-lamp-body,
+.home-intro-overlay--hold .home-intro-lamp-body {
     opacity: 1;
     transform: translateY(0);
 }
 
-.home-intro-overlay--blackout {
-    --home-lamp-drop: clamp(76px, 13vh, 128px);
-}
-
-.home-intro-overlay--blackout .home-intro-lamp-wrap {
+.home-intro-overlay--blackout .home-intro-lamp-body {
     opacity: 0;
-    transform: translateY(-18px);
+    transform: translateY(-8px);
     transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.home-intro-overlay--blackout .home-intro-lamp-cord {
-    opacity: 0;
-    transition: opacity 1.2s ease;
 }
 
 .home-intro-lamp-image {
@@ -638,12 +626,12 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 0 30px rgba(255, 208, 120, 0.5));
+    filter: drop-shadow(0 0 28px rgba(255, 208, 120, 0.45));
 }
 
 .home-intro-lamp-beam {
     position: absolute;
-    top: 92%;
+    top: 78%;
     left: 50%;
     z-index: 1;
     width: min(92vw, 920px);
@@ -651,7 +639,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     pointer-events: none;
     opacity: 0;
     transform: translateX(-50%);
-    transition: opacity 2.2s ease 1.8s;
+    transition: opacity 2.2s ease 1.4s;
     clip-path: polygon(50% 0%, 10% 100%, 90% 100%);
     background:
         conic-gradient(
