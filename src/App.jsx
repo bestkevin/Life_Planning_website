@@ -274,7 +274,7 @@ function App() {
                                 className="button mx-auto mt-8 w-fit"
                                 href="#project-1"
                             >
-                                查看我的计划
+                                开始
                                 <ArrowRight aria-hidden="true" size={18} />
                             </a>
                         </div>

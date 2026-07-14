@@ -362,7 +362,9 @@ p {
 
 #home p {
     margin-inline: auto;
+    color: #f7f3eb;
     font-size: clamp(1rem, 2.5vw, 1.2rem);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 }
 
 button,
