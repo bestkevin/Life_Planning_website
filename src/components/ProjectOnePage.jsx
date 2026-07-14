@@ -19,6 +19,46 @@ const PHASE = {
     READY: "ready",
 };
 
+const INTRO_SEEN_KEY = "projectOneIntroSeen";
+const CHAT_STATE_KEY = "projectOneChatState";
+
+function loadChatState() {
+    try {
+        const raw = localStorage.getItem(CHAT_STATE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== "object") return null;
+        return {
+            messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+            questionIndex:
+                typeof parsed.questionIndex === "number" ? parsed.questionIndex : -1,
+            chatStarted: Boolean(parsed.chatStarted),
+            awaitingAnswer: Boolean(parsed.awaitingAnswer),
+            inputValue: typeof parsed.inputValue === "string" ? parsed.inputValue : "",
+            inputHint: typeof parsed.inputHint === "string" ? parsed.inputHint : "",
+            openingDone: Boolean(parsed.openingDone),
+        };
+    } catch {
+        return null;
+    }
+}
+
+function saveChatState(state) {
+    try {
+        localStorage.setItem(CHAT_STATE_KEY, JSON.stringify(state));
+    } catch {
+        // Ignore quota / private-mode failures.
+    }
+}
+
+function hasSeenIntro() {
+    return localStorage.getItem(INTRO_SEEN_KEY) === "1";
+}
+
+function markIntroSeen() {
+    localStorage.setItem(INTRO_SEEN_KEY, "1");
+}
+
 function CollapsiblePanel({ title, children, defaultOpen = false }) {
     const [open, setOpen] = useState(defaultOpen);
 
@@ -43,16 +83,34 @@ function CollapsiblePanel({ title, children, defaultOpen = false }) {
 }
 
 export default function ProjectOnePage() {
-    const [phase, setPhase] = useState(PHASE.BLACK);
-    const [messages, setMessages] = useState([]);
-    const [questionIndex, setQuestionIndex] = useState(-1);
-    const [chatStarted, setChatStarted] = useState(false);
-    const [awaitingAnswer, setAwaitingAnswer] = useState(false);
-    const [inputValue, setInputValue] = useState("");
-    const [inputHint, setInputHint] = useState("");
-    const [openingDone, setOpeningDone] = useState(false);
+    const savedChat = loadChatState();
+    const introAlreadySeen = hasSeenIntro();
+
+    const [phase, setPhase] = useState(() =>
+        introAlreadySeen ? PHASE.READY : PHASE.BLACK,
+    );
+    const [messages, setMessages] = useState(() => savedChat?.messages ?? []);
+    const [questionIndex, setQuestionIndex] = useState(
+        () => savedChat?.questionIndex ?? -1,
+    );
+    const [chatStarted, setChatStarted] = useState(() => savedChat?.chatStarted ?? false);
+    const [awaitingAnswer, setAwaitingAnswer] = useState(
+        () => savedChat?.awaitingAnswer ?? false,
+    );
+    const [inputValue, setInputValue] = useState(() => savedChat?.inputValue ?? "");
+    const [inputHint, setInputHint] = useState(() => {
+        if (savedChat?.inputHint) return savedChat.inputHint;
+        if (savedChat?.openingDone && !savedChat?.chatStarted) return projectOneInputHint;
+        return "";
+    });
+    const [openingDone, setOpeningDone] = useState(
+        () => Boolean(savedChat?.openingDone || (savedChat?.messages?.length ?? 0) > 0),
+    );
     const dialogRef = useRef(null);
     const inputRef = useRef(null);
+
+    const playIntro = phase === PHASE.BLACK || phase === PHASE.RIPPLE;
+    const typeOpening = phase === PHASE.READY && !openingDone;
 
     const { displayed: introDisplayed, done: introDone } = useTypewriter(
         projectOneIntroText,
@@ -62,24 +120,32 @@ export default function ProjectOnePage() {
 
     const { displayed: openingDisplayed, done: openingTypedDone } = useTypewriter(
         projectOneOpeningLine,
-        phase === PHASE.READY,
+        typeOpening,
         52,
     );
 
     useEffect(() => {
-        const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
-        return () => window.clearTimeout(blackTimer);
-    }, []);
+        // First visit plays intro once; mark immediately so refresh won't replay.
+        if (!introAlreadySeen) {
+            markIntroSeen();
+        }
+    }, [introAlreadySeen]);
 
     useEffect(() => {
-        const introActive = phase === PHASE.BLACK || phase === PHASE.RIPPLE;
-        if (introActive) {
+        if (introAlreadySeen || phase !== PHASE.BLACK) return undefined;
+
+        const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
+        return () => window.clearTimeout(blackTimer);
+    }, [introAlreadySeen, phase]);
+
+    useEffect(() => {
+        if (playIntro) {
             document.body.dataset.projectOneIntro = "true";
         } else {
             delete document.body.dataset.projectOneIntro;
         }
         return () => delete document.body.dataset.projectOneIntro;
-    }, [phase]);
+    }, [playIntro]);
 
     useEffect(() => {
         if (!introDone || phase !== PHASE.RIPPLE) return undefined;
@@ -91,14 +157,36 @@ export default function ProjectOnePage() {
     useEffect(() => {
         if (openingTypedDone && !openingDone) {
             setOpeningDone(true);
-            setInputHint(projectOneInputHint);
+            if (!chatStarted) {
+                setInputHint(projectOneInputHint);
+            }
         }
-    }, [openingTypedDone, openingDone]);
+    }, [openingTypedDone, openingDone, chatStarted]);
 
     useEffect(() => {
         if (!dialogRef.current) return;
         dialogRef.current.scrollTop = dialogRef.current.scrollHeight;
-    }, [messages, openingDisplayed, questionIndex]);
+    }, [messages, openingDisplayed, questionIndex, openingDone]);
+
+    useEffect(() => {
+        saveChatState({
+            messages,
+            questionIndex,
+            chatStarted,
+            awaitingAnswer,
+            inputValue,
+            inputHint,
+            openingDone,
+        });
+    }, [
+        messages,
+        questionIndex,
+        chatStarted,
+        awaitingAnswer,
+        inputValue,
+        inputHint,
+        openingDone,
+    ]);
 
     const startChat = () => {
         if (chatStarted) return;
@@ -134,6 +222,7 @@ export default function ProjectOnePage() {
             setMessages(nextMessages);
             setQuestionIndex(nextIndex);
             setInputValue("");
+            setAwaitingAnswer(true);
             return;
         }
 
@@ -155,9 +244,11 @@ export default function ProjectOnePage() {
         }
     };
 
+    const showOpeningLine = openingDone || Boolean(openingDisplayed);
+
     return (
         <div className="project-one-page">
-            {(phase === PHASE.BLACK || phase === PHASE.RIPPLE) &&
+            {playIntro &&
                 createPortal(
                     <div
                         className={`project-one-intro project-one-intro--${phase}`}
@@ -207,7 +298,7 @@ export default function ProjectOnePage() {
                     <section className="project-one-dialog-wrap">
                         <div className="project-one-dialog liquid-glass-panel">
                             <div className="project-one-dialog-scroll" ref={dialogRef}>
-                                {(openingDisplayed || openingDone) && (
+                                {showOpeningLine && (
                                     <p className="project-one-message project-one-message--mystery">
                                         {openingDone ? projectOneOpeningLine : openingDisplayed}
                                     </p>
