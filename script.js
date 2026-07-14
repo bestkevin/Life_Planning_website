@@ -9,8 +9,8 @@ export const projects = [
     {
         id: "project-1",
         eyebrow: "PROJECT 01",
-        title: "成长计划",
-        description: "将长期愿景拆分为清晰、可执行的阶段目标，让每一步成长都有迹可循。",
+        title: "普鲁斯特问卷—你是谁？",
+        description: "以对话的形式与咖啡馆主理人交谈，在问答中初步探索你的思想、价值观与人生经验。",
         progress: 68,
         icon: "Sprout",
     },
