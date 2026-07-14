@@ -18,17 +18,14 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
-/** Bump this when intro/homepage deploy must invalidate session intro cache. */
-const SITE_BUILD = "20260714-p1-intro-full";
+const HOME_INTRO_SEEN_KEY = "homeIntroSeen";
 
-function syncSiteBuild() {
-    const previous = sessionStorage.getItem("siteBuild");
-    if (previous !== SITE_BUILD) {
-        sessionStorage.removeItem("homeIntroSeen");
-        sessionStorage.setItem("siteBuild", SITE_BUILD);
-        return false;
-    }
-    return Boolean(sessionStorage.getItem("homeIntroSeen"));
+function hasSeenHomeIntro() {
+    return localStorage.getItem(HOME_INTRO_SEEN_KEY) === "1";
+}
+
+function markHomeIntroSeen() {
+    localStorage.setItem(HOME_INTRO_SEEN_KEY, "1");
 }
 
 const liquidGlassDefaults = {
@@ -67,11 +64,18 @@ function App() {
     const [activePage, setActivePage] = useState(getPageFromHash);
     const [rainReady, setRainReady] = useState(false);
     const [rainEnabled, setRainEnabled] = useState(false);
-    const introSeen = syncSiteBuild();
+    const introSeen = hasSeenHomeIntro();
     const [showHomeIntro, setShowHomeIntro] = useState(() => !introSeen);
     const [homeRevealPhase, setHomeRevealPhase] = useState(() =>
         introSeen ? HOME_REVEAL_PHASE.DONE : null,
     );
+
+    useEffect(() => {
+        // Mark on first actual home intro so refresh / later visits skip it.
+        if (activePage === "home" && showHomeIntro) {
+            markHomeIntroSeen();
+        }
+    }, [activePage, showHomeIntro]);
 
     useEffect(() => {
         const handleHashChange = () => {
@@ -164,7 +168,7 @@ function App() {
     }, [activePage, showHomeIntro, homeRevealPhase]);
 
     const handleRevealHome = useCallback(() => {
-        sessionStorage.setItem("homeIntroSeen", "1");
+        markHomeIntroSeen();
         setHomeRevealPhase(HOME_REVEAL_PHASE.DONE);
         setRainEnabled(true);
     }, []);
