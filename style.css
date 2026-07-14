@@ -981,8 +981,8 @@ body[data-project-one-intro="true"] footer {
     background: transparent;
     border: 0;
     box-shadow: none;
-    /* Keep sidebar put; pull main column up by half of the 108px top blank. */
-    transform: translate(3cm, -54px);
+    /* Keep sidebar put; lift dialog to the page top (cancel main top padding). */
+    transform: translate(3cm, -108px);
 }
 
 .project-one-photo-wall {
