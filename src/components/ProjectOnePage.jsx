@@ -56,17 +56,17 @@ export default function ProjectOnePage() {
     const { displayed: introDisplayed, done: introDone } = useTypewriter(
         projectOneIntroText,
         phase === PHASE.RIPPLE,
-        38,
+        58,
     );
 
     const { displayed: openingDisplayed, done: openingTypedDone } = useTypewriter(
         projectOneOpeningLine,
-        phase === PHASE.READY && messages.length === 0,
-        40,
+        phase === PHASE.READY,
+        52,
     );
 
     useEffect(() => {
-        const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 500);
+        const blackTimer = window.setTimeout(() => setPhase(PHASE.RIPPLE), 1200);
         return () => window.clearTimeout(blackTimer);
     }, []);
 
