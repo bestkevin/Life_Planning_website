@@ -11,6 +11,7 @@ const cordSrc = `${import.meta.env.BASE_URL}img/pendant-cord.png`;
 const PHASE = {
     DARK: "dark",
     LAMP: "lamp",
+    DROP: "drop",
     TEXT: "text",
     HOLD: "hold",
     BLACKOUT: "blackout",
@@ -18,8 +19,9 @@ const PHASE = {
 };
 
 const TIMING = {
-    darkHold: 1400,
-    lampHold: 3600,
+    darkHold: 1200,
+    lampAppearHold: 1800,
+    dropHold: 3600,
     typeSpeed: 72,
     textHold: 3200,
     blackoutFade: 1200,
@@ -37,40 +39,47 @@ export default function HomeIntroOverlay({ onBlackoutComplete }) {
     useEffect(() => {
         if (phase !== PHASE.DARK) return undefined;
 
-        const lampTimer = window.setTimeout(() => setPhase(PHASE.LAMP), TIMING.darkHold);
-        return () => window.clearTimeout(lampTimer);
+        const timer = window.setTimeout(() => setPhase(PHASE.LAMP), TIMING.darkHold);
+        return () => window.clearTimeout(timer);
     }, [phase]);
 
     useEffect(() => {
         if (phase !== PHASE.LAMP) return undefined;
 
-        const textTimer = window.setTimeout(() => setPhase(PHASE.TEXT), TIMING.lampHold);
-        return () => window.clearTimeout(textTimer);
+        const timer = window.setTimeout(() => setPhase(PHASE.DROP), TIMING.lampAppearHold);
+        return () => window.clearTimeout(timer);
+    }, [phase]);
+
+    useEffect(() => {
+        if (phase !== PHASE.DROP) return undefined;
+
+        const timer = window.setTimeout(() => setPhase(PHASE.TEXT), TIMING.dropHold);
+        return () => window.clearTimeout(timer);
     }, [phase]);
 
     useEffect(() => {
         if (!done || phase !== PHASE.TEXT) return undefined;
 
-        const holdTimer = window.setTimeout(() => setPhase(PHASE.HOLD), TIMING.textHold);
-        return () => window.clearTimeout(holdTimer);
+        const timer = window.setTimeout(() => setPhase(PHASE.HOLD), TIMING.textHold);
+        return () => window.clearTimeout(timer);
     }, [done, phase]);
 
     useEffect(() => {
         if (phase !== PHASE.HOLD) return undefined;
 
-        const blackoutTimer = window.setTimeout(() => setPhase(PHASE.BLACKOUT), 500);
-        return () => window.clearTimeout(blackoutTimer);
+        const timer = window.setTimeout(() => setPhase(PHASE.BLACKOUT), 500);
+        return () => window.clearTimeout(timer);
     }, [phase]);
 
     useEffect(() => {
         if (phase !== PHASE.BLACKOUT) return undefined;
 
-        const doneTimer = window.setTimeout(() => {
+        const timer = window.setTimeout(() => {
             setPhase(PHASE.DONE);
             onBlackoutComplete?.();
         }, TIMING.blackoutFade + TIMING.blackoutHold);
 
-        return () => window.clearTimeout(doneTimer);
+        return () => window.clearTimeout(timer);
     }, [phase, onBlackoutComplete]);
 
     if (phase === PHASE.DONE) {
