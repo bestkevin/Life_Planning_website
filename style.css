@@ -693,7 +693,7 @@ body[data-page="project-1"] #root {
     display: block;
     width: 100%;
     max-width: none;
-    padding: 108px max(16px, calc((100% - 1380px) / 2)) 0;
+    padding: 54px max(16px, calc((100% - 1380px) / 2)) 0;
     isolation: auto;
 }
 
@@ -837,7 +837,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-sidebar {
     position: sticky;
-    top: 108px;
+    top: 54px;
     float: left;
     z-index: 2;
     display: flex;
