@@ -724,6 +724,18 @@ body[data-page="project-1"] .project-one-section.page-enter {
 .project-one-page {
     position: relative;
     min-height: calc(100vh - 180px);
+    --project-one-text: #ffe566;
+    --project-one-text-soft: rgba(255, 229, 102, 0.62);
+    color: var(--project-one-text);
+}
+
+.project-one-page :is(p, span, strong, li, button, label, h1, h2, h3, h4) {
+    color: var(--project-one-text);
+}
+
+.project-one-page svg {
+    color: var(--project-one-text);
+    stroke: var(--project-one-text);
 }
 
 .project-one-intro {
@@ -796,12 +808,12 @@ body[data-project-one-intro="true"] footer {
     max-width: min(760px, calc(100% - 48px));
     margin: 0;
     padding: 0 16px;
-    color: #f3ead8;
+    color: #ffe566;
     font-size: clamp(1.05rem, 2.6vw, 1.35rem);
     line-height: 1.95;
     letter-spacing: 0.06em;
     text-align: center;
-    text-shadow: 0 0 16px rgba(255, 220, 160, 0.22);
+    text-shadow: 0 0 16px rgba(255, 220, 80, 0.28);
 }
 
 .project-one-layout {
@@ -824,7 +836,7 @@ body[data-project-one-intro="true"] footer {
     aspect-ratio: auto;
     padding: 8px 4px;
     overflow: visible;
-    color: #fff;
+    color: var(--project-one-text);
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -851,7 +863,7 @@ body[data-project-one-intro="true"] footer {
 .project-one-sidebar li,
 .project-one-sidebar strong,
 .project-one-sidebar span {
-    color: #fff;
+    color: var(--project-one-text);
 }
 
 .project-one-portrait {
@@ -861,7 +873,7 @@ body[data-project-one-intro="true"] footer {
     margin-bottom: 16px;
     overflow: hidden;
     background: #1a1714;
-    border: 2px solid rgba(255, 255, 255, 0.22);
+    border: 2px solid rgba(255, 229, 102, 0.35);
     border-radius: 10px;
 }
 
@@ -875,7 +887,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-sidebar-title {
     margin: 0 0 6px;
-    color: #fff !important;
+    color: var(--project-one-text) !important;
     font-size: 1.2rem;
     font-weight: 600;
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
@@ -883,14 +895,14 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-sidebar-subtitle {
     margin: 0 0 18px;
-    color: rgba(255, 255, 255, 0.86) !important;
+    color: var(--project-one-text) !important;
     font-size: 0.95rem;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .project-one-collapse {
     margin-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid rgba(255, 229, 102, 0.22);
 }
 
 .project-one-collapse-trigger {
@@ -900,7 +912,7 @@ body[data-project-one-intro="true"] footer {
     justify-content: space-between;
     gap: 12px;
     padding: 12px 0;
-    color: #fff;
+    color: var(--project-one-text);
     font: inherit;
     text-align: left;
     background: transparent;
@@ -916,7 +928,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-collapse-body {
     padding-bottom: 12px;
-    color: rgba(255, 255, 255, 0.88);
+    color: var(--project-one-text);
     font-size: 0.92rem;
     line-height: 1.8;
 }
@@ -935,7 +947,7 @@ body[data-project-one-intro="true"] footer {
     display: grid;
     gap: 6px;
     padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 229, 102, 0.16);
 }
 
 .project-one-compare-list li:last-child {
@@ -974,7 +986,7 @@ body[data-project-one-intro="true"] footer {
     min-height: min(72vh, 760px);
     aspect-ratio: auto;
     padding: 0;
-    color: #fff;
+    color: var(--project-one-text);
     overflow: visible;
     background: transparent;
     border: 0;
@@ -1006,7 +1018,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-message {
     margin: 0 0 16px;
-    color: #fff !important;
+    color: var(--project-one-text) !important;
     font-size: clamp(1rem, 2.2vw, 1.12rem);
     line-height: 1.85;
     letter-spacing: 0.04em;
@@ -1016,7 +1028,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-message--me {
     padding-left: 12px;
-    border-left: 2px solid rgba(255, 255, 255, 0.22);
+    border-left: 2px solid rgba(255, 229, 102, 0.45);
 }
 
 .project-one-input-row {
@@ -1024,27 +1036,27 @@ body[data-project-one-intro="true"] footer {
     grid-template-columns: 1fr auto;
     gap: 10px;
     padding: 12px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-top: 1px solid rgba(255, 229, 102, 0.22);
 }
 
 .project-one-input-row input {
     width: 100%;
     min-height: 48px;
     padding: 12px 16px;
-    color: #fff;
+    color: var(--project-one-text);
     font: inherit;
     background: #090909;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 229, 102, 0.28);
     border-radius: 14px;
     outline: none;
 }
 
 .project-one-input-row input::placeholder {
-    color: rgba(255, 255, 255, 0.42);
+    color: var(--project-one-text-soft);
 }
 
 .project-one-input-row input:focus-visible {
-    border-color: rgba(220, 177, 105, 0.55);
+    border-color: rgba(255, 229, 102, 0.7);
 }
 
 .project-one-input-row button {
@@ -1056,14 +1068,14 @@ body[data-project-one-intro="true"] footer {
 .project-one-photo-wall-text {
     max-width: none;
     margin: 0 0 22px;
-    color: #f8e8b0 !important;
+    color: var(--project-one-text) !important;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     line-height: 1.8;
     letter-spacing: 0.06em;
     text-align: center;
     text-shadow:
-        0 0 12px rgba(255, 220, 150, 0.22),
-        0 0 28px rgba(255, 190, 110, 0.12);
+        0 0 12px rgba(255, 220, 80, 0.28),
+        0 0 28px rgba(255, 190, 40, 0.14);
 }
 
 .project-one-padlet {
