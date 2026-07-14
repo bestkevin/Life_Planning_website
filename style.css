@@ -1068,7 +1068,7 @@ body[data-project-one-intro="true"] footer {
 
 .project-one-input-row {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     gap: 10px;
     padding: 12px 0 0;
     border-top: 1px solid rgba(247, 232, 168, 0.22);
@@ -1099,6 +1099,11 @@ body[data-project-one-intro="true"] footer {
     min-width: 48px;
     padding-inline: 14px;
     border-radius: 14px;
+}
+
+.project-one-undo-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
 }
 
 .project-one-photo-wall-text {

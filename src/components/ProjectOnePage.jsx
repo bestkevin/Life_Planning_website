@@ -1,4 +1,4 @@
-import { ChevronDown, Send } from "lucide-react";
+import { ChevronDown, Send, Undo2 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -313,6 +313,36 @@ export default function ProjectOnePage() {
         });
     };
 
+    const cancelMysteryTyping = useCallback(() => {
+        typingDoneHandlerRef.current = null;
+        setTypingBody(null);
+        setSpeakerVisible(false);
+        setTypedQuestion("");
+    }, []);
+
+    const undoLastAnswer = () => {
+        const lastMeIndex = messages.findLastIndex((message) => message.role === "me");
+        if (lastMeIndex < 0) return;
+
+        const lastAnswer = messages[lastMeIndex];
+        const restoredText = lastAnswer.text.startsWith("我：")
+            ? lastAnswer.text.slice(2)
+            : lastAnswer.text;
+        const restoredQuestionIndex = messages
+            .slice(0, lastMeIndex)
+            .filter((message) => message.role === "me").length;
+
+        cancelMysteryTyping();
+        setMessages(messages.slice(0, lastMeIndex));
+        setQuestionIndex(restoredQuestionIndex);
+        setAwaitingAnswer(true);
+        setInputValue(restoredText);
+        setInputHint("");
+        window.requestAnimationFrame(() => inputRef.current?.focus());
+    };
+
+    const canUndo = messages.some((message) => message.role === "me");
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -430,6 +460,16 @@ export default function ProjectOnePage() {
                                     }
                                 >
                                     <Send aria-hidden="true" size={18} />
+                                </button>
+                                <button
+                                    type="button"
+                                    className="project-one-undo-button"
+                                    aria-label="回撤上一条回答"
+                                    title="回撤上一条回答"
+                                    onClick={undoLastAnswer}
+                                    disabled={!openingDone || !canUndo}
+                                >
+                                    <Undo2 aria-hidden="true" size={18} />
                                 </button>
                             </form>
                         </div>
