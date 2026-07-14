@@ -547,7 +547,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(188px, 28vw);
+    width: min(94px, 14vw);
     transform: translateX(-50%);
     pointer-events: none;
 }
@@ -556,8 +556,9 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     position: relative;
     z-index: 3;
     flex: 0 0 auto;
-    width: 8px;
+    width: 5px;
     height: 0;
+    margin-bottom: -6px;
     border-radius: 999px;
     background-color: #8a6238;
     background-repeat: repeat-y;
@@ -566,7 +567,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     box-shadow:
         inset 1px 0 1px rgba(255, 230, 190, 0.28),
         inset -1px 0 1px rgba(40, 24, 10, 0.4),
-        0 0 10px rgba(255, 200, 120, 0.16);
+        0 0 8px rgba(255, 200, 120, 0.14);
     transform-origin: top center;
     transition: height 3.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -576,18 +577,18 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     position: absolute;
     top: -2px;
     left: 50%;
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #e2c49a, #7a5530 70%);
     transform: translateX(-50%);
-    box-shadow: 0 0 8px rgba(255, 210, 140, 0.25);
+    box-shadow: 0 0 6px rgba(255, 210, 140, 0.22);
 }
 
 .home-intro-overlay--lamp .home-intro-lamp-cord,
 .home-intro-overlay--text .home-intro-lamp-cord,
 .home-intro-overlay--hold .home-intro-lamp-cord {
-    height: min(22vh, 190px);
+    height: min(26vh, 210px);
 }
 
 .home-intro-overlay--blackout .home-intro-lamp-cord {
@@ -626,7 +627,7 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 0 28px rgba(255, 208, 120, 0.45));
+    filter: drop-shadow(0 0 18px rgba(255, 208, 120, 0.4));
 }
 
 .home-intro-lamp-beam {
@@ -634,29 +635,29 @@ body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
     top: 78%;
     left: 50%;
     z-index: 1;
-    width: min(92vw, 920px);
-    height: min(72vh, 640px);
+    width: min(70vw, 560px);
+    height: min(58vh, 460px);
     pointer-events: none;
     opacity: 0;
     transform: translateX(-50%);
     transition: opacity 2.2s ease 1.4s;
-    clip-path: polygon(50% 0%, 10% 100%, 90% 100%);
+    clip-path: polygon(50% 0%, 12% 100%, 88% 100%);
     background:
         conic-gradient(
             from 180deg at 50% 0%,
-            transparent 208deg,
-            rgba(255, 214, 138, 0.05) 222deg,
-            rgba(255, 204, 124, 0.3) 252deg,
-            rgba(255, 196, 108, 0.44) 270deg,
-            rgba(255, 204, 124, 0.3) 288deg,
-            rgba(255, 214, 138, 0.05) 318deg,
-            transparent 332deg
+            transparent 214deg,
+            rgba(255, 214, 138, 0.05) 226deg,
+            rgba(255, 204, 124, 0.28) 252deg,
+            rgba(255, 196, 108, 0.4) 270deg,
+            rgba(255, 204, 124, 0.28) 288deg,
+            rgba(255, 214, 138, 0.05) 314deg,
+            transparent 326deg
         ),
         linear-gradient(
             to bottom,
-            rgba(255, 214, 145, 0.42) 0%,
-            rgba(255, 194, 112, 0.18) 38%,
-            rgba(255, 176, 92, 0.06) 62%,
+            rgba(255, 214, 145, 0.38) 0%,
+            rgba(255, 194, 112, 0.16) 38%,
+            rgba(255, 176, 92, 0.05) 62%,
             transparent 90%
         );
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
