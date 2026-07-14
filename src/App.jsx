@@ -18,6 +18,19 @@ import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
 
+/** Bump this when intro/homepage deploy must invalidate session intro cache. */
+const SITE_BUILD = "20260714-pendant-drop";
+
+function syncSiteBuild() {
+    const previous = sessionStorage.getItem("siteBuild");
+    if (previous !== SITE_BUILD) {
+        sessionStorage.removeItem("homeIntroSeen");
+        sessionStorage.setItem("siteBuild", SITE_BUILD);
+        return false;
+    }
+    return Boolean(sessionStorage.getItem("homeIntroSeen"));
+}
+
 const liquidGlassDefaults = {
     blurAmount: 0.68,
     refraction: 3,
@@ -65,7 +78,7 @@ function App() {
     const [activePage, setActivePage] = useState(getPageFromHash);
     const [rainReady, setRainReady] = useState(false);
     const [rainEnabled, setRainEnabled] = useState(false);
-    const introSeen = Boolean(sessionStorage.getItem("homeIntroSeen"));
+    const introSeen = syncSiteBuild();
     const [showHomeIntro, setShowHomeIntro] = useState(() => !introSeen);
     const [homeRevealPhase, setHomeRevealPhase] = useState(() =>
         introSeen ? HOME_REVEAL_PHASE.DONE : null,
