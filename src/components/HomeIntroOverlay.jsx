@@ -4,12 +4,14 @@ import { useTypewriter } from "../hooks/useTypewriter.js";
 const INTRO_TEXT =
     "你来了？我们都在等你。刚好我们在聊一个有趣的话题……";
 
+const sconceSrc = `${import.meta.env.BASE_URL}img/wall-sconce.png`;
+
 const PHASE = {
     DARK: "dark",
     LAMP: "lamp",
     TEXT: "text",
     HOLD: "hold",
-    REVEAL: "reveal",
+    BLACKOUT: "blackout",
     DONE: "done",
 };
 
@@ -18,10 +20,11 @@ const TIMING = {
     lampHold: 2800,
     typeSpeed: 72,
     textHold: 3200,
-    revealHold: 2600,
+    blackoutFade: 1200,
+    blackoutHold: 800,
 };
 
-export default function HomeIntroOverlay({ onComplete }) {
+export default function HomeIntroOverlay({ onBlackoutComplete }) {
     const [phase, setPhase] = useState(PHASE.DARK);
     const { displayed, done } = useTypewriter(
         INTRO_TEXT,
@@ -53,20 +56,20 @@ export default function HomeIntroOverlay({ onComplete }) {
     useEffect(() => {
         if (phase !== PHASE.HOLD) return undefined;
 
-        const revealTimer = window.setTimeout(() => setPhase(PHASE.REVEAL), 600);
-        return () => window.clearTimeout(revealTimer);
+        const blackoutTimer = window.setTimeout(() => setPhase(PHASE.BLACKOUT), 500);
+        return () => window.clearTimeout(blackoutTimer);
     }, [phase]);
 
     useEffect(() => {
-        if (phase !== PHASE.REVEAL) return undefined;
+        if (phase !== PHASE.BLACKOUT) return undefined;
 
         const doneTimer = window.setTimeout(() => {
             setPhase(PHASE.DONE);
-            onComplete?.();
-        }, TIMING.revealHold);
+            onBlackoutComplete?.();
+        }, TIMING.blackoutFade + TIMING.blackoutHold);
 
         return () => window.clearTimeout(doneTimer);
-    }, [phase, onComplete]);
+    }, [phase, onBlackoutComplete]);
 
     if (phase === PHASE.DONE) {
         return null;
@@ -78,9 +81,13 @@ export default function HomeIntroOverlay({ onComplete }) {
             aria-hidden="true"
         >
             <div className="home-intro-lamp-wrap">
-                <div className="home-intro-lamp-cord" />
-                <div className="home-intro-lamp-shade" />
-                <div className="home-intro-lamp-glow" />
+                <img
+                    className="home-intro-lamp-image"
+                    src={sconceSrc}
+                    alt=""
+                    draggable="false"
+                />
+                <div className="home-intro-lamp-beam" />
             </div>
             <p className="home-intro-text">{displayed}</p>
         </div>

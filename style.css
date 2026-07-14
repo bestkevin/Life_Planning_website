@@ -431,6 +431,86 @@ footer p {
     visibility: hidden;
 }
 
+body[data-home-reveal] #home.page-enter {
+    animation: none;
+}
+
+body[data-home-reveal="intro"] #root,
+body[data-home-reveal="black"] #root,
+body[data-home-reveal="intro"] .liquid-root[data-page="home"] > .liquid-scene,
+body[data-home-reveal="black"] .liquid-root[data-page="home"] > .liquid-scene {
+    opacity: 0;
+}
+
+body[data-home-reveal="background"] #root,
+body[data-home-reveal="background"] .liquid-root[data-page="home"] > .liquid-scene,
+body[data-home-reveal="panel"] #root,
+body[data-home-reveal="panel"] .liquid-root[data-page="home"] > .liquid-scene,
+body[data-home-reveal="text"] #root,
+body[data-home-reveal="text"] .liquid-root[data-page="home"] > .liquid-scene,
+body[data-home-reveal="done"] #root,
+body[data-home-reveal="done"] .liquid-root[data-page="home"] > .liquid-scene {
+    opacity: 1;
+    transition: opacity 3s ease;
+}
+
+body[data-home-reveal="intro"] #home,
+body[data-home-reveal="black"] #home,
+body[data-home-reveal="background"] #home {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(18px);
+}
+
+body[data-home-reveal="panel"] #home,
+body[data-home-reveal="text"] #home,
+body[data-home-reveal="done"] #home {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition:
+        opacity 2.4s ease,
+        transform 2.4s ease,
+        visibility 0s linear 0s;
+}
+
+body[data-home-reveal="panel"] #home .home-panel-content > *,
+body[data-home-reveal="intro"] #home .home-panel-content > *,
+body[data-home-reveal="black"] #home .home-panel-content > *,
+body[data-home-reveal="background"] #home .home-panel-content > * {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+body[data-home-reveal="text"] #home .home-panel-content > *,
+body[data-home-reveal="done"] #home .home-panel-content > * {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 1.8s ease,
+        transform 1.8s ease;
+}
+
+body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(1),
+body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(1) {
+    transition-delay: 0.15s;
+}
+
+body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(2),
+body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(2) {
+    transition-delay: 0.45s;
+}
+
+body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(3),
+body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(3) {
+    transition-delay: 0.75s;
+}
+
+body[data-home-reveal="text"] #home .home-panel-content > *:nth-child(4),
+body[data-home-reveal="done"] #home .home-panel-content > *:nth-child(4) {
+    transition-delay: 1.05s;
+}
+
 .home-intro-overlay {
     position: fixed;
     z-index: 1200;
@@ -438,22 +518,15 @@ footer p {
     display: grid;
     place-items: center;
     background: #000;
-    transition: background 2.4s ease, opacity 2.4s ease;
+    transition: background 1.2s ease, opacity 1.2s ease;
 }
 
-.home-intro-overlay--dark {
-    background: #000;
-}
-
+.home-intro-overlay--dark,
 .home-intro-overlay--lamp,
 .home-intro-overlay--text,
-.home-intro-overlay--hold {
+.home-intro-overlay--hold,
+.home-intro-overlay--blackout {
     background: #000;
-}
-
-.home-intro-overlay--reveal {
-    background: rgba(0, 0, 0, 0.72);
-    opacity: 1;
 }
 
 .home-intro-overlay--done {
@@ -463,54 +536,86 @@ footer p {
 
 .home-intro-lamp-wrap {
     position: absolute;
-    top: 12%;
+    top: 7%;
     left: 50%;
-    width: 180px;
-    height: 220px;
+    width: min(240px, 34vw);
     opacity: 0;
-    transform: translateX(-50%) translateY(-18px);
+    transform: translateX(-50%) translateY(-16px);
     transition: opacity 1.8s ease, transform 1.8s ease;
 }
 
 .home-intro-overlay--lamp .home-intro-lamp-wrap,
 .home-intro-overlay--text .home-intro-lamp-wrap,
-.home-intro-overlay--hold .home-intro-lamp-wrap,
-.home-intro-overlay--reveal .home-intro-lamp-wrap {
+.home-intro-overlay--hold .home-intro-lamp-wrap {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
 
-.home-intro-lamp-glow {
-    position: absolute;
-    top: 118px;
-    left: 50%;
-    width: min(72vw, 520px);
-    height: min(52vh, 420px);
-    background: radial-gradient(
-        ellipse at center top,
-        rgba(255, 220, 150, 0.42) 0%,
-        rgba(255, 190, 110, 0.18) 34%,
-        rgba(255, 170, 90, 0.06) 58%,
-        transparent 76%
-    );
-    transform: translateX(-50%);
-    pointer-events: none;
+.home-intro-overlay--blackout .home-intro-lamp-wrap {
     opacity: 0;
-    transition: opacity 2s ease 0.4s;
+    transform: translateX(-50%) translateY(-10px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
-.home-intro-overlay--lamp .home-intro-lamp-glow,
-.home-intro-overlay--text .home-intro-lamp-glow,
-.home-intro-overlay--hold .home-intro-lamp-glow,
-.home-intro-overlay--reveal .home-intro-lamp-glow {
+.home-intro-lamp-image {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 28px rgba(255, 208, 120, 0.45));
+}
+
+.home-intro-lamp-beam {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    z-index: 1;
+    width: min(92vw, 920px);
+    height: min(72vh, 640px);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 2.2s ease 0.35s;
+    clip-path: polygon(50% 0%, 10% 100%, 90% 100%);
+    background:
+        conic-gradient(
+            from 180deg at 50% 0%,
+            transparent 208deg,
+            rgba(255, 214, 138, 0.05) 222deg,
+            rgba(255, 204, 124, 0.3) 252deg,
+            rgba(255, 196, 108, 0.44) 270deg,
+            rgba(255, 204, 124, 0.3) 288deg,
+            rgba(255, 214, 138, 0.05) 318deg,
+            transparent 332deg
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255, 214, 145, 0.42) 0%,
+            rgba(255, 194, 112, 0.18) 38%,
+            rgba(255, 176, 92, 0.06) 62%,
+            transparent 90%
+        );
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+
+.home-intro-overlay--lamp .home-intro-lamp-beam,
+.home-intro-overlay--text .home-intro-lamp-beam,
+.home-intro-overlay--hold .home-intro-lamp-beam {
     opacity: 1;
+}
+
+.home-intro-overlay--blackout .home-intro-lamp-beam {
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 
 .home-intro-text {
     position: relative;
     z-index: 1;
     max-width: min(760px, calc(100% - 48px));
-    margin: 120px auto 0;
+    margin: min(48vh, 420px) auto 0;
     padding: 0 12px;
     color: #f8e8c8;
     font-size: clamp(1.05rem, 2.8vw, 1.45rem);
@@ -523,31 +628,13 @@ footer p {
 }
 
 .home-intro-overlay--text .home-intro-text,
-.home-intro-overlay--hold .home-intro-text,
-.home-intro-overlay--reveal .home-intro-text {
+.home-intro-overlay--hold .home-intro-text {
     opacity: 1;
 }
 
-.home-intro-lamp-cord {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2px;
-    height: 72px;
-    background: linear-gradient(180deg, #2a241d, #6d5a3d);
-    transform: translateX(-50%);
-}
-
-.home-intro-lamp-shade {
-    position: absolute;
-    top: 68px;
-    left: 50%;
-    width: 120px;
-    height: 58px;
-    background: linear-gradient(180deg, #d8c39a 0%, #8f7348 100%);
-    border-radius: 58px 58px 18px 18px;
-    transform: translateX(-50%);
-    box-shadow: inset 0 -8px 14px rgba(0, 0, 0, 0.28);
+.home-intro-overlay--blackout .home-intro-text {
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 
 body[data-page="project-1"] #root {

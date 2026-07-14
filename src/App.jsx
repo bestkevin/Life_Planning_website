@@ -36,6 +36,21 @@ const liquidGlassDefaults = {
     shadowOffsetY: 10,
 };
 
+const HOME_REVEAL_PHASE = {
+    BLACK: "black",
+    BACKGROUND: "background",
+    PANEL: "panel",
+    TEXT: "text",
+    DONE: "done",
+};
+
+const HOME_REVEAL_TIMING = {
+    [HOME_REVEAL_PHASE.BLACK]: 700,
+    [HOME_REVEAL_PHASE.BACKGROUND]: 3200,
+    [HOME_REVEAL_PHASE.PANEL]: 2400,
+    [HOME_REVEAL_PHASE.TEXT]: 2600,
+};
+
 function getPageFromHash() {
     const hash = window.location.hash || "#home";
     const matchedPage = navigation.find((item) => item.href === hash);
@@ -50,8 +65,10 @@ function App() {
     const [activePage, setActivePage] = useState(getPageFromHash);
     const [rainReady, setRainReady] = useState(false);
     const [rainEnabled, setRainEnabled] = useState(false);
-    const [showHomeIntro, setShowHomeIntro] = useState(
-        () => !sessionStorage.getItem("homeIntroSeen"),
+    const introSeen = Boolean(sessionStorage.getItem("homeIntroSeen"));
+    const [showHomeIntro, setShowHomeIntro] = useState(() => !introSeen);
+    const [homeRevealPhase, setHomeRevealPhase] = useState(() =>
+        introSeen ? HOME_REVEAL_PHASE.DONE : null,
     );
 
     useEffect(() => {
@@ -69,6 +86,23 @@ function App() {
         document.body.dataset.page = activePage;
         return () => delete document.body.dataset.page;
     }, [activePage]);
+
+    useEffect(() => {
+        if (activePage !== "home") {
+            delete document.body.dataset.homeReveal;
+            return undefined;
+        }
+
+        if (showHomeIntro) {
+            document.body.dataset.homeReveal = "intro";
+        } else if (homeRevealPhase) {
+            document.body.dataset.homeReveal = homeRevealPhase;
+        } else {
+            delete document.body.dataset.homeReveal;
+        }
+
+        return () => delete document.body.dataset.homeReveal;
+    }, [activePage, showHomeIntro, homeRevealPhase]);
 
     useEffect(() => {
         const root = mainRef.current;
@@ -114,36 +148,59 @@ function App() {
     }, [activePage]);
 
     useEffect(() => {
+        if (activePage !== "home" || !homeRevealPhase) return undefined;
+
+        const nextPhase = {
+            [HOME_REVEAL_PHASE.BLACK]: HOME_REVEAL_PHASE.BACKGROUND,
+            [HOME_REVEAL_PHASE.BACKGROUND]: HOME_REVEAL_PHASE.PANEL,
+            [HOME_REVEAL_PHASE.PANEL]: HOME_REVEAL_PHASE.TEXT,
+            [HOME_REVEAL_PHASE.TEXT]: HOME_REVEAL_PHASE.DONE,
+        }[homeRevealPhase];
+
+        if (!nextPhase) return undefined;
+
+        const revealTimer = window.setTimeout(
+            () => setHomeRevealPhase(nextPhase),
+            HOME_REVEAL_TIMING[homeRevealPhase],
+        );
+
+        return () => window.clearTimeout(revealTimer);
+    }, [activePage, homeRevealPhase]);
+
+    useEffect(() => {
         if (activePage !== "home") {
             setRainReady(false);
             setRainEnabled(false);
             return undefined;
         }
 
-        if (showHomeIntro) {
+        if (showHomeIntro || homeRevealPhase !== HOME_REVEAL_PHASE.DONE) {
             setRainEnabled(false);
             return undefined;
         }
 
-        const rainTimer = window.setTimeout(() => setRainEnabled(true), 2000);
+        const rainTimer = window.setTimeout(() => setRainEnabled(true), 3000);
         return () => window.clearTimeout(rainTimer);
-    }, [activePage, showHomeIntro]);
+    }, [activePage, showHomeIntro, homeRevealPhase]);
 
-    const handleHomeIntroComplete = () => {
+    const handleHomeBlackoutComplete = () => {
         sessionStorage.setItem("homeIntroSeen", "1");
         setShowHomeIntro(false);
+        setHomeRevealPhase(HOME_REVEAL_PHASE.BLACK);
     };
 
     const handleRainFrame = (target) => {
         liquidGlassRef.current?.markChanged(target);
     };
 
-    const hideChrome = showHomeIntro && activePage === "home";
+    const hideChrome =
+        activePage === "home" &&
+        (showHomeIntro || homeRevealPhase !== HOME_REVEAL_PHASE.DONE);
 
     return (
         <>
             {showHomeIntro && activePage === "home" && (
-                <HomeIntroOverlay onComplete={handleHomeIntroComplete} />
+                <HomeIntroOverlay onBlackoutComplete={handleHomeBlackoutComplete} />
             )}
 
             <header className={hideChrome ? "site-chrome-hidden" : ""}>
@@ -177,7 +234,11 @@ function App() {
                 className={`liquid-root ${activePage === "project-1" ? "liquid-root--project-one" : ""}`}
                 data-page={activePage}
                 data-rain-ready={activePage === "home" && rainReady ? "true" : undefined}
-                data-home-intro={showHomeIntro && activePage === "home" ? "true" : undefined}
+                data-home-intro={
+                    activePage === "home" && homeRevealPhase !== HOME_REVEAL_PHASE.DONE
+                        ? "true"
+                        : undefined
+                }
             >
                 <div className="liquid-scene" aria-hidden="true">
                     {activePage === "home" && rainEnabled && (
@@ -189,25 +250,24 @@ function App() {
                 </div>
 
                 {activePage === "home" && (
-                    <section
-                        id="home"
-                        className={`liquid-glass-panel page-enter ${showHomeIntro ? "home-panel-hidden" : ""}`}
-                    >
-                        <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
-                            <Star aria-hidden="true" size={16} />
-                            向理想生活缓缓生长
+                    <section id="home" className="liquid-glass-panel page-enter">
+                        <div className="home-panel-content">
+                            <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-[#b89659]/30 bg-[#2d2018]/55 px-4 py-2 text-sm tracking-[0.16em] text-[#d5b77d] shadow-sm backdrop-blur">
+                                <Star aria-hidden="true" size={16} />
+                                向理想生活缓缓生长
+                            </div>
+                            <h1>人生规划</h1>
+                            <p>
+                                在属于你的节奏中看见方向，把珍视的愿景化为今日可以完成的小事。
+                            </p>
+                            <a
+                                className="button mx-auto mt-8 w-fit"
+                                href="#project-1"
+                            >
+                                查看我的计划
+                                <ArrowRight aria-hidden="true" size={18} />
+                            </a>
                         </div>
-                        <h1>人生规划</h1>
-                        <p>
-                            在属于你的节奏中看见方向，把珍视的愿景化为今日可以完成的小事。
-                        </p>
-                        <a
-                            className="button mx-auto mt-8 w-fit"
-                            href="#project-1"
-                        >
-                            查看我的计划
-                            <ArrowRight aria-hidden="true" size={18} />
-                        </a>
                     </section>
                 )}
 
