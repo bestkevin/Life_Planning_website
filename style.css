@@ -691,7 +691,7 @@ body[data-page="project-1"] #root {
 
 body[data-page="project-2"] #root {
     background:
-        linear-gradient(rgba(4, 8, 14, 0.38), rgba(6, 10, 16, 0.52)),
+        linear-gradient(rgba(8, 5, 3, 0.42), rgba(10, 7, 4, 0.55)),
         url("./project2-bg.jpg") center / cover no-repeat fixed;
 }
 
