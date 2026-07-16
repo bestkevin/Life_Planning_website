@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import {
-    projectTwoResultCue,
     riasecCodeNames,
     riasecCodeSequence,
     riasecCoordinates,
@@ -109,21 +108,21 @@ export default function RiasecExplorer() {
     };
 
     return (
-        <section className="riasec-explorer" aria-labelledby="riasec-explorer-title">
-            <p className="riasec-explorer-cue">{projectTwoResultCue}</p>
-            <header className="riasec-explorer-header">
-                <div>
+        <div className="riasec-explorer-wrap">
+            <header className="riasec-explorer-titlebar">
+                <div className="riasec-explorer-titlebar-text">
                     <p className="riasec-explorer-eyebrow">专业生涯规划辅助工具</p>
                     <h2 id="riasec-explorer-title">霍兰德职业兴趣（RIASEC）组合探索器</h2>
-                    <p className="riasec-explorer-lead">
-                        不仅分析单一特质，更探索多维代码组合背后的跨界职业机会与特质张力。
-                    </p>
                 </div>
                 <button type="button" className="riasec-reset" onClick={resetAll}>
                     重置探索器
                 </button>
             </header>
 
+            <section
+                className="riasec-explorer"
+                aria-labelledby="riasec-explorer-title"
+            >
             <div className="riasec-explorer-grid">
                 <div className="riasec-panel">
                     <div className="riasec-panel-head">
@@ -346,11 +345,13 @@ export default function RiasecExplorer() {
                 </div>
             </div>
 
+            </section>
+
             {toast && (
                 <div className="riasec-toast" role="status">
                     {toast}
                 </div>
             )}
-        </section>
+        </div>
     );
 }
