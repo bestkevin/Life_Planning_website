@@ -1578,6 +1578,10 @@ body[data-project-two-intro="true"] footer {
     min-width: 0;
 }
 
+.project-two-sds {
+    margin-bottom: 28px;
+}
+
 .project-two-sds h2,
 .riasec-explorer h3,
 .riasec-explorer h4 {
@@ -1622,7 +1626,7 @@ body[data-project-two-intro="true"] footer {
 }
 
 .project-two-result-cue {
-    margin: 8px auto 4px;
+    margin: 56px auto 12px;
     max-width: 18em;
     color: var(--project-two-text) !important;
     font-size: clamp(1.2rem, 2.6vw, 1.7rem);
