@@ -2079,6 +2079,7 @@ body[data-project-two-intro="true"] footer {
         position: static;
         width: 100%;
         max-width: none;
+        transform: none;
     }
 
     .riasec-explorer-titlebar {
