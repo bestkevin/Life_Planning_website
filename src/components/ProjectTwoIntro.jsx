@@ -14,7 +14,8 @@ const PHASE = {
 const INTRO_SEEN_KEY = "projectTwoIntroSeen";
 const TYPE_SPEED = 96;
 const BLACK_MS = 1600;
-const PARCHMENT_MS = 5000;
+/* Parchment fades ~2.4s, hex starts at 1.4s and fades ~2.2s → hold through both. */
+const PARCHMENT_MS = 6200;
 const FAILSAFE_MS = 22000;
 
 export function hasSeenProjectTwoIntro() {

@@ -1403,7 +1403,6 @@ body[data-page="project-2"] .project-two-section.page-enter {
 .project-two-parchment {
     position: relative;
     width: min(480px, 92vw);
-    animation: project-two-parchment-in 2.8s ease-in both;
 }
 
 .project-two-parchment-filter {
@@ -1420,6 +1419,7 @@ body[data-page="project-2"] .project-two-section.page-enter {
     filter:
         url(#project-two-parchment-erode)
         drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55));
+    animation: project-two-parchment-in 2.4s ease-in both;
 }
 
 .project-two-parchment-hex {
@@ -1430,7 +1430,8 @@ body[data-page="project-2"] .project-two-section.page-enter {
     padding-top: 0;
     transform: scale(1.28);
     transform-origin: center center;
-    animation: project-two-hex-in 2.8s ease-in both;
+    /* Starts after parchment begins to appear, so the two fade in separately */
+    animation: project-two-hex-in 2.2s ease-in 1.4s both;
 }
 
 @keyframes project-two-parchment-in {
