@@ -1603,23 +1603,25 @@ body[data-project-two-intro="true"] footer {
     text-underline-offset: 3px;
 }
 
-.project-two-result-cue {
-    margin: 8px auto 0;
-    max-width: 18em;
+.riasec-explorer-cue {
+    position: sticky;
+    top: 96px;
+    z-index: 4;
+    margin: -8px -4px 18px;
+    padding: 14px 18px;
     color: var(--project-two-text) !important;
-    font-size: clamp(1.2rem, 2.6vw, 1.7rem);
-    line-height: 1.8;
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    line-height: 1.7;
     letter-spacing: 0.08em;
     text-align: center;
+    border: 1px solid rgba(190, 151, 91, 0.28);
+    border-radius: 14px;
+    background:
+        linear-gradient(180deg, rgba(42, 30, 18, 0.96), rgba(22, 16, 10, 0.94));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
     text-shadow:
         0 0 12px rgba(247, 232, 168, 0.24),
         0 0 28px rgba(230, 200, 110, 0.12);
-    animation: project-two-cue-in 1.1s ease both;
-}
-
-@keyframes project-two-cue-in {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .project-two-type-modal {
@@ -2021,7 +2023,12 @@ body[data-project-two-intro="true"] footer {
     color: #f5f0e6;
     font-size: 0.88rem;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    animation: project-two-cue-in 0.25s ease both;
+    animation: riasec-toast-in 0.25s ease both;
+}
+
+@keyframes riasec-toast-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 960px) {

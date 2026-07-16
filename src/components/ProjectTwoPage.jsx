@@ -3,7 +3,6 @@ import { useCallback, useState } from "react";
 import {
     hollandSidebarSections,
     hollandTypes,
-    projectTwoResultCue,
     SDS_TEST_URL,
 } from "../data/hollandContent.js";
 import HollandHexagon from "./HollandHexagon.jsx";
@@ -92,8 +91,6 @@ export default function ProjectTwoPage() {
                                 。
                             </p>
                         </section>
-
-                        <p className="project-two-result-cue">{projectTwoResultCue}</p>
 
                         <RiasecExplorer />
                     </div>

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import {
+    projectTwoResultCue,
     riasecCodeNames,
     riasecCodeSequence,
     riasecCoordinates,
@@ -109,6 +110,7 @@ export default function RiasecExplorer() {
 
     return (
         <section className="riasec-explorer" aria-labelledby="riasec-explorer-title">
+            <p className="riasec-explorer-cue">{projectTwoResultCue}</p>
             <header className="riasec-explorer-header">
                 <div>
                     <p className="riasec-explorer-eyebrow">专业生涯规划辅助工具</p>
