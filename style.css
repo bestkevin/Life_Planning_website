@@ -1580,30 +1580,28 @@ body[data-project-two-intro="true"] footer {
 }
 
 .project-two-sds {
-    position: relative;
     margin-bottom: 28px;
-    padding: 0;
-    overflow: visible;
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
+    padding: clamp(20px, 3vw, 32px);
+    background: rgba(10, 8, 6, 0.42) !important;
+    border: 1px solid rgba(120, 96, 64, 0.22) !important;
+    border-radius: 20px;
     box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    isolation: auto;
-    transform: none !important;
+    backdrop-filter: blur(10px) saturate(90%);
+    -webkit-backdrop-filter: blur(10px) saturate(90%);
 }
 
 .project-two-sds::before,
 .project-two-sds::after {
     display: none !important;
     content: none !important;
+    background: none !important;
+    box-shadow: none !important;
 }
 
 .project-two-sds:hover {
     transform: none !important;
+    border-color: rgba(120, 96, 64, 0.28) !important;
     box-shadow: none !important;
-    border-color: transparent !important;
 }
 
 .project-two-sds h2,
