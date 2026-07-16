@@ -149,7 +149,7 @@ export function findCareerMatch(selectedCodes, careerDatabase) {
     return { matchedData, matchType, codeStr: currentCodeStr };
 }
 
-export function buildMarkdownReport({
+export function buildTextReport({
     selectedCodes,
     codeNames,
     codeSequence,
@@ -157,51 +157,60 @@ export function buildMarkdownReport({
     matchType,
 }) {
     if (selectedCodes.length === 0) {
-        return `### 暂未生成生涯定位卡\n\n请在互动六边形中选择你的霍兰德职业兴趣核心代码。`;
+        return [
+            "暂未生成生涯定位卡",
+            "",
+            "请在互动六边形中选择你的霍兰德职业兴趣核心代码。",
+        ].join("\n");
     }
 
     const codeStr = selectedCodes.join("");
     const typeNames = selectedCodes.map((c) => codeNames[c].split(" ")[0]).join(" + ");
-    let mdText = `# 霍兰德职业兴趣生涯定位卡
-## 一、核心霍兰德特质
-- **当前生涯定位代码**：\`${codeStr}\`
-- **特质核心组合**：${typeNames}
-- **判定日期**：${new Date().toLocaleDateString("zh-CN")}
----
-## 二、特质关系解读
-`;
+    const lines = [
+        "霍兰德职业兴趣生涯定位卡",
+        "",
+        "一、核心霍兰德特质",
+        `当前生涯定位代码：${codeStr}`,
+        `特质核心组合：${typeNames}`,
+        `判定日期：${new Date().toLocaleDateString("zh-CN")}`,
+        "",
+        "二、特质关系解读",
+    ];
 
     if (selectedCodes.length >= 2) {
         const analysis = analyzeConsistency(selectedCodes, codeSequence);
-        mdText += `> **${analysis.title}**：${analysis.desc}`;
+        lines.push(`${analysis.title}：${analysis.desc}`);
     } else {
-        mdText += `> 目前仅解锁第一主导代码，建议继续探索，锁定前两项特质关联，以获得更完整的一致性分析。`;
+        lines.push(
+            "目前仅解锁第一主导代码，建议继续探索，锁定前两项特质关联，以获得更完整的一致性分析。",
+        );
     }
 
-    mdText += `
----
-## 三、推荐生涯蓝图探索
-### 建议方向：${matchedData?.title ?? "—"}（${matchType}）
-`;
+    lines.push(
+        "",
+        "三、推荐生涯蓝图探索",
+        `建议方向：${matchedData?.title ?? "—"}（${matchType}）`,
+    );
 
     if (matchedData?.desc) {
-        mdText += `\n> **方向描述**：${matchedData.desc}\n`;
+        lines.push("", `方向描述：${matchedData.desc}`);
     }
 
     if (matchedData?.jobs?.length) {
-        mdText += `\n**重点推荐典型岗位**：\n`;
+        lines.push("", "重点推荐典型岗位：");
         matchedData.jobs.forEach((job) => {
-            mdText += `- ${job.name}\n`;
+            lines.push(`- ${job.name}`);
         });
     }
 
     if (matchedData?.why) {
-        mdText += `\n**匹配原因分析**：\n> ${matchedData.why}\n`;
+        lines.push("", "匹配原因分析：", matchedData.why);
     }
 
-    mdText += `
----
-*本报告由「霍兰德职业兴趣 (RIASEC) 组合探索器」自动导出。*`;
+    lines.push(
+        "",
+        "本报告由「霍兰德职业兴趣 (RIASEC) 组合探索器」自动导出。",
+    );
 
-    return mdText;
+    return lines.join("\n");
 }

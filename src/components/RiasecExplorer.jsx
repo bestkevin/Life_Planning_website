@@ -7,7 +7,7 @@ import {
 import { careerDatabase } from "../data/riasecCareerDatabase.js";
 import {
     analyzeConsistency,
-    buildMarkdownReport,
+    buildTextReport,
     findCareerMatch,
 } from "../data/riasecFallbacks.js";
 
@@ -78,7 +78,7 @@ export default function RiasecExplorer() {
 
     const report = useMemo(
         () =>
-            buildMarkdownReport({
+            buildTextReport({
                 selectedCodes,
                 codeNames: riasecCodeNames,
                 codeSequence: riasecCodeSequence,
@@ -101,7 +101,7 @@ export default function RiasecExplorer() {
     const copyReport = async () => {
         try {
             await navigator.clipboard.writeText(report);
-            showToast("生涯定位卡已复制，可粘贴到 Markdown 编辑器。");
+            showToast("生涯定位卡已复制为文本，可直接粘贴使用。");
         } catch {
             showToast("复制失败，请手动选中报告文本。");
         }
@@ -335,7 +335,7 @@ export default function RiasecExplorer() {
 
                     <div className="riasec-report">
                         <div className="riasec-report-head">
-                            <h4>生涯定位卡（Markdown）</h4>
+                            <h4>生涯定位卡（TXT）</h4>
                             <button type="button" onClick={copyReport}>
                                 一键复制
                             </button>
