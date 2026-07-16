@@ -1580,7 +1580,30 @@ body[data-project-two-intro="true"] footer {
 }
 
 .project-two-sds {
+    position: relative;
     margin-bottom: 28px;
+    padding: 0;
+    overflow: visible;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    isolation: auto;
+    transform: none !important;
+}
+
+.project-two-sds::before,
+.project-two-sds::after {
+    display: none !important;
+    content: none !important;
+}
+
+.project-two-sds:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
 }
 
 .project-two-sds h2,

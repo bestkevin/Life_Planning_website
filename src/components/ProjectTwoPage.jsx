@@ -69,7 +69,7 @@ export default function ProjectTwoPage() {
                     </aside>
 
                     <div className="project-two-main">
-                        <section className="project-two-sds" aria-labelledby="project-two-sds-title">
+                        <div className="project-two-sds" aria-labelledby="project-two-sds-title">
                             <h2 id="project-two-sds-title">霍兰德职业兴趣测试（RIASEC）</h2>
                             <p className="project-two-sds-lead">
                                 在下方完成免费 SDS 测试，获得你的兴趣代码后再继续向下探索。
@@ -91,7 +91,7 @@ export default function ProjectTwoPage() {
                                 </a>
                                 。
                             </p>
-                        </section>
+                        </div>
 
                         <p className="project-two-result-cue">{projectTwoResultCue}</p>
 
