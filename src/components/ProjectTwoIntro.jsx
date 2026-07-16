@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { projectTwoIntroText } from "../data/hollandContent.js";
 import { useTypewriter } from "../hooks/useTypewriter.js";
-import HollandHexagon from "./HollandHexagon.jsx";
 
 const PHASE = {
     BLACK: "black",
@@ -14,8 +13,7 @@ const PHASE = {
 const INTRO_SEEN_KEY = "projectTwoIntroSeen";
 const TYPE_SPEED = 96;
 const BLACK_MS = 1600;
-/* Parchment fades ~2.4s, hex starts at 1.4s and fades ~2.2s → hold through both. */
-const PARCHMENT_MS = 6200;
+const PARCHMENT_MS = 5000;
 const FAILSAFE_MS = 22000;
 
 export function hasSeenProjectTwoIntro() {
@@ -27,7 +25,7 @@ export function markProjectTwoIntroSeen() {
 }
 
 /**
- * Black screen → typewriter → parchment + hexagon (~5s) → done.
+ * Black screen → typewriter → parchment-with-hex image (~5s) → done.
  */
 export default function ProjectTwoIntro({ onDone }) {
     const shouldPlayRef = useRef(!hasSeenProjectTwoIntro());
@@ -117,12 +115,9 @@ export default function ProjectTwoIntro({ onDone }) {
                     </svg>
                     <img
                         className="project-two-parchment-bg"
-                        src={`${import.meta.env.BASE_URL}img/project2-parchment.png`}
-                        alt=""
+                        src={`${import.meta.env.BASE_URL}img/project2-parchment-hex.png`}
+                        alt="画在羊皮纸上的霍兰德六边形"
                     />
-                    <div className="project-two-parchment-hex">
-                        <HollandHexagon interactive={false} size={360} />
-                    </div>
                 </div>
             )}
         </div>,
