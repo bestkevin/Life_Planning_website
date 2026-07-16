@@ -1498,7 +1498,7 @@ body[data-project-two-intro="true"] footer {
     max-width: 300px;
     padding: 4px;
     color: var(--project-two-text);
-    transform: translateX(18px);
+    transform: translateX(-1.4cm);
 }
 
 .project-two-hex-float {
