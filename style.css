@@ -1604,10 +1604,8 @@ body[data-project-two-intro="true"] footer {
 }
 
 .riasec-explorer-cue {
-    position: sticky;
-    top: 96px;
-    z-index: 4;
-    margin: -8px -4px 18px;
+    position: static;
+    margin: 0 0 18px;
     padding: 14px 18px;
     color: var(--project-two-text) !important;
     font-size: clamp(1.05rem, 2.2vw, 1.35rem);
