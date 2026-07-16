@@ -689,6 +689,12 @@ body[data-page="project-1"] #root {
         url("./project1-bg.jpg") center / cover no-repeat fixed;
 }
 
+body[data-page="project-2"] #root {
+    background:
+        linear-gradient(rgba(4, 8, 14, 0.38), rgba(6, 10, 16, 0.52)),
+        url("./project2-bg.jpg") center / cover no-repeat fixed;
+}
+
 .liquid-root--project-one {
     display: block;
     width: 100%;
