@@ -1598,10 +1598,10 @@ body[data-project-two-intro="true"] footer {
 
 .project-two-sds-frame {
     overflow: hidden;
-    border: 1px solid rgba(190, 151, 91, 0.28);
-    border-radius: 20px;
-    background: rgba(10, 8, 6, 0.72);
-    box-shadow: var(--shadow);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
 .project-two-sds-frame iframe {
@@ -1609,7 +1609,7 @@ body[data-project-two-intro="true"] footer {
     width: 100%;
     min-height: 720px;
     border: 0;
-    background: #111;
+    background: transparent;
 }
 
 .project-two-sds-fallback {
