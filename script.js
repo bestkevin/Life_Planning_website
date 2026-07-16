@@ -17,8 +17,8 @@ export const projects = [
     {
         id: "project-2",
         eyebrow: "PROJECT 02",
-        title: "知识花园",
-        description: "建立持续学习与定期回顾的节奏，让积累的知识逐渐连接成体系。",
+        title: "霍兰德职业兴趣—你适合什么？",
+        description: "通过 SDS 测试与 RIASEC 组合探索，认识兴趣类型，并把结果转化为可行动的方向线索。",
         progress: 42,
         icon: "BookOpen",
     },

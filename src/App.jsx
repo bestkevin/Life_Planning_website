@@ -14,6 +14,7 @@ import {
 import { navigation, projects } from "../script";
 import HomeIntroOverlay from "./components/HomeIntroOverlay.jsx";
 import ProjectOnePage from "./components/ProjectOnePage.jsx";
+import ProjectTwoPage from "./components/ProjectTwoPage.jsx";
 import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles };
@@ -135,8 +136,8 @@ function App() {
                 await document.fonts?.ready;
                 if (cancelled) return;
 
-                // Project 1 has no glass panels — skip LiquidGlass entirely.
-                if (activePage === "project-1") {
+                // Dedicated project pages have no glass panels — skip LiquidGlass.
+                if (activePage === "project-1" || activePage === "project-2") {
                     delete root.dataset.liquidReady;
                     return;
                 }
@@ -252,7 +253,13 @@ function App() {
 
             <main
                 ref={mainRef}
-                className={`liquid-root ${activePage === "project-1" ? "liquid-root--project-one" : ""}`}
+                className={`liquid-root ${
+                    activePage === "project-1"
+                        ? "liquid-root--project-one"
+                        : activePage === "project-2"
+                          ? "liquid-root--project-two"
+                          : ""
+                }`}
                 data-page={activePage}
                 data-rain-ready={activePage === "home" && rainReady ? "true" : undefined}
                 data-home-intro={
@@ -300,8 +307,19 @@ function App() {
                     </div>
                 )}
 
+                {activePage === "project-2" && (
+                    <div id="project-2" className="project-two-section page-enter">
+                        <ProjectTwoPage />
+                    </div>
+                )}
+
                 {projects
-                    .filter((project) => project.id === activePage && project.id !== "project-1")
+                    .filter(
+                        (project) =>
+                            project.id === activePage &&
+                            project.id !== "project-1" &&
+                            project.id !== "project-2",
+                    )
                     .map((project) => {
                         const Icon = icons[project.icon];
                         const isExpanded = expandedProject === project.id;
