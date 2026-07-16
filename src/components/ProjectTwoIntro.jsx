@@ -109,13 +109,18 @@ export default function ProjectTwoIntro({ onDone }) {
 
             {phase === PHASE.PARCHMENT && (
                 <div className="project-two-parchment">
+                    <svg className="project-two-parchment-filter" aria-hidden="true">
+                        <filter id="project-two-parchment-erode">
+                            <feMorphology operator="erode" radius="1.2" />
+                        </filter>
+                    </svg>
                     <img
                         className="project-two-parchment-bg"
                         src={`${import.meta.env.BASE_URL}img/project2-parchment.png`}
                         alt=""
                     />
                     <div className="project-two-parchment-hex">
-                        <HollandHexagon interactive={false} size={240} />
+                        <HollandHexagon interactive={false} size={360} />
                     </div>
                 </div>
             )}

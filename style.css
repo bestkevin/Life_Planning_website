@@ -1396,15 +1396,24 @@ body[data-page="project-2"] .project-two-section.page-enter {
 
 .project-two-parchment {
     position: relative;
-    width: min(420px, 88vw);
-    animation: project-two-parchment-in 0.9s ease-out both;
+    width: min(480px, 92vw);
+    animation: project-two-parchment-in 2.8s ease-in both;
+}
+
+.project-two-parchment-filter {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 .project-two-parchment-bg {
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55));
+    filter:
+        url(#project-two-parchment-erode)
+        drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55));
 }
 
 .project-two-parchment-hex {
@@ -1412,17 +1421,27 @@ body[data-page="project-2"] .project-two-section.page-enter {
     inset: 0;
     display: grid;
     place-items: center;
-    padding-top: 6%;
+    padding-top: 0;
+    transform: scale(1.28);
+    transform-origin: center center;
+    animation: project-two-hex-in 2.8s ease-in both;
 }
 
 @keyframes project-two-parchment-in {
     from {
         opacity: 0;
-        transform: translateY(18px) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes project-two-hex-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
