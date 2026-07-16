@@ -335,7 +335,7 @@ export default function RiasecExplorer() {
 
                     <div className="riasec-report">
                         <div className="riasec-report-head">
-                            <h4>生涯定位卡（TXT）</h4>
+                            <h4>生涯定位卡</h4>
                             <button type="button" onClick={copyReport}>
                                 一键复制
                             </button>
