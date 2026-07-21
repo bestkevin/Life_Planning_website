@@ -2610,10 +2610,10 @@ body[data-project-three-intro="true"] footer {
     position: absolute;
     left: 50%;
     top: 18%;
-    width: min(360px, 36vw);
-    padding: 16px 18px;
+    width: min(480px, 46vw);
+    padding: 22px 24px;
     border: 1px solid rgba(212, 176, 106, 0.35);
-    border-radius: 18px;
+    border-radius: 20px;
     background: rgba(18, 12, 8, 0.58);
     backdrop-filter: blur(8px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
@@ -2648,9 +2648,9 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-bubble p {
-    margin: 0 0 10px;
-    color: #f3e0a8 !important;
-    font-size: 0.92rem;
+    margin: 0 0 12px;
+    color: #ffffff !important;
+    font-size: clamp(1.05rem, 1.55vw, 1.28rem);
     line-height: 1.75;
 }
 
@@ -3093,8 +3093,13 @@ body[data-project-three-intro="true"] footer {
     .project-three-bubble {
         left: 50%;
         top: 16%;
-        width: min(88vw, 320px);
+        width: min(92vw, 420px);
+        padding: 18px 20px;
         transform: translate(-50%, -50%);
+    }
+
+    .project-three-bubble p {
+        font-size: clamp(1rem, 3.6vw, 1.15rem);
     }
 
     .project-three-cafe-links {
