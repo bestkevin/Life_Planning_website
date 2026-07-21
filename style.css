@@ -2605,7 +2605,7 @@ body[data-project-three-intro="true"] footer {
 .project-three-bubble {
     position: absolute;
     left: 50%;
-    top: 32%;
+    top: 18%;
     width: min(360px, 36vw);
     padding: 16px 18px;
     border: 1px solid rgba(212, 176, 106, 0.35);
