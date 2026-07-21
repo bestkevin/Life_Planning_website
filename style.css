@@ -2117,9 +2117,14 @@ body[data-project-two-intro="true"] footer {
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
-    padding: 108px 0 48px;
+    padding: 108px 0 0;
+    flex: 0 0 auto;
     isolation: auto;
     overflow: visible;
+}
+
+.liquid-root--project-three:has(.project-three-page--interview) {
+    padding-bottom: 48px;
 }
 
 .project-three-gutter {
@@ -2166,9 +2171,14 @@ body[data-page="project-3"] .project-three-section.page-enter {
     --p3-gold-soft: rgba(212, 176, 106, 0.72);
     --p3-cream: #f5f0e6;
     position: relative;
-    min-height: calc(100vh - 160px);
+    min-height: 0;
     color: var(--p3-gold);
     overflow: visible;
+}
+
+.project-three-page--interview {
+    min-height: calc(100vh - 160px);
+    padding-bottom: 24px;
 }
 
 .project-three-intro {
@@ -2500,6 +2510,8 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-activity {
     margin-top: 132px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .project-three-activity-title {
@@ -2509,7 +2521,7 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-activity-lead {
-    margin: 0 0 28px;
+    margin: 0 0 18px;
     color: var(--p3-gold) !important;
     font-size: clamp(1.2rem, 2.4vw, 1.45rem);
     letter-spacing: 0.04em;
@@ -2577,7 +2589,7 @@ body[data-project-three-intro="true"] footer {
 .project-three-bubble {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 32%;
     width: min(360px, 36vw);
     padding: 16px 18px;
     border: 1px solid rgba(212, 176, 106, 0.35);
@@ -2629,11 +2641,20 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-cafe-links {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    top: 4.5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 28px 48px;
-    margin: 36px 0 24px;
+    gap: 22px 48px;
+    width: max-content;
+    max-width: calc(100% - 32px);
+    margin: 0;
+    padding: 0;
+    transform: translateX(-50%);
+    pointer-events: auto;
 }
 
 .project-three-cafe-links a,
@@ -2647,6 +2668,9 @@ body[data-project-three-intro="true"] footer {
     letter-spacing: 0.04em;
     cursor: pointer;
     text-decoration: none;
+    text-shadow:
+        0 1px 8px rgba(8, 5, 3, 0.7),
+        0 0 12px rgba(8, 5, 3, 0.45);
 }
 
 .project-three-modal {
@@ -3039,9 +3063,19 @@ body[data-project-three-intro="true"] footer {
 
     .project-three-bubble {
         left: 50%;
-        top: 50%;
+        top: 30%;
         width: min(88vw, 320px);
         transform: translate(-50%, -50%);
+    }
+
+    .project-three-cafe-links {
+        top: 3.5%;
+        gap: 16px 28px;
+    }
+
+    .project-three-cafe-links a,
+    .project-three-cafe-links button {
+        font-size: 0.95rem;
     }
 
     .project-three-steam {

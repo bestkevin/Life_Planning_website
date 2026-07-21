@@ -174,6 +174,15 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                 src={`${import.meta.env.BASE_URL}${projectThreeCafeImage}`}
                                 alt="咖啡馆场景"
                             />
+                            <div className="project-three-cafe-links">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowSuitableModal(true)}
+                                >
+                                    什么是「合适的对象」？
+                                </button>
+                                <a href="#project-3-interview">如何进行访谈</a>
+                            </div>
                             <div className="project-three-steam" aria-hidden="true">
                                 <span />
                                 <span />
@@ -187,18 +196,6 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                     ))}
                                 </div>
                             )}
-                        </div>
-
-                        <div className="project-three-gutter">
-                            <div className="project-three-cafe-links">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowSuitableModal(true)}
-                                >
-                                    什么是「合适的对象」？
-                                </button>
-                                <a href="#project-3-interview">如何进行访谈</a>
-                            </div>
                         </div>
                     </section>
                 </>
