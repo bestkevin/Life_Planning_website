@@ -122,7 +122,7 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                     ))}
                                 </div>
                                 <p className="project-three-ellipsis" aria-hidden="true">
-                                    ···
+                                    ······
                                 </p>
                             </div>
                             <p className="project-three-share-lead">{projectThreeShareLead}</p>

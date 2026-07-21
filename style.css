@@ -2310,6 +2310,32 @@ body[data-project-three-intro="true"] footer {
     visibility: hidden;
 }
 
+.project-three-share,
+.project-three-activity {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.project-three-share::before,
+.project-three-share::after,
+.project-three-activity::before,
+.project-three-activity::after {
+    display: none !important;
+    content: none !important;
+}
+
+.project-three-share:hover,
+.project-three-activity:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
 .project-three-share {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 280px;
@@ -2325,13 +2351,13 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-video-panel {
-    padding: 20px;
-    border: 1px solid rgba(190, 151, 91, 0.28);
-    border-radius: 22px;
-    background: rgba(42, 28, 18, 0.38);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
 }
 
 .project-three-video-grid {
@@ -2370,12 +2396,18 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-ellipsis {
-    margin: 18px 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 28px 0 8px;
     color: var(--p3-gold) !important;
-    font-size: 2rem;
-    letter-spacing: 0.35em;
+    font-size: clamp(2.6rem, 4.5vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
     text-align: center;
-    opacity: 0.85;
+    opacity: 0.92;
 }
 
 .project-three-share-lead {
@@ -2442,19 +2474,23 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-cafe-scene {
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    min-height: 100vh;
-    overflow: hidden;
-    background: #1a120c;
+    width: fit-content;
+    max-width: min(820px, 100%);
+    margin: 0 auto;
+    overflow: visible;
+    background: transparent;
 }
 
 .project-three-cafe-img {
     display: block;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-width: min(820px, 100%);
+    max-height: min(62vh, 560px);
+    object-fit: contain;
     object-position: center;
+    border: 1px solid rgba(190, 151, 91, 0.28);
+    border-radius: 8px;
 }
 
 .project-three-steam {
@@ -2491,10 +2527,10 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-bubble {
     position: absolute;
-    left: 8%;
-    top: 18%;
-    width: min(360px, 42vw);
-    padding: 18px 20px;
+    left: 6%;
+    top: 10%;
+    width: min(300px, 48%);
+    padding: 16px 18px;
     border: 1px solid rgba(212, 176, 106, 0.35);
     border-radius: 18px;
     background: rgba(18, 12, 8, 0.58);
@@ -2911,17 +2947,18 @@ body[data-project-three-intro="true"] footer {
     }
 
     .project-three-cafe-scene {
-        min-height: 70vh;
+        max-width: 100%;
     }
 
     .project-three-cafe-img {
-        height: 70vh;
+        max-width: 100%;
+        max-height: min(52vh, 420px);
     }
 
     .project-three-bubble {
         left: 4%;
-        top: 8%;
-        width: min(88vw, 360px);
+        top: 6%;
+        width: min(88%, 300px);
     }
 
     .project-three-steam {
