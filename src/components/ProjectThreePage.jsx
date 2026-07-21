@@ -219,30 +219,7 @@ export default function ProjectThreePage({ interviewMode = false }) {
                             </div>
                             {bubbleVisible && (
                                 <div className="project-three-bubble">
-                                    <svg
-                                        className="project-three-bubble-shape"
-                                        viewBox="0 0 400 240"
-                                        preserveAspectRatio="none"
-                                        aria-hidden="true"
-                                    >
-                                        <path
-                                            className="project-three-bubble-path"
-                                            d="M28 12
-                                               H372
-                                               Q388 12 388 28
-                                               V152
-                                               Q388 168 372 168
-                                               H78
-                                               L34 224
-                                               L58 168
-                                               H28
-                                               Q12 168 12 152
-                                               V28
-                                               Q12 12 28 12
-                                               Z"
-                                        />
-                                    </svg>
-                                    <div className="project-three-bubble-content">
+                                    <div className="project-three-bubble-panel">
                                         <div
                                             className="project-three-bubble-sizer"
                                             aria-hidden="true"
@@ -270,6 +247,16 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                             ))}
                                         </div>
                                     </div>
+                                    <svg
+                                        className="project-three-bubble-tail"
+                                        viewBox="0 0 36 26"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            className="project-three-bubble-tail-path"
+                                            d="M1 1 H33 L7 25 Z"
+                                        />
+                                    </svg>
                                 </div>
                             )}
                         </div>
