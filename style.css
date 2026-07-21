@@ -2711,11 +2711,11 @@ body[data-project-three-intro="true"] footer {
 .project-three-cafe-links button {
     color: var(--p3-gold) !important;
     background: transparent;
-    border: 0 !important;
-    border-bottom: 0 !important;
+    border: 1.5px solid rgba(212, 176, 106, 0.85) !important;
+    border-radius: 12px;
     outline: none;
     box-shadow: none;
-    padding: 0;
+    padding: 10px 22px;
     margin: 0;
     font-family: "ZuhunFoshanCaideng", "字魂佛山彩灯体", "KingHwa_OldSong", serif;
     font-size: clamp(1.35rem, 2.6vw, 1.85rem);
@@ -2725,6 +2725,13 @@ body[data-project-three-intro="true"] footer {
     cursor: pointer;
     text-decoration: none;
     text-shadow: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.project-three-cafe-links a:hover,
+.project-three-cafe-links button:hover {
+    border-color: rgba(243, 224, 168, 0.95) !important;
+    background: rgba(212, 176, 106, 0.08);
 }
 
 .project-three-modal {
