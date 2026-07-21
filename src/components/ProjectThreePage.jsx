@@ -100,56 +100,59 @@ export default function ProjectThreePage({ interviewMode = false }) {
                 <>
                     <section className="project-three-share" aria-labelledby="p3-share-title">
                         <div className="project-three-gutter">
-                            <div className="project-three-share-main">
-                                <h2 id="p3-share-title">职业信息分享</h2>
-                                <div className="project-three-video-panel">
-                                    <div className="project-three-video-stage">
-                                        <div className="project-three-video-grid">
-                                            {projectThreeVideos.map((video) => (
-                                                <a
-                                                    key={video.bv}
-                                                    className="project-three-video-card"
-                                                    href={video.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    title={video.title}
-                                                >
-                                                    <img
-                                                        src={`${import.meta.env.BASE_URL}${video.cover}`}
-                                                        alt={video.title}
-                                                        loading="lazy"
-                                                    />
-                                                    <span className="project-three-video-meta">
-                                                        @{video.author} · bilibili
-                                                    </span>
-                                                </a>
-                                            ))}
+                            <div className="project-three-share-grid">
+                                <div className="project-three-share-main">
+                                    <h2 id="p3-share-title">职业信息分享</h2>
+                                    <div className="project-three-video-panel">
+                                        <div className="project-three-video-stage">
+                                            <div className="project-three-video-grid">
+                                                {projectThreeVideos.map((video) => (
+                                                    <a
+                                                        key={video.bv}
+                                                        className="project-three-video-card"
+                                                        href={video.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        title={video.title}
+                                                    >
+                                                        <img
+                                                            src={`${import.meta.env.BASE_URL}${video.cover}`}
+                                                            alt={video.title}
+                                                            loading="lazy"
+                                                        />
+                                                        <span className="project-three-video-meta">
+                                                            @{video.author} · bilibili
+                                                        </span>
+                                                    </a>
+                                                ))}
+                                            </div>
+                                            <p className="project-three-ellipsis" aria-hidden="true">
+                                                ······
+                                            </p>
                                         </div>
-                                        <p className="project-three-ellipsis" aria-hidden="true">
-                                            ······
-                                        </p>
                                     </div>
                                 </div>
-                                <p className="project-three-share-lead">{projectThreeShareLead}</p>
+
+                                <aside className="project-three-sites">
+                                    <h3>这里有一些可能有用的网站</h3>
+                                    <ul>
+                                        {projectThreeUsefulSites.map((site) => (
+                                            <li key={site.url}>
+                                                <a
+                                                    href={site.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {site.name}
+                                                </a>
+                                                <span>{site.note}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </aside>
                             </div>
 
-                            <aside className="project-three-sites">
-                                <h3>这里有一些可能有用的网站</h3>
-                                <ul>
-                                    {projectThreeUsefulSites.map((site) => (
-                                        <li key={site.url}>
-                                            <a
-                                                href={site.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                {site.name}
-                                            </a>
-                                            <span>{site.note}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </aside>
+                            <p className="project-three-share-lead">{projectThreeShareLead}</p>
                         </div>
                     </section>
 
