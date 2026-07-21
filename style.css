@@ -2611,44 +2611,41 @@ body[data-project-three-intro="true"] footer {
     left: 50%;
     top: 18%;
     width: min(480px, 46vw);
-    padding: 22px 24px;
-    border: 1px solid rgba(212, 176, 106, 0.35);
-    border-radius: 20px;
-    background: rgba(18, 12, 8, 0.58);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
     transform: translate(-50%, -50%);
     animation: project-three-bubble-in 1.4s ease both;
+    filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.42));
 }
 
-/* Seam cover — hides the border where tip meets the bubble */
-.project-three-bubble::before {
-    content: "";
+.project-three-bubble-shape {
     position: absolute;
-    left: 12px;
-    bottom: -1px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.project-three-bubble-path {
+    fill: rgba(18, 12, 8, 0.72);
+    stroke: rgba(212, 176, 106, 0.4);
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+}
+
+.project-three-bubble-content {
+    position: relative;
     z-index: 1;
-    width: 22px;
-    height: 4px;
-    background: rgba(18, 12, 8, 0.58);
-    pointer-events: none;
+    padding: 22px 24px 40px;
 }
 
-/* Connected tip — same fill as bubble, no outline split */
-.project-three-bubble::after {
-    content: "";
-    position: absolute;
-    left: 12px;
-    bottom: -15px;
-    z-index: 0;
-    width: 22px;
-    height: 18px;
-    background: rgba(18, 12, 8, 0.58);
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    pointer-events: none;
-}
-
-.project-three-bubble p {
+.project-three-bubble-content p {
     margin: 0 0 12px;
     color: #ffffff !important;
     font-size: clamp(1.05rem, 1.55vw, 1.28rem);
@@ -2656,7 +2653,7 @@ body[data-project-three-intro="true"] footer {
     min-height: 1.75em;
 }
 
-.project-three-bubble p:last-child { margin-bottom: 0; }
+.project-three-bubble-content p:last-child { margin-bottom: 0; }
 
 .project-three-bubble-caret {
     display: inline;
@@ -3109,11 +3106,14 @@ body[data-project-three-intro="true"] footer {
         left: 50%;
         top: 16%;
         width: min(92vw, 420px);
-        padding: 18px 20px;
         transform: translate(-50%, -50%);
     }
 
-    .project-three-bubble p {
+    .project-three-bubble-content {
+        padding: 18px 20px 36px;
+    }
+
+    .project-three-bubble-content p {
         font-size: clamp(1rem, 3.6vw, 1.15rem);
     }
 

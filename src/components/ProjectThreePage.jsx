@@ -205,17 +205,45 @@ export default function ProjectThreePage({ interviewMode = false }) {
                             </div>
                             {bubbleVisible && (
                                 <div className="project-three-bubble">
-                                    {bubbleTypedLines.map((line, index) => (
-                                        <p key={`bubble-line-${index}`}>
-                                            {line}
-                                            {index === bubbleTypedLines.length - 1 &&
-                                                bubbleDisplayed.length < bubbleFullText.length && (
-                                                    <span className="project-three-bubble-caret" aria-hidden="true">
-                                                        |
-                                                    </span>
-                                                )}
-                                        </p>
-                                    ))}
+                                    <svg
+                                        className="project-three-bubble-shape"
+                                        viewBox="0 0 400 240"
+                                        preserveAspectRatio="none"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            className="project-three-bubble-path"
+                                            d="M28 12
+                                               H372
+                                               Q388 12 388 28
+                                               V152
+                                               Q388 168 372 168
+                                               H78
+                                               L34 224
+                                               L58 168
+                                               H28
+                                               Q12 168 12 152
+                                               V28
+                                               Q12 12 28 12
+                                               Z"
+                                        />
+                                    </svg>
+                                    <div className="project-three-bubble-content">
+                                        {bubbleTypedLines.map((line, index) => (
+                                            <p key={`bubble-line-${index}`}>
+                                                {line}
+                                                {index === bubbleTypedLines.length - 1 &&
+                                                    bubbleDisplayed.length < bubbleFullText.length && (
+                                                        <span
+                                                            className="project-three-bubble-caret"
+                                                            aria-hidden="true"
+                                                        >
+                                                            |
+                                                        </span>
+                                                    )}
+                                            </p>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
