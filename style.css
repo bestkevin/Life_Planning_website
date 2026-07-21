@@ -2177,10 +2177,11 @@ body[data-page="project-3"] .project-three-section.page-enter {
 }
 
 .project-three-ripple {
-    position: absolute;
+    position: fixed;
     inset: 50% auto auto 50%;
-    width: min(70vw, 520px);
-    height: min(70vw, 520px);
+    z-index: 0;
+    width: 150vmax;
+    height: 150vmax;
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
@@ -2191,16 +2192,16 @@ body[data-page="project-3"] .project-three-section.page-enter {
     border: 2px solid rgba(180, 140, 70, 0.72);
     border-radius: 50%;
     opacity: 0;
-    transform: scale(0.28);
-    animation: project-three-ripple 4.8s ease-out infinite both;
+    transform: scale(0.06);
+    animation: project-three-ripple 5.6s ease-out infinite both;
 }
 
-.project-three-ripple span:nth-child(2) { animation-delay: 1.2s; }
-.project-three-ripple span:nth-child(3) { animation-delay: 2.4s; }
+.project-three-ripple span:nth-child(2) { animation-delay: 1.4s; }
+.project-three-ripple span:nth-child(3) { animation-delay: 2.8s; }
 
 @keyframes project-three-ripple {
-    0% { transform: scale(0.28); opacity: 0.85; }
-    100% { transform: scale(1.05); opacity: 0; }
+    0% { transform: scale(0.06); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 0; }
 }
 
 .project-three-intro-type-wrap--fade {
