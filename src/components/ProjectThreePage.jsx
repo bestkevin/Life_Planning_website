@@ -166,14 +166,6 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                 {activityTitle}
                             </h2>
                             <p className="project-three-activity-lead">{projectThreeActivityLead}</p>
-                        </div>
-
-                        <div className="project-three-cafe-scene" ref={cafeRef}>
-                            <img
-                                className="project-three-cafe-img"
-                                src={`${import.meta.env.BASE_URL}${projectThreeCafeImage}`}
-                                alt="咖啡馆场景"
-                            />
                             <div className="project-three-cafe-links">
                                 <button
                                     type="button"
@@ -183,6 +175,14 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                 </button>
                                 <a href="#project-3-interview">如何进行访谈</a>
                             </div>
+                        </div>
+
+                        <div className="project-three-cafe-scene" ref={cafeRef}>
+                            <img
+                                className="project-three-cafe-img"
+                                src={`${import.meta.env.BASE_URL}${projectThreeCafeImage}`}
+                                alt="咖啡馆场景"
+                            />
                             <div className="project-three-steam" aria-hidden="true">
                                 <span />
                                 <span />

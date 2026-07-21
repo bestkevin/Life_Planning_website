@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "ZuhunFoshanCaideng";
+    src: url("./fonts/ZuhunFoshanCaideng.ttf") format("truetype");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --black: #070605;
     --soft-black: #11100e;
@@ -2529,7 +2537,7 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-activity-lead {
-    margin: 0 0 18px;
+    margin: 0 0 14px;
     color: var(--p3-gold) !important;
     font-size: clamp(1.2rem, 2.4vw, 1.45rem);
     letter-spacing: 0.04em;
@@ -2656,36 +2664,38 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-cafe-links {
-    position: absolute;
-    z-index: 6;
-    left: 50%;
-    top: 4.5%;
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 22px 48px;
-    width: max-content;
-    max-width: calc(100% - 32px);
-    margin: 0;
-    padding: 0;
-    transform: translateX(-50%);
-    pointer-events: auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px 64px;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 22px;
+    padding: 0 clamp(36px, 8vw, 120px);
+    box-sizing: border-box;
 }
 
 .project-three-cafe-links a,
 .project-three-cafe-links button {
     color: var(--p3-gold) !important;
     background: transparent;
-    border: 0;
-    border-bottom: 1px solid rgba(212, 176, 106, 0.55);
-    padding: 4px 2px;
-    font-size: 1.05rem;
-    letter-spacing: 0.04em;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    font-family: "ZuhunFoshanCaideng", "字魂佛山彩灯体", "KingHwa_OldSong", serif;
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
     cursor: pointer;
     text-decoration: none;
-    text-shadow:
-        0 1px 8px rgba(8, 5, 3, 0.7),
-        0 0 12px rgba(8, 5, 3, 0.45);
+    text-shadow: none;
 }
 
 .project-three-modal {
@@ -3084,13 +3094,15 @@ body[data-project-three-intro="true"] footer {
     }
 
     .project-three-cafe-links {
-        top: 3.5%;
-        gap: 16px 28px;
+        justify-content: center;
+        gap: 16px 36px;
+        margin-bottom: 18px;
+        padding: 0 20px;
     }
 
     .project-three-cafe-links a,
     .project-three-cafe-links button {
-        font-size: 0.95rem;
+        font-size: clamp(1.15rem, 4.2vw, 1.4rem);
     }
 
     .project-three-steam {
