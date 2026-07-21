@@ -80,12 +80,14 @@ export default function ProjectThreePage({ interviewMode = false }) {
     if (interviewMode) {
         return (
             <div className="project-three-page project-three-page--interview">
-                <a href="#project-3" className="project-three-back" aria-label="返回项目3">
-                    <ArrowLeft size={20} aria-hidden="true" />
-                    <span>返回项目3</span>
-                </a>
-                <p className="project-three-interview-intro">{interviewToolkitIntro}</p>
-                <InterviewToolkit />
+                <div className="project-three-gutter">
+                    <a href="#project-3" className="project-three-back" aria-label="返回项目3">
+                        <ArrowLeft size={20} aria-hidden="true" />
+                        <span>返回项目3</span>
+                    </a>
+                    <p className="project-three-interview-intro">{interviewToolkitIntro}</p>
+                    <InterviewToolkit />
+                </div>
             </div>
         );
     }
@@ -97,56 +99,58 @@ export default function ProjectThreePage({ interviewMode = false }) {
             {introDone && (
                 <>
                     <section className="project-three-share" aria-labelledby="p3-share-title">
-                        <div className="project-three-share-main">
-                            <h2 id="p3-share-title">职业信息分享</h2>
-                            <div className="project-three-video-panel">
-                                <div className="project-three-video-stage">
-                                    <div className="project-three-video-grid">
-                                        {projectThreeVideos.map((video) => (
+                        <div className="project-three-gutter">
+                            <div className="project-three-share-main">
+                                <h2 id="p3-share-title">职业信息分享</h2>
+                                <div className="project-three-video-panel">
+                                    <div className="project-three-video-stage">
+                                        <div className="project-three-video-grid">
+                                            {projectThreeVideos.map((video) => (
+                                                <a
+                                                    key={video.bv}
+                                                    className="project-three-video-card"
+                                                    href={video.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    title={video.title}
+                                                >
+                                                    <img
+                                                        src={`${import.meta.env.BASE_URL}${video.cover}`}
+                                                        alt={video.title}
+                                                        loading="lazy"
+                                                    />
+                                                    <span className="project-three-video-meta">
+                                                        @{video.author} · bilibili
+                                                    </span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                        <p className="project-three-ellipsis" aria-hidden="true">
+                                            ······
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className="project-three-share-lead">{projectThreeShareLead}</p>
+                            </div>
+
+                            <aside className="project-three-sites">
+                                <h3>这里有一些可能有用的网站</h3>
+                                <ul>
+                                    {projectThreeUsefulSites.map((site) => (
+                                        <li key={site.url}>
                                             <a
-                                                key={video.bv}
-                                                className="project-three-video-card"
-                                                href={video.url}
+                                                href={site.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                title={video.title}
                                             >
-                                                <img
-                                                    src={`${import.meta.env.BASE_URL}${video.cover}`}
-                                                    alt={video.title}
-                                                    loading="lazy"
-                                                />
-                                                <span className="project-three-video-meta">
-                                                    @{video.author} · bilibili
-                                                </span>
+                                                {site.name}
                                             </a>
-                                        ))}
-                                    </div>
-                                    <p className="project-three-ellipsis" aria-hidden="true">
-                                        ······
-                                    </p>
-                                </div>
-                            </div>
-                            <p className="project-three-share-lead">{projectThreeShareLead}</p>
+                                            <span>{site.note}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </aside>
                         </div>
-
-                        <aside className="project-three-sites">
-                            <h3>这里有一些可能有用的网站</h3>
-                            <ul>
-                                {projectThreeUsefulSites.map((site) => (
-                                    <li key={site.url}>
-                                        <a
-                                            href={site.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {site.name}
-                                        </a>
-                                        <span>{site.note}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </aside>
                     </section>
 
                     <section
@@ -154,10 +158,12 @@ export default function ProjectThreePage({ interviewMode = false }) {
                         ref={activityRef}
                         aria-labelledby="p3-activity-title"
                     >
-                        <h2 id="p3-activity-title" className="project-three-activity-title">
-                            {activityTitle}
-                        </h2>
-                        <p className="project-three-activity-lead">{projectThreeActivityLead}</p>
+                        <div className="project-three-gutter">
+                            <h2 id="p3-activity-title" className="project-three-activity-title">
+                                {activityTitle}
+                            </h2>
+                            <p className="project-three-activity-lead">{projectThreeActivityLead}</p>
+                        </div>
 
                         <div className="project-three-cafe-scene" ref={cafeRef}>
                             <img
@@ -180,14 +186,16 @@ export default function ProjectThreePage({ interviewMode = false }) {
                             )}
                         </div>
 
-                        <div className="project-three-cafe-links">
-                            <button
-                                type="button"
-                                onClick={() => setShowSuitableModal(true)}
-                            >
-                                什么是「合适的对象」？
-                            </button>
-                            <a href="#project-3-interview">如何进行访谈</a>
+                        <div className="project-three-gutter">
+                            <div className="project-three-cafe-links">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowSuitableModal(true)}
+                                >
+                                    什么是「合适的对象」？
+                                </button>
+                                <a href="#project-3-interview">如何进行访谈</a>
+                            </div>
                         </div>
                     </section>
                 </>
