@@ -2537,7 +2537,7 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-activity-lead {
-    margin: 0 0 28px;
+    margin: 0 0 56px;
     color: var(--p3-gold) !important;
     font-size: clamp(1.2rem, 2.4vw, 1.45rem);
     letter-spacing: 0.04em;
