@@ -2601,22 +2601,29 @@ body[data-project-three-intro="true"] footer {
     animation: project-three-bubble-in 1.4s ease both;
 }
 
+/* Outer tip edge — same border color; points to bottom-left */
 .project-three-bubble::before {
-    display: none;
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: -17px;
+    width: 22px;
+    height: 18px;
+    background: rgba(212, 176, 106, 0.35);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    pointer-events: none;
 }
 
-/* Comic-style tip at bottom-left — same fill/border colors as the bubble */
+/* Inner tip fill — same background; points to bottom-left */
 .project-three-bubble::after {
     content: "";
     position: absolute;
-    left: 26px;
-    bottom: -7px;
-    width: 14px;
-    height: 14px;
+    left: 9px;
+    bottom: -15px;
+    width: 19px;
+    height: 15px;
     background: rgba(18, 12, 8, 0.58);
-    border-right: 1px solid rgba(212, 176, 106, 0.35);
-    border-bottom: 1px solid rgba(212, 176, 106, 0.35);
-    transform: rotate(45deg);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
     pointer-events: none;
 }
 
