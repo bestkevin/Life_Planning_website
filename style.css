@@ -2574,8 +2574,8 @@ body[data-project-three-intro="true"] footer {
     position: absolute;
     left: 9%;
     bottom: 34%;
-    width: 42px;
-    height: 120px;
+    width: 52px;
+    height: 140px;
     pointer-events: none;
 }
 
@@ -2583,23 +2583,27 @@ body[data-project-three-intro="true"] footer {
     position: absolute;
     bottom: 0;
     left: 50%;
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: rgba(245, 235, 210, 0.35);
-    filter: blur(3px);
-    animation: project-three-steam 3.6s ease-in infinite;
+    background: rgba(168, 120, 58, 0.72);
+    box-shadow:
+        0 0 10px rgba(120, 78, 32, 0.55),
+        0 0 18px rgba(90, 55, 22, 0.35);
+    filter: blur(2.5px);
+    animation: project-three-steam 3.4s ease-in infinite;
 }
 
-.project-three-steam span:nth-child(1) { margin-left: -12px; animation-delay: 0s; }
-.project-three-steam span:nth-child(2) { margin-left: 2px; animation-delay: 0.7s; }
-.project-three-steam span:nth-child(3) { margin-left: -4px; animation-delay: 1.4s; }
-.project-three-steam span:nth-child(4) { margin-left: 8px; animation-delay: 2.1s; }
+.project-three-steam span:nth-child(1) { margin-left: -14px; animation-delay: 0s; }
+.project-three-steam span:nth-child(2) { margin-left: 2px; animation-delay: 0.65s; }
+.project-three-steam span:nth-child(3) { margin-left: -6px; animation-delay: 1.3s; }
+.project-three-steam span:nth-child(4) { margin-left: 10px; animation-delay: 1.95s; }
 
 @keyframes project-three-steam {
-    0% { opacity: 0; transform: translateY(0) scale(0.7); }
-    25% { opacity: 0.7; }
-    100% { opacity: 0; transform: translateY(-110px) scale(1.4); }
+    0% { opacity: 0; transform: translateY(0) scale(0.65); }
+    18% { opacity: 1; }
+    55% { opacity: 0.85; }
+    100% { opacity: 0; transform: translateY(-130px) scale(1.55); }
 }
 
 .project-three-bubble {
@@ -3088,7 +3092,7 @@ body[data-project-three-intro="true"] footer {
 
     .project-three-bubble {
         left: 50%;
-        top: 30%;
+        top: 16%;
         width: min(88vw, 320px);
         transform: translate(-50%, -50%);
     }
