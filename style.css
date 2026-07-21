@@ -2363,12 +2363,24 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-video-stage {
     position: relative;
-    padding: 18px;
-    border: 1px solid rgba(190, 151, 91, 0.22);
+    padding: 20px;
+    border: 1px solid rgba(212, 176, 106, 0.42);
     border-radius: 18px;
-    background: rgba(28, 18, 12, 0.32);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background:
+        linear-gradient(
+            155deg,
+            rgba(48, 32, 20, 0.72) 0%,
+            rgba(22, 14, 10, 0.78) 55%,
+            rgba(28, 18, 12, 0.74) 100%
+        );
+    backdrop-filter: blur(14px) saturate(108%);
+    -webkit-backdrop-filter: blur(14px) saturate(108%);
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 230, 180, 0.16),
+        inset 0 -1px 0 rgba(120, 84, 40, 0.28),
+        inset 1px 0 0 rgba(190, 151, 91, 0.12),
+        inset -1px 0 0 rgba(0, 0, 0, 0.18);
 }
 
 .project-three-video-grid {
