@@ -17,6 +17,7 @@ import ProjectThreeIntro, {
 } from "./ProjectThreeIntro.jsx";
 
 const BUBBLE_TYPE_SPEED = 96;
+const BUBBLE_TYPE_DELAY_MS = 1100;
 
 function useTypeOnView(text, active, speed = 56) {
     const [displayed, setDisplayed] = useState("");
@@ -41,6 +42,7 @@ export default function ProjectThreePage({ interviewMode = false }) {
     const [introDone, setIntroDone] = useState(() => hasSeenProjectThreeIntro());
     const [showSuitableModal, setShowSuitableModal] = useState(false);
     const [bubbleVisible, setBubbleVisible] = useState(false);
+    const [bubbleReadyToType, setBubbleReadyToType] = useState(false);
     const [activityInView, setActivityInView] = useState(false);
     const cafeRef = useRef(null);
     const activityRef = useRef(null);
@@ -57,12 +59,24 @@ export default function ProjectThreePage({ interviewMode = false }) {
     );
     const { displayed: bubbleDisplayed } = useTypewriter(
         bubbleFullText,
-        bubbleVisible && !interviewMode,
+        bubbleReadyToType && !interviewMode,
         BUBBLE_TYPE_SPEED,
     );
     const bubbleTypedLines = bubbleDisplayed.split("\n");
 
     const handleIntroDone = useCallback(() => setIntroDone(true), []);
+
+    useEffect(() => {
+        if (!bubbleVisible || interviewMode) {
+            setBubbleReadyToType(false);
+            return undefined;
+        }
+        setBubbleReadyToType(false);
+        const timer = window.setTimeout(() => {
+            setBubbleReadyToType(true);
+        }, BUBBLE_TYPE_DELAY_MS);
+        return () => window.clearTimeout(timer);
+    }, [bubbleVisible, interviewMode]);
 
     useEffect(() => {
         if (!introDone || interviewMode) return undefined;
@@ -229,20 +243,32 @@ export default function ProjectThreePage({ interviewMode = false }) {
                                         />
                                     </svg>
                                     <div className="project-three-bubble-content">
-                                        {bubbleTypedLines.map((line, index) => (
-                                            <p key={`bubble-line-${index}`}>
-                                                {line}
-                                                {index === bubbleTypedLines.length - 1 &&
-                                                    bubbleDisplayed.length < bubbleFullText.length && (
-                                                        <span
-                                                            className="project-three-bubble-caret"
-                                                            aria-hidden="true"
-                                                        >
-                                                            |
-                                                        </span>
-                                                    )}
-                                            </p>
-                                        ))}
+                                        <div
+                                            className="project-three-bubble-sizer"
+                                            aria-hidden="true"
+                                        >
+                                            {projectThreeBubbleLines.map((line) => (
+                                                <p key={`bubble-size-${line}`}>{line}</p>
+                                            ))}
+                                        </div>
+                                        <div className="project-three-bubble-typed">
+                                            {bubbleTypedLines.map((line, index) => (
+                                                <p key={`bubble-line-${index}`}>
+                                                    {line}
+                                                    {index === bubbleTypedLines.length - 1 &&
+                                                        bubbleReadyToType &&
+                                                        bubbleDisplayed.length <
+                                                            bubbleFullText.length && (
+                                                            <span
+                                                                className="project-three-bubble-caret"
+                                                                aria-hidden="true"
+                                                            >
+                                                                |
+                                                            </span>
+                                                        )}
+                                                </p>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             )}

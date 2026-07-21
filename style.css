@@ -2610,7 +2610,7 @@ body[data-project-three-intro="true"] footer {
     position: absolute;
     left: 50%;
     top: 18%;
-    width: min(480px, 46vw);
+    width: min(560px, 56vw);
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -2618,7 +2618,7 @@ body[data-project-three-intro="true"] footer {
     box-shadow: none;
     backdrop-filter: none;
     transform: translate(-50%, -50%);
-    animation: project-three-bubble-in 1.4s ease both;
+    animation: project-three-bubble-in 1.1s ease both;
     filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.42));
 }
 
@@ -2642,18 +2642,31 @@ body[data-project-three-intro="true"] footer {
 .project-three-bubble-content {
     position: relative;
     z-index: 1;
-    padding: 22px 24px 40px;
+    padding: 24px 28px 48px;
 }
 
-.project-three-bubble-content p {
+.project-three-bubble-sizer {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.project-three-bubble-typed {
+    position: absolute;
+    inset: 24px 28px 48px;
+}
+
+.project-three-bubble-sizer p,
+.project-three-bubble-typed p {
     margin: 0 0 12px;
     color: #ffffff !important;
     font-size: clamp(1.05rem, 1.55vw, 1.28rem);
     line-height: 1.75;
-    min-height: 1.75em;
 }
 
-.project-three-bubble-content p:last-child { margin-bottom: 0; }
+.project-three-bubble-sizer p:last-child,
+.project-three-bubble-typed p:last-child {
+    margin-bottom: 0;
+}
 
 .project-three-bubble-caret {
     display: inline;
@@ -3105,15 +3118,20 @@ body[data-project-three-intro="true"] footer {
     .project-three-bubble {
         left: 50%;
         top: 16%;
-        width: min(92vw, 420px);
+        width: min(94vw, 480px);
         transform: translate(-50%, -50%);
     }
 
     .project-three-bubble-content {
-        padding: 18px 20px 36px;
+        padding: 18px 20px 40px;
     }
 
-    .project-three-bubble-content p {
+    .project-three-bubble-typed {
+        inset: 18px 20px 40px;
+    }
+
+    .project-three-bubble-sizer p,
+    .project-three-bubble-typed p {
         font-size: clamp(1rem, 3.6vw, 1.15rem);
     }
 
