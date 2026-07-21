@@ -2188,17 +2188,19 @@ body[data-page="project-3"] .project-three-section.page-enter {
 .project-three-ripple span {
     position: absolute;
     inset: 0;
-    border: 1px solid rgba(212, 176, 106, 0.28);
+    border: 2px solid rgba(180, 140, 70, 0.72);
     border-radius: 50%;
-    animation: project-three-ripple 4.8s ease-out infinite;
+    opacity: 0;
+    transform: scale(0.28);
+    animation: project-three-ripple 4.8s ease-out infinite both;
 }
 
 .project-three-ripple span:nth-child(2) { animation-delay: 1.2s; }
 .project-three-ripple span:nth-child(3) { animation-delay: 2.4s; }
 
 @keyframes project-three-ripple {
-    0% { transform: scale(0.35); opacity: 0.55; }
-    100% { transform: scale(1.15); opacity: 0; }
+    0% { transform: scale(0.28); opacity: 0.85; }
+    100% { transform: scale(1.05); opacity: 0; }
 }
 
 .project-three-intro-type-wrap--fade {
