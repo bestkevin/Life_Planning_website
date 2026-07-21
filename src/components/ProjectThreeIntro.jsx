@@ -148,6 +148,15 @@ export default function ProjectThreeIntro({ onDone }) {
                             : ""
                     }`}
                 >
+                    {(phase === PHASE.TYPE ||
+                        phase === PHASE.HOLD ||
+                        phase === PHASE.FADE_TEXT) && (
+                        <div className="project-three-ripple" aria-hidden="true">
+                            <span />
+                            <span />
+                            <span />
+                        </div>
+                    )}
                     <p className="project-three-intro-type">
                         {phase === PHASE.HOLD ||
                         phase === PHASE.FADE_TEXT ||
