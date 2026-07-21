@@ -2686,7 +2686,7 @@ body[data-project-three-intro="true"] footer {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 18px 72px;
+    gap: 18px 120px;
     width: 100%;
     max-width: none;
     margin: 0 0 22px;
@@ -3119,7 +3119,7 @@ body[data-project-three-intro="true"] footer {
 
     .project-three-cafe-links {
         justify-content: center;
-        gap: 16px 36px;
+        gap: 16px 56px;
         margin-bottom: 18px;
         padding: 0 20px;
     }
