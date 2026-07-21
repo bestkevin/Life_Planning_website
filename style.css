@@ -2374,6 +2374,14 @@ body[data-project-three-intro="true"] footer {
     letter-spacing: 0.06em;
 }
 
+.project-three-sites h3 {
+    color: #f3e0a8 !important;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 12px rgba(243, 224, 168, 0.22);
+}
+
 .project-three-video-panel {
     padding: 0;
     border: 0;
