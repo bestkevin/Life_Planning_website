@@ -2227,8 +2227,8 @@ body[data-page="project-3"] .project-three-section.page-enter {
 
 .project-three-photo-stack {
     position: relative;
-    width: min(520px, 86vw);
-    height: min(560px, 78vh);
+    width: min(560px, 88vw);
+    height: min(580px, 80vh);
 }
 
 .project-three-photo-stack--fade {
@@ -2242,28 +2242,35 @@ body[data-page="project-3"] .project-three-section.page-enter {
 
 .project-three-photo-card {
     position: absolute;
-    inset: 6% 8%;
-    width: 84%;
-    height: 84%;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    max-width: min(420px, 78vw);
+    max-height: min(480px, 68vh);
     object-fit: contain;
-    object-position: center;
     background: transparent;
-    border: 1px solid rgba(212, 176, 106, 0.35);
-    border-radius: 10px;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border: 2px solid rgba(212, 176, 106, 0.78);
+    border-radius: 6px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
     transform:
+        translate(-50%, -50%)
         rotate(calc((var(--stack-i, 0) - 2) * 4deg))
-        translateY(calc(var(--stack-i, 0) * -6px));
+        translateY(calc(var(--stack-i, 0) * -8px));
     animation: project-three-photo-in 0.7s ease both;
 }
 
 @keyframes project-three-photo-in {
-    from { opacity: 0; transform: translateY(28px) scale(0.94); }
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.94);
+    }
     to {
         opacity: 1;
         transform:
+            translate(-50%, -50%)
             rotate(calc((var(--stack-i, 0) - 2) * 4deg))
-            translateY(calc(var(--stack-i, 0) * -6px));
+            translateY(calc(var(--stack-i, 0) * -8px));
     }
 }
 
