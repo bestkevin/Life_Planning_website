@@ -2498,20 +2498,21 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-activity {
-    margin-top: 72px;
+    margin-top: 132px;
 }
 
 .project-three-activity-title {
     min-height: 1.4em;
     color: var(--p3-cream) !important;
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-size: clamp(1.75rem, 3.8vw, 2.55rem);
 }
 
 .project-three-activity-lead {
     margin: 0 0 28px;
     color: var(--p3-gold) !important;
-    font-size: 1.05rem;
+    font-size: clamp(1.2rem, 2.4vw, 1.45rem);
     letter-spacing: 0.04em;
+    line-height: 1.65;
 }
 
 .project-three-cafe-scene {
@@ -2542,7 +2543,7 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-steam {
     position: absolute;
-    left: 18%;
+    left: 9%;
     bottom: 34%;
     width: 42px;
     height: 120px;
@@ -2574,7 +2575,7 @@ body[data-project-three-intro="true"] footer {
 
 .project-three-bubble {
     position: absolute;
-    left: 8%;
+    left: 2%;
     top: 14%;
     width: min(360px, 36vw);
     padding: 16px 18px;
@@ -3005,13 +3006,13 @@ body[data-project-three-intro="true"] footer {
     }
 
     .project-three-bubble {
-        left: 4%;
+        left: 1%;
         top: 8%;
         width: min(88vw, 320px);
     }
 
     .project-three-steam {
-        left: 16%;
+        left: 6%;
         bottom: 30%;
     }
 
