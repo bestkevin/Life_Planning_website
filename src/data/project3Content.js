@@ -1,7 +1,7 @@
 export const projectThreeIntroText =
     "要成为一个真正的智者，不仅要看清自己，还得看清周围的世界。";
 
-export const projectThreeTitleCue = "了解职业工作内容，进行职业调查";
+export const projectThreeTitleCue = "去真正了解他们吧";
 
 export const projectThreeShareLead =
     "在这个充满信息的时代，你有太多方式去了解与探索你想要的未来。";

@@ -2169,41 +2169,20 @@ body[data-page="project-3"] .project-three-section.page-enter {
     padding: 24px;
 }
 
-.project-three-intro--stack,
-.project-three-intro--title {
-    background: #1a120c;
-}
-
 .project-three-intro-type-wrap {
     position: relative;
     display: grid;
     place-items: center;
-    max-width: min(920px, 94vw);
+    max-width: min(1100px, 96vw);
 }
 
-.project-three-ripple {
-    position: absolute;
-    inset: 50% auto auto 50%;
-    width: min(70vw, 520px);
-    height: min(70vw, 520px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+.project-three-intro-type-wrap--fade {
+    animation: project-three-text-fade 2s ease forwards;
 }
 
-.project-three-ripple span {
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(212, 176, 106, 0.28);
-    border-radius: 50%;
-    animation: project-three-ripple 4.8s ease-out infinite;
-}
-
-.project-three-ripple span:nth-child(2) { animation-delay: 1.2s; }
-.project-three-ripple span:nth-child(3) { animation-delay: 2.4s; }
-
-@keyframes project-three-ripple {
-    0% { transform: scale(0.35); opacity: 0.55; }
-    100% { transform: scale(1.15); opacity: 0; }
+@keyframes project-three-text-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 .project-three-intro-type {
@@ -2211,32 +2190,44 @@ body[data-page="project-3"] .project-three-section.page-enter {
     z-index: 1;
     margin: 0;
     color: #d4b06a !important;
-    font-size: clamp(1.05rem, 2.4vw, 1.55rem);
-    line-height: 1.85;
-    letter-spacing: 0.06em;
+    font-size: clamp(0.95rem, 2.1vw, 1.45rem);
+    line-height: 1.4;
+    letter-spacing: 0.05em;
     text-align: center;
     text-shadow: 0 0 16px rgba(180, 140, 70, 0.28);
+    white-space: nowrap;
 }
 
 .project-three-photo-stack {
     position: relative;
-    width: min(360px, 72vw);
-    height: min(460px, 70vh);
+    width: min(520px, 86vw);
+    height: min(560px, 78vh);
+}
+
+.project-three-photo-stack--fade {
+    animation: project-three-photos-fade 1.8s ease forwards;
+}
+
+@keyframes project-three-photos-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 .project-three-photo-card {
     position: absolute;
-    inset: 8% 10%;
-    width: 80%;
-    height: 78%;
-    object-fit: cover;
+    inset: 6% 8%;
+    width: 84%;
+    height: 84%;
+    object-fit: contain;
+    object-position: center;
+    background: transparent;
     border: 1px solid rgba(212, 176, 106, 0.35);
     border-radius: 10px;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
     transform:
         rotate(calc((var(--stack-i, 0) - 2) * 4deg))
         translateY(calc(var(--stack-i, 0) * -6px));
-    animation: project-three-photo-in 0.55s ease both;
+    animation: project-three-photo-in 0.7s ease both;
 }
 
 @keyframes project-three-photo-in {
@@ -2250,7 +2241,7 @@ body[data-page="project-3"] .project-three-section.page-enter {
 }
 
 .project-three-intro-title {
-    position: absolute;
+    position: relative;
     z-index: 5;
     margin: 0;
     padding: 0 20px;
@@ -2258,6 +2249,7 @@ body[data-page="project-3"] .project-three-section.page-enter {
     font-size: clamp(1.35rem, 3.2vw, 2.1rem);
     letter-spacing: 0.12em;
     text-align: center;
+    white-space: nowrap;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
     animation: project-three-title-in 0.9s ease both;
 }
@@ -2265,6 +2257,18 @@ body[data-page="project-3"] .project-three-section.page-enter {
 @keyframes project-three-title-in {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 720px) {
+    .project-three-intro-type {
+        white-space: normal;
+        font-size: clamp(0.92rem, 3.8vw, 1.15rem);
+        line-height: 1.7;
+    }
+
+    .project-three-intro-title {
+        white-space: normal;
+    }
 }
 
 body[data-project-three-intro="true"] header,
