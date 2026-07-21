@@ -2537,7 +2537,7 @@ body[data-project-three-intro="true"] footer {
 }
 
 .project-three-activity-lead {
-    margin: 0 0 14px;
+    margin: 0 0 28px;
     color: var(--p3-gold) !important;
     font-size: clamp(1.2rem, 2.4vw, 1.45rem);
     letter-spacing: 0.04em;
@@ -2672,9 +2672,9 @@ body[data-project-three-intro="true"] footer {
     z-index: 2;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 18px 64px;
+    gap: 18px 32px;
     width: 100%;
     max-width: none;
     margin: 0 0 22px;
@@ -3099,7 +3099,7 @@ body[data-project-three-intro="true"] footer {
 
     .project-three-cafe-links {
         justify-content: center;
-        gap: 16px 36px;
+        gap: 16px 18px;
         margin-bottom: 18px;
         padding: 0 20px;
     }
