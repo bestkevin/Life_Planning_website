@@ -10,14 +10,16 @@ import {
     Sprout,
     Star,
     Target,
+    Users,
 } from "lucide-react";
 import { navigation, projects } from "../script";
 import HomeIntroOverlay from "./components/HomeIntroOverlay.jsx";
 import ProjectOnePage from "./components/ProjectOnePage.jsx";
 import ProjectTwoPage from "./components/ProjectTwoPage.jsx";
+import ProjectThreePage from "./components/ProjectThreePage.jsx";
 import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 
-const icons = { Home, Sprout, BookOpen, Sparkles };
+const icons = { Home, Sprout, BookOpen, Sparkles, Users };
 
 const HOME_INTRO_SEEN_KEY = "homeIntroSeen";
 
@@ -53,6 +55,7 @@ const HOME_REVEAL_PHASE = {
 
 function getPageFromHash() {
     const hash = window.location.hash || "#home";
+    if (hash === "#project-3-interview") return "project-3-interview";
     const matchedPage = navigation.find((item) => item.href === hash);
 
     return matchedPage ? matchedPage.href.slice(1) : "home";
@@ -105,7 +108,8 @@ function App() {
     }, []);
 
     useEffect(() => {
-        document.body.dataset.page = activePage;
+        document.body.dataset.page =
+            activePage === "project-3-interview" ? "project-3" : activePage;
         return () => delete document.body.dataset.page;
     }, [activePage]);
 
@@ -137,7 +141,12 @@ function App() {
                 if (cancelled) return;
 
                 // Dedicated project pages have no glass panels — skip LiquidGlass.
-                if (activePage === "project-1" || activePage === "project-2") {
+                if (
+                    activePage === "project-1" ||
+                    activePage === "project-2" ||
+                    activePage === "project-3" ||
+                    activePage === "project-3-interview"
+                ) {
                     delete root.dataset.liquidReady;
                     return;
                 }
@@ -229,19 +238,20 @@ function App() {
                 <nav aria-label="主导航">
                     {navigation.map((item) => {
                         const Icon = icons[item.icon];
+                        const pageId = item.href.slice(1);
+                        const isActive =
+                            activePage === pageId ||
+                            (pageId === "project-3" &&
+                                activePage === "project-3-interview");
 
                         return (
                             <a
                                 key={item.href}
                                 href={item.href}
                                 className={`flex items-center gap-2 ${
-                                    activePage === item.href.slice(1)
-                                        ? "nav-link-active"
-                                        : ""
+                                    isActive ? "nav-link-active" : ""
                                 }`}
-                                aria-current={
-                                    activePage === item.href.slice(1) ? "page" : undefined
-                                }
+                                aria-current={isActive ? "page" : undefined}
                             >
                                 <Icon aria-hidden="true" size={17} strokeWidth={1.8} />
                                 <span>{item.label}</span>
@@ -258,9 +268,14 @@ function App() {
                         ? "liquid-root--project-one"
                         : activePage === "project-2"
                           ? "liquid-root--project-two"
-                          : ""
+                          : activePage === "project-3" ||
+                              activePage === "project-3-interview"
+                            ? "liquid-root--project-three"
+                            : ""
                 }`}
-                data-page={activePage}
+                data-page={
+                    activePage === "project-3-interview" ? "project-3" : activePage
+                }
                 data-rain-ready={activePage === "home" && rainReady ? "true" : undefined}
                 data-home-intro={
                     activePage === "home" && homeRevealPhase !== HOME_REVEAL_PHASE.DONE
@@ -313,12 +328,28 @@ function App() {
                     </div>
                 )}
 
+                {activePage === "project-3" && (
+                    <div id="project-3" className="project-three-section page-enter">
+                        <ProjectThreePage />
+                    </div>
+                )}
+
+                {activePage === "project-3-interview" && (
+                    <div
+                        id="project-3-interview"
+                        className="project-three-section page-enter"
+                    >
+                        <ProjectThreePage interviewMode />
+                    </div>
+                )}
+
                 {projects
                     .filter(
                         (project) =>
                             project.id === activePage &&
                             project.id !== "project-1" &&
-                            project.id !== "project-2",
+                            project.id !== "project-2" &&
+                            project.id !== "project-3",
                     )
                     .map((project) => {
                         const Icon = icons[project.icon];
