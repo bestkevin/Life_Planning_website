@@ -1,5 +1,5 @@
 import { ArrowLeft, X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
     interviewToolkitIntro,
     projectThreeActivityLead,
@@ -10,10 +10,13 @@ import {
     projectThreeUsefulSites,
 } from "../data/project3Content.js";
 import { projectThreeVideos } from "../data/project3Videos.js";
+import { useTypewriter } from "../hooks/useTypewriter.js";
 import InterviewToolkit from "./InterviewToolkit.jsx";
 import ProjectThreeIntro, {
     hasSeenProjectThreeIntro,
 } from "./ProjectThreeIntro.jsx";
+
+const BUBBLE_TYPE_SPEED = 96;
 
 function useTypeOnView(text, active, speed = 56) {
     const [displayed, setDisplayed] = useState("");
@@ -47,6 +50,17 @@ export default function ProjectThreePage({ interviewMode = false }) {
         introDone && activityInView && !interviewMode,
         64,
     );
+
+    const bubbleFullText = useMemo(
+        () => projectThreeBubbleLines.join("\n"),
+        [],
+    );
+    const { displayed: bubbleDisplayed } = useTypewriter(
+        bubbleFullText,
+        bubbleVisible && !interviewMode,
+        BUBBLE_TYPE_SPEED,
+    );
+    const bubbleTypedLines = bubbleDisplayed.split("\n");
 
     const handleIntroDone = useCallback(() => setIntroDone(true), []);
 
@@ -191,8 +205,16 @@ export default function ProjectThreePage({ interviewMode = false }) {
                             </div>
                             {bubbleVisible && (
                                 <div className="project-three-bubble">
-                                    {projectThreeBubbleLines.map((line) => (
-                                        <p key={line}>{line}</p>
+                                    {bubbleTypedLines.map((line, index) => (
+                                        <p key={`bubble-line-${index}`}>
+                                            {line}
+                                            {index === bubbleTypedLines.length - 1 &&
+                                                bubbleDisplayed.length < bubbleFullText.length && (
+                                                    <span className="project-three-bubble-caret" aria-hidden="true">
+                                                        |
+                                                    </span>
+                                                )}
+                                        </p>
                                     ))}
                                 </div>
                             )}
