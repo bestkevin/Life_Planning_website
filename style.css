@@ -2382,6 +2382,18 @@ body[data-project-three-intro="true"] footer {
     letter-spacing: 0.06em;
 }
 
+.project-three-share-main h2 {
+    margin-bottom: 10px;
+}
+
+.project-three-share-tagline {
+    margin: 0 0 20px;
+    color: var(--p3-gold-soft) !important;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
 .project-three-sites h3 {
     color: #f3e0a8 !important;
     font-size: clamp(1.15rem, 1.8vw, 1.4rem);

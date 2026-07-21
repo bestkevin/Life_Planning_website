@@ -131,6 +131,9 @@ export default function ProjectThreePage({ interviewMode = false }) {
                             <div className="project-three-share-grid">
                                 <div className="project-three-share-main">
                                     <h2 id="p3-share-title">职业信息分享</h2>
+                                    <p className="project-three-share-tagline">
+                                        Digital literacy is important.
+                                    </p>
                                     <div className="project-three-video-panel">
                                         <div className="project-three-video-stage">
                                             <div className="project-three-video-grid">
