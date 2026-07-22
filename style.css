@@ -1644,7 +1644,7 @@ body[data-project-two-intro="true"] footer {
 }
 
 .project-two-result-cue {
-    margin: 56px auto 12px;
+    margin: 56px auto 36px;
     max-width: 18em;
     color: var(--project-two-text) !important;
     font-size: clamp(1.2rem, 2.6vw, 1.7rem);
@@ -1764,22 +1764,30 @@ body[data-project-two-intro="true"] footer {
 .riasec-explorer-wrap {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 28px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .riasec-explorer-titlebar {
+    position: static;
+    z-index: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 14px 18px;
-    margin: 0 0 18px;
-    padding: 0 0 16px;
-    border: 0;
-    border-bottom: 1px solid rgba(190, 151, 91, 0.28);
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 16px 20px;
+    border: 1px solid rgba(190, 151, 91, 0.35);
+    border-radius: 16px;
+    background:
+        linear-gradient(165deg, rgba(48, 34, 20, 0.96), rgba(18, 12, 8, 0.96));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
 .riasec-explorer-titlebar-text {
@@ -3343,32 +3351,39 @@ body[data-project-three-intro="true"] footer {
 
 .vinyl-disc-label {
     position: absolute;
-    inset: 34%;
+    inset: 30%;
     display: grid;
     place-items: center;
-    padding: 6px 4px;
-    overflow: hidden;
-    color: #f3e0a8;
-    font-size: 0.52rem;
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: 0.01em;
-    text-align: center;
+    padding: 10px 8px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 30%, #8c5a2f, #4a2d16 70%);
     box-shadow: inset 0 0 0 1px rgba(255, 220, 160, 0.25);
+}
+
+.vinyl-disc-title {
+    display: block;
+    max-width: 100%;
+    color: #f3e0a8;
+    font-size: 0.52rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    word-break: break-word;
 }
 
 .vinyl-disc-hub {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 10px;
-    height: 10px;
+    z-index: 1;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #d8c39a;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 0 2px rgba(20, 12, 8, 0.85);
+    pointer-events: none;
 }
 
 .vinyl-disc.is-spinning {

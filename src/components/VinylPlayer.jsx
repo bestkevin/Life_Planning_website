@@ -142,7 +142,9 @@ export default function VinylPlayer() {
                     onClick={toggleByClick}
                 >
                     <span className="vinyl-disc-grooves" aria-hidden="true" />
-                    <span className="vinyl-disc-label">{track.title}</span>
+                    <span className="vinyl-disc-label">
+                        <span className="vinyl-disc-title">{track.title}</span>
+                    </span>
                     <span className="vinyl-disc-hub" aria-hidden="true" />
                 </button>
 
