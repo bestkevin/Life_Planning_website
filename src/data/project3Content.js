@@ -36,6 +36,11 @@ export const projectThreeSuitableCriteria = [
 
 export const projectThreeUsefulSites = [
     {
+        name: "教育局生涯规划资讯网站",
+        url: "https://lifeplanning.edb.gov.hk/tc/",
+        note: "升学、职业与生涯规划资讯",
+    },
+    {
         name: "国家职业资格目录",
         url: "http://www.mohrss.gov.cn/",
         note: "了解职业资格与政策脉络",
@@ -51,11 +56,6 @@ export const projectThreeUsefulSites = [
         note: "岗位描述与能力要求",
     },
     {
-        name: "前程无忧",
-        url: "https://www.51job.com/",
-        note: "行业岗位与招聘趋势",
-    },
-    {
         name: "脉脉",
         url: "https://maimai.cn/",
         note: "职场人真实讨论与内推线索",
@@ -64,11 +64,6 @@ export const projectThreeUsefulSites = [
         name: "LinkedIn",
         url: "https://www.linkedin.com/",
         note: "全球职业网络与人物画像",
-    },
-    {
-        name: "O*NET Online",
-        url: "https://www.onetonline.org/",
-        note: "职业任务、技能与环境数据库",
     },
     {
         name: "Bilibili 知识区",
