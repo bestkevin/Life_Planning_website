@@ -3344,6 +3344,16 @@ body[data-project-three-intro="true"] footer {
 .vinyl-disc-label {
     position: absolute;
     inset: 34%;
+    display: grid;
+    place-items: center;
+    padding: 6px 4px;
+    overflow: hidden;
+    color: #f3e0a8;
+    font-size: 0.52rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-align: center;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 30%, #8c5a2f, #4a2d16 70%);
     box-shadow: inset 0 0 0 1px rgba(255, 220, 160, 0.25);
