@@ -2843,8 +2843,15 @@ body[data-project-three-intro="true"] footer {
     align-items: center;
     gap: 8px;
     margin-bottom: 18px;
-    color: var(--p3-gold) !important;
+    color: #ffffff !important;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-decoration: none;
+}
+
+.project-three-back span {
+    color: #ffffff !important;
 }
 
 .project-three-interview-intro {
@@ -2860,16 +2867,15 @@ body[data-project-three-intro="true"] footer {
 }
 
 .interview-toolkit-header {
-    position: sticky;
-    top: 72px;
-    z-index: 40;
-    margin: 0 -8px;
-    padding: 14px 8px 16px;
-    background: rgba(18, 12, 8, 0.72);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(190, 151, 91, 0.22);
-    border-radius: 0 0 14px 14px;
+    position: static;
+    z-index: auto;
+    margin: 0;
+    padding: 0 0 8px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 0;
+    border-radius: 0;
 }
 
 .interview-toolkit-header h2 {

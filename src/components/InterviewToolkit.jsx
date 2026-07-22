@@ -220,7 +220,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
         <div className="interview-toolkit">
             <header className="interview-toolkit-header">
                 <p className="interview-toolkit-eyebrow">实践探究工具</p>
-                <h2>生涯人物访谈与职业调查行动工具包</h2>
+                <h2>职业访谈与调查活动</h2>
                 <p>
                     向外探索，打破信息茧房。本工具包指导你从「目标筹备」「定制提问」「现场笔记」到「一键导出报告」，完整体验真实的生涯研究。
                 </p>
