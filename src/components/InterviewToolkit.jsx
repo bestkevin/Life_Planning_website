@@ -145,6 +145,7 @@ export default function InterviewToolkit() {
         channel: "",
         reflectionCognitive: "",
         reflectionAction: "",
+        customSummary: "",
     });
 
     const showToast = (msg) => {
@@ -202,7 +203,14 @@ ${form.reflectionCognitive.trim() || "暂无深度认知反思..."}
 
 微行动实践指南（下周突破口）
 ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
-
+`;
+        if (form.customSummary.trim()) {
+            text += `
+四、自定义总结
+${form.customSummary.trim()}
+`;
+        }
+        text += `
 本报告由「职业访谈与调查活动」工具自动生成。`;
         return text;
     }, [answeredQuestions, form, notes, selectedQuestions]);
@@ -431,7 +439,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                     <section>
                         <h3>第四步：生成生涯调查报告与自我反思</h3>
                         <p className="interview-help">
-                            恭喜你完成了访谈！请填写下面两个核心反思问题，工具包会合并输出报告：
+                            恭喜你完成了访谈！请填写下面的反思与总结，工具包会合并输出报告：
                         </p>
                         <label className="interview-field">
                             <span>
@@ -459,6 +467,20 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                                     setForm((prev) => ({
                                         ...prev,
                                         reflectionAction: e.target.value,
+                                    }))
+                                }
+                            />
+                        </label>
+                        <label className="interview-field">
+                            <span>自定义总结</span>
+                            <textarea
+                                rows={4}
+                                value={form.customSummary}
+                                placeholder="在这里写下你对本次访谈的额外总结、启发或想补充的内容…"
+                                onChange={(e) =>
+                                    setForm((prev) => ({
+                                        ...prev,
+                                        customSummary: e.target.value,
                                     }))
                                 }
                             />
