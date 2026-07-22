@@ -221,7 +221,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
             <header className="interview-toolkit-header">
                 <p className="interview-toolkit-eyebrow">实践探究工具</p>
                 <h2>职业访谈与调查活动</h2>
-                <p>
+                <p className="interview-toolkit-lead interview-copy-box">
                     如果对如何组织一场访谈并获得自己想要的信息感到棘手，你可以试着跟随这个小工具的指引设定并执行你的访谈计划，一步步填充其中的内容，最终完成这个活动。相信你会有别样的收获。
                 </p>
             </header>

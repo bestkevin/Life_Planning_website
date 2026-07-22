@@ -113,7 +113,9 @@ export default function ProjectThreePage({ interviewMode = false }) {
                         <ArrowLeft size={20} aria-hidden="true" />
                         <span>返回项目3</span>
                     </a>
-                    <p className="project-three-interview-intro">{interviewToolkitIntro}</p>
+                    <p className="project-three-interview-intro interview-copy-box">
+                        {interviewToolkitIntro}
+                    </p>
                     <InterviewToolkit />
                 </div>
             </div>
