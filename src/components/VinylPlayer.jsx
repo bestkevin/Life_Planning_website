@@ -142,7 +142,7 @@ export default function VinylPlayer() {
                     onClick={toggleByClick}
                 >
                     <span className="vinyl-disc-grooves" aria-hidden="true" />
-                    <span className="vinyl-disc-label">{track.title}</span>
+                    <span className="vinyl-disc-label" aria-hidden="true" />
                     <span className="vinyl-disc-hub" aria-hidden="true" />
                 </button>
 
@@ -171,10 +171,6 @@ export default function VinylPlayer() {
                     <span className="vinyl-arm-head" aria-hidden="true" />
                 </div>
             </div>
-
-            <p className="vinyl-player-hint">
-                {armOn ? `循环播放 · ${track.title}` : "将唱臂放到唱片上播放"}
-            </p>
         </aside>
     );
 }

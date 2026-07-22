@@ -3296,17 +3296,14 @@ body[data-project-three-intro="true"] footer {
 /* ===== Vinyl player (global, bottom-right) ===== */
 .vinyl-player {
     position: fixed;
-    right: 18px;
-    bottom: 18px;
+    right: 12px;
+    bottom: 12px;
     z-index: 1200;
-    width: 168px;
-    padding: 12px 12px 10px;
-    color: #f1eadf;
-    background:
-        linear-gradient(160deg, rgba(28, 20, 14, 0.92), rgba(12, 9, 7, 0.94));
-    border: 1px solid rgba(190, 151, 91, 0.35);
-    border-radius: 18px;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    width: 144px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     user-select: none;
     touch-action: none;
 }
@@ -3315,7 +3312,6 @@ body[data-project-three-intro="true"] footer {
     position: relative;
     width: 144px;
     height: 144px;
-    margin: 0 auto;
 }
 
 .vinyl-disc {
@@ -3355,14 +3351,6 @@ body[data-project-three-intro="true"] footer {
 .vinyl-disc-label {
     position: absolute;
     inset: 34%;
-    display: grid;
-    place-items: center;
-    padding: 4px;
-    color: #f3e0a8;
-    font-size: 0.58rem;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
-    text-align: center;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 30%, #8c5a2f, #4a2d16 70%);
     box-shadow: inset 0 0 0 1px rgba(255, 220, 160, 0.25);
@@ -3442,21 +3430,11 @@ body[data-project-three-intro="true"] footer {
     transform: rotate(28deg);
 }
 
-.vinyl-player-hint {
-    margin: 10px 2px 0;
-    color: rgba(241, 234, 223, 0.82) !important;
-    font-size: 0.68rem;
-    line-height: 1.4;
-    letter-spacing: 0.03em;
-    text-align: center;
-}
-
 @media (max-width: 720px) {
     .vinyl-player {
-        right: 10px;
-        bottom: 10px;
-        width: 142px;
-        padding: 10px 10px 8px;
+        right: 8px;
+        bottom: 8px;
+        width: 122px;
     }
 
     .vinyl-player-deck {
