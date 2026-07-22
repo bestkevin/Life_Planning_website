@@ -2,28 +2,52 @@ import { useMemo, useState } from "react";
 
 const PRESETS = [
     {
-        label: "算法工程师 (I+C)",
-        job: "自然语言处理工程师",
-        industry: "AI人工智能",
-        interviewee: "林博士 / NLP算法组长",
+        label: "高中教师",
+        job: "高中学科教师",
+        industry: "基础教育",
+        interviewee: "张老师 / 高中语文教师",
     },
     {
-        label: "生态学研究 (R+I)",
-        job: "湿地生态保护专家",
-        industry: "自然环保与科研",
-        interviewee: "王教授 / 湿地保育站长",
+        label: "临床医生",
+        job: "住院医师 / 专科医生",
+        industry: "医疗卫生",
+        interviewee: "李医生 / 内科主治医师",
     },
     {
-        label: "课程设计师 (S+A)",
-        job: "AI素养课程设计师",
-        industry: "未来教育科技",
-        interviewee: "陈老师 / 创客空间主导者",
+        label: "软件工程师",
+        job: "软件开发工程师",
+        industry: "互联网与信息技术",
+        interviewee: "王工 / 后端开发工程师",
     },
     {
-        label: "交互设计师 (A+C)",
-        job: "UI/UX 交互设计师",
-        industry: "数字产品设计",
-        interviewee: "李工 / 产品体验总监",
+        label: "结构工程师",
+        job: "建筑结构工程师",
+        industry: "建筑设计与土木",
+        interviewee: "赵工 / 结构设计工程师",
+    },
+    {
+        label: "材料科研",
+        job: "材料科学研究员",
+        industry: "高等院校 / 科研院所",
+        interviewee: "陈博士 / 材料科学课题组",
+    },
+    {
+        label: "生物医学科研",
+        job: "生物医学科研工作者",
+        industry: "生命科学与医药研发",
+        interviewee: "刘研究员 / 实验室课题骨干",
+    },
+    {
+        label: "产品经理",
+        job: "互联网产品经理",
+        industry: "互联网产品",
+        interviewee: "周经理 / 产品负责人",
+    },
+    {
+        label: "心理咨询师",
+        job: "心理咨询师",
+        industry: "心理健康服务",
+        interviewee: "吴老师 / 注册心理咨询师",
     },
 ];
 
