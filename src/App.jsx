@@ -19,6 +19,7 @@ import ProjectTwoPage from "./components/ProjectTwoPage.jsx";
 import ProjectThreePage from "./components/ProjectThreePage.jsx";
 import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
 import VinylPlayer from "./components/VinylPlayer.jsx";
+import { projectNavCups } from "./components/NavCoffeeCups.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles, Users };
 
@@ -238,8 +239,9 @@ function App() {
             <header className={hideChrome ? "site-chrome-hidden" : ""}>
                 <nav aria-label="主导航">
                     {navigation.map((item) => {
-                        const Icon = icons[item.icon];
                         const pageId = item.href.slice(1);
+                        const CupIcon = projectNavCups[pageId];
+                        const Icon = CupIcon || icons[item.icon];
                         const isActive =
                             activePage === pageId ||
                             (pageId === "project-3" &&
