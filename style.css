@@ -2848,8 +2848,25 @@ body[data-project-three-intro="true"] footer {
     gap: 18px;
 }
 
+.interview-toolkit-header {
+    position: sticky;
+    top: 72px;
+    z-index: 40;
+    margin: 0 -8px;
+    padding: 14px 8px 16px;
+    background:
+        linear-gradient(
+            180deg,
+            #24180f 0%,
+            #1a120c 72%,
+            rgba(26, 18, 12, 0.92) 100%
+        );
+    border-bottom: 1px solid rgba(190, 151, 91, 0.18);
+}
+
 .interview-toolkit-header h2 {
     margin: 6px 0;
+    color: var(--p3-cream) !important;
 }
 
 .interview-toolkit-eyebrow {
@@ -2872,21 +2889,6 @@ body[data-project-three-intro="true"] footer {
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     padding: 8px 0 18px;
-}
-
-.interview-steps-track {
-    position: absolute;
-    left: 8%;
-    right: 8%;
-    top: 22px;
-    height: 2px;
-    background: rgba(190, 151, 91, 0.2);
-}
-
-.interview-steps-progress {
-    height: 100%;
-    background: var(--p3-gold);
-    transition: width 0.3s ease;
 }
 
 .interview-step-btn {

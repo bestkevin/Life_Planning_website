@@ -227,12 +227,6 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
             </header>
 
             <div className="interview-steps">
-                <div className="interview-steps-track" aria-hidden="true">
-                    <div
-                        className="interview-steps-progress"
-                        style={{ width: `${((step - 1) / 3) * 100}%` }}
-                    />
-                </div>
                 {STEP_LABELS.map((label, index) => {
                     const n = index + 1;
                     const state = n === step ? "active" : n < step ? "done" : "";
