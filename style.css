@@ -2149,6 +2149,16 @@ body[data-page="project-3"] #root {
     overflow-x: clip;
 }
 
+body[data-page="project-3"]:has(.project-three-page--interview) #root {
+    background-image:
+        linear-gradient(rgba(10, 7, 4, 0.42), rgba(12, 8, 5, 0.55)),
+        url("./interview-toolkit-bg.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .project-three-section {
     padding: 0;
     background: transparent !important;
@@ -2187,6 +2197,8 @@ body[data-page="project-3"] .project-three-section.page-enter {
 .project-three-page--interview {
     min-height: calc(100vh - 160px);
     padding-bottom: 24px;
+    max-width: 920px;
+    margin: 0 auto;
 }
 
 .project-three-intro {
@@ -2827,6 +2839,10 @@ body[data-project-three-intro="true"] footer {
     margin: 0 auto;
 }
 
+.project-three-page--interview .project-three-gutter {
+    width: min(920px, calc(100% - 32px));
+}
+
 .project-three-back {
     display: inline-flex;
     align-items: center;
@@ -2854,14 +2870,11 @@ body[data-project-three-intro="true"] footer {
     z-index: 40;
     margin: 0 -8px;
     padding: 14px 8px 16px;
-    background:
-        linear-gradient(
-            180deg,
-            #24180f 0%,
-            #1a120c 72%,
-            rgba(26, 18, 12, 0.92) 100%
-        );
-    border-bottom: 1px solid rgba(190, 151, 91, 0.18);
+    background: rgba(18, 12, 8, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(190, 151, 91, 0.22);
+    border-radius: 0 0 14px 14px;
 }
 
 .interview-toolkit-header h2 {
