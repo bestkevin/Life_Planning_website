@@ -224,6 +224,20 @@ ${form.customSummary.trim()}
         }));
     };
 
+    const removeCustomQuestion = (tabKey, id) => {
+        setQuestions((prev) => ({
+            ...prev,
+            [tabKey]: prev[tabKey].filter((q) => q.id !== id),
+        }));
+        setNotes((prev) => {
+            if (!(id in prev)) return prev;
+            const next = { ...prev };
+            delete next[id];
+            return next;
+        });
+        showToast("已删除该自定义问题。");
+    };
+
     const addCustomQuestion = () => {
         const text = customQuestion.trim();
         if (!text) return;
@@ -354,20 +368,38 @@ ${form.customSummary.trim()}
                         </div>
                         <div className="interview-q-pool">
                             {questions[qTab].map((q) => (
-                                <button
+                                <div
                                     key={q.id}
-                                    type="button"
-                                    className={`interview-q-card ${q.checked ? "is-checked" : ""}`}
-                                    onClick={() => toggleQuestion(qTab, q.id)}
+                                    className={`interview-q-card ${q.checked ? "is-checked" : ""} ${
+                                        q.custom ? "is-custom" : ""
+                                    }`}
                                 >
-                                    <span>{q.checked ? "✓" : "○"}</span>
-                                    <span>
-                                        {q.text}
-                                        {q.custom ? (
-                                            <em className="interview-q-custom-tag">自定义</em>
-                                        ) : null}
-                                    </span>
-                                </button>
+                                    <button
+                                        type="button"
+                                        className="interview-q-toggle"
+                                        onClick={() => toggleQuestion(qTab, q.id)}
+                                    >
+                                        <span className="interview-q-check">
+                                            {q.checked ? "✓" : "○"}
+                                        </span>
+                                        <span className="interview-q-text">
+                                            {q.text}
+                                            {q.custom ? (
+                                                <em className="interview-q-custom-tag">自定义</em>
+                                            ) : null}
+                                        </span>
+                                    </button>
+                                    {q.custom ? (
+                                        <button
+                                            type="button"
+                                            className="interview-q-delete"
+                                            aria-label="删除该自定义问题"
+                                            onClick={() => removeCustomQuestion(qTab, q.id)}
+                                        >
+                                            删除
+                                        </button>
+                                    ) : null}
+                                </div>
                             ))}
                         </div>
                         <div className="interview-custom-q">

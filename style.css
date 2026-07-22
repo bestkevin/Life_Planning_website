@@ -3090,19 +3090,61 @@ body[data-project-three-intro="true"] footer {
 .interview-q-card {
     display: flex;
     gap: 10px;
-    align-items: flex-start;
-    padding: 12px 14px;
+    align-items: center;
+    padding: 10px 12px 10px 14px;
     text-align: left;
     color: var(--p3-cream) !important;
     background: rgba(10, 8, 6, 0.45);
     border: 1px solid rgba(190, 151, 91, 0.22);
     border-radius: 12px;
-    cursor: pointer;
 }
 
 .interview-q-card.is-checked {
     border-color: rgba(212, 176, 106, 0.55);
     background: rgba(212, 176, 106, 0.1);
+}
+
+.interview-q-toggle {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 10px;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 2px 0;
+    color: inherit !important;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.interview-q-check {
+    flex: 0 0 auto;
+    margin-top: 1px;
+}
+
+.interview-q-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    line-height: 1.55;
+}
+
+.interview-q-delete {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    color: #f0d9a0 !important;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    background: rgba(18, 12, 8, 0.72);
+    border: 1px solid rgba(190, 151, 91, 0.45);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.interview-q-delete:hover {
+    border-color: rgba(230, 180, 120, 0.85);
+    background: rgba(40, 22, 14, 0.9);
 }
 
 .interview-q-custom-tag {
