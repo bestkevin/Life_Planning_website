@@ -3105,6 +3105,19 @@ body[data-project-three-intro="true"] footer {
     background: rgba(212, 176, 106, 0.1);
 }
 
+.interview-q-custom-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    color: #f0d9a0 !important;
+    font-size: 0.72rem;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(212, 176, 106, 0.45);
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
 .interview-custom-q {
     display: flex;
     gap: 10px;

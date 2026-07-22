@@ -152,20 +152,28 @@ export default function InterviewToolkit() {
         window.setTimeout(() => setToast(""), 3200);
     };
 
-    const checkedQuestions = useMemo(() => {
+    const selectedQuestions = useMemo(() => {
         const list = [];
         Object.values(questions).forEach((group) => {
-            group.filter((q) => q.checked).forEach((q) => list.push(q));
+            group.forEach((q) => {
+                if (q.checked) list.push(q);
+            });
         });
         return list;
     }, [questions]);
+
+    const answeredQuestions = useMemo(
+        () =>
+            selectedQuestions.filter((q) => Boolean(notes[q.id]?.trim())),
+        [selectedQuestions, notes],
+    );
 
     const report = useMemo(() => {
         const job = form.job.trim() || "未设定目标职业";
         const industry = form.industry.trim() || "未设定行业";
         const name = form.interviewee.trim() || "未设定访谈人物";
         const channel = form.channel.trim() || "未设定联络渠道";
-        let text = `生涯人物访谈与职业调查报告
+        let text = `职业访谈与调查活动报告
 
 一、基本情况
 - 目标职业：${job}
@@ -176,12 +184,14 @@ export default function InterviewToolkit() {
 
 二、访谈核心记录
 `;
-        if (checkedQuestions.length === 0) {
-            text += "\n（你还未在第二步勾选任何核心问题。请返回第二步选择定制）\n";
+        if (selectedQuestions.length === 0) {
+            text += "\n（你还未在第二步勾选任何问题。请返回第二步选择提问清单。）\n";
+        } else if (answeredQuestions.length === 0) {
+            text += "\n（你已勾选问题，但尚未在第三步填写任何访谈笔记。有内容的问题才会出现在报告中。）\n";
         } else {
-            checkedQuestions.forEach((q) => {
-                const ans = notes[q.id]?.trim() || "未在笔记中录入回答记录";
-                text += `\n问题：${q.text}\n回答记录：${ans}\n`;
+            answeredQuestions.forEach((q, index) => {
+                const ans = notes[q.id].trim();
+                text += `\n${index + 1}. 问题：${q.text}\n回答记录：${ans}\n`;
             });
         }
         text += `
@@ -193,9 +203,9 @@ ${form.reflectionCognitive.trim() || "暂无深度认知反思..."}
 微行动实践指南（下周突破口）
 ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
 
-本报告由「生涯人物访谈与职业调查行动工具包」自动生成。`;
+本报告由「职业访谈与调查活动」工具自动生成。`;
         return text;
-    }, [checkedQuestions, form, notes]);
+    }, [answeredQuestions, form, notes, selectedQuestions]);
 
     const toggleQuestion = (tabKey, id) => {
         setQuestions((prev) => ({
@@ -213,7 +223,12 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
             ...prev,
             [qTab]: [
                 ...prev[qTab],
-                { id: `custom-${Date.now()}`, text, checked: true },
+                {
+                    id: `custom-${Date.now()}`,
+                    text,
+                    checked: true,
+                    custom: true,
+                },
             ],
         }));
         setCustomQuestion("");
@@ -228,7 +243,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
             interviewee: preset.interviewee,
             channel: "模拟联络渠道 / 师长推荐",
         }));
-        showToast("已载入 1 组典型跨界探索预设！");
+        showToast("已载入该职业预设！");
     };
 
     const copyReport = async () => {
@@ -295,7 +310,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                             ))}
                         </div>
                         <div className="interview-presets">
-                            <p>常用跨界职业预设（快速开始）</p>
+                            <p>常用职业预设（快速开始）</p>
                             <div className="interview-preset-row">
                                 {PRESETS.map((preset) => (
                                     <button
@@ -315,7 +330,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                     <section>
                         <h3>第二步：生成/精选提问清单</h3>
                         <p className="interview-help">
-                            推荐 4 大核心方向的经典问题。点击卡片可移出/加入清单。
+                            从下方方向中勾选你想问的问题；也可以自行添加自定义问题。只有勾选中的问题会进入第三步笔记，并在填写回答后进入最终报告。
                         </p>
                         <div className="interview-tabs">
                             {TABS.map((tab) => (
@@ -338,7 +353,12 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                                     onClick={() => toggleQuestion(qTab, q.id)}
                                 >
                                     <span>{q.checked ? "✓" : "○"}</span>
-                                    {q.text}
+                                    <span>
+                                        {q.text}
+                                        {q.custom ? (
+                                            <em className="interview-q-custom-tag">自定义</em>
+                                        ) : null}
+                                    </span>
                                 </button>
                             ))}
                         </div>
@@ -346,7 +366,7 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                             <input
                                 value={customQuestion}
                                 onChange={(e) => setCustomQuestion(e.target.value)}
-                                placeholder="添加自定义问题…"
+                                placeholder="输入自定义问题后点击添加…"
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
                                         e.preventDefault();
@@ -364,29 +384,45 @@ ${form.reflectionAction.trim() || "暂无下周微行动计划..."}
                 {step === 3 && (
                     <section>
                         <h3>第三步：访谈现场实录与笔记</h3>
-                        {checkedQuestions.length === 0 ? (
+                        {selectedQuestions.length === 0 ? (
                             <p className="interview-help">
-                                你还没有在第二步选择任何问题。请返回第二步添加后记录。
+                                你还没有在第二步勾选任何问题（也未添加自定义问题）。请返回第二步勾选或添加后，再来记录访谈笔记。
                             </p>
                         ) : (
-                            <div className="interview-notes">
-                                {checkedQuestions.map((q) => (
-                                    <label key={q.id} className="interview-field">
-                                        <span>{q.text}</span>
-                                        <textarea
-                                            rows={3}
-                                            value={notes[q.id] || ""}
-                                            placeholder="点击此处录入访谈对象的回答记录…"
-                                            onChange={(e) =>
-                                                setNotes((prev) => ({
-                                                    ...prev,
-                                                    [q.id]: e.target.value,
-                                                }))
-                                            }
-                                        />
-                                    </label>
-                                ))}
-                            </div>
+                            <>
+                                <p className="interview-help">
+                                    以下表单来自第二步已勾选的问题
+                                    {selectedQuestions.some((q) => q.custom)
+                                        ? "（含你添加的自定义问题）"
+                                        : ""}
+                                    。填写回答后，有内容的问题会出现在最终报告中。
+                                </p>
+                                <div className="interview-notes">
+                                    {selectedQuestions.map((q) => (
+                                        <label key={q.id} className="interview-field">
+                                            <span>
+                                                {q.text}
+                                                {q.custom ? (
+                                                    <em className="interview-q-custom-tag">
+                                                        自定义
+                                                    </em>
+                                                ) : null}
+                                            </span>
+                                            <textarea
+                                                rows={3}
+                                                value={notes[q.id] || ""}
+                                                placeholder="点击此处录入访谈对象的回答记录…"
+                                                onChange={(e) =>
+                                                    setNotes((prev) => ({
+                                                        ...prev,
+                                                        [q.id]: e.target.value,
+                                                    }))
+                                                }
+                                            />
+                                        </label>
+                                    ))}
+                                </div>
+                            </>
                         )}
                     </section>
                 )}
