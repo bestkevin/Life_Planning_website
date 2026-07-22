@@ -2834,11 +2834,6 @@ body[data-project-three-intro="true"] footer {
     line-height: 1.65;
 }
 
-.project-three-page--interview {
-    max-width: 920px;
-    margin: 0 auto;
-}
-
 .project-three-page--interview .project-three-gutter {
     width: min(920px, calc(100% - 32px));
 }
