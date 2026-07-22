@@ -18,6 +18,7 @@ import ProjectOnePage from "./components/ProjectOnePage.jsx";
 import ProjectTwoPage from "./components/ProjectTwoPage.jsx";
 import ProjectThreePage from "./components/ProjectThreePage.jsx";
 import HeartfeltRainCanvas from "./rain/HeartfeltRainCanvas.jsx";
+import VinylPlayer from "./components/VinylPlayer.jsx";
 
 const icons = { Home, Sprout, BookOpen, Sparkles, Users };
 
@@ -467,6 +468,8 @@ function App() {
             <footer className={hideChrome ? "site-chrome-hidden" : ""}>
                 <p>© 2026 人生规划 · 制作人：LYU</p>
             </footer>
+
+            <VinylPlayer />
         </>
     );
 }
