@@ -1,8 +1,8 @@
 export const navigation = [
     { label: "首页", href: "#home", icon: "Home" },
-    { label: "项目1", href: "#project-1", icon: "Sprout" },
-    { label: "项目2", href: "#project-2", icon: "BookOpen" },
-    { label: "项目3", href: "#project-3", icon: "Users" },
+    { label: "自我", href: "#project-1", icon: "Sprout" },
+    { label: "连结", href: "#project-2", icon: "BookOpen" },
+    { label: "与探索", href: "#project-3", icon: "Users" },
     { label: "总结", href: "#summary", icon: "Sparkles" },
 ];
 
