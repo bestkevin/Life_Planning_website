@@ -109,6 +109,10 @@ export default function RiasecExplorer() {
 
     return (
         <div className="riasec-explorer-wrap">
+            <section
+                className="riasec-explorer"
+                aria-labelledby="riasec-explorer-title"
+            >
             <header className="riasec-explorer-titlebar">
                 <div className="riasec-explorer-titlebar-text">
                     <p className="riasec-explorer-eyebrow">专业生涯规划辅助工具</p>
@@ -119,10 +123,6 @@ export default function RiasecExplorer() {
                 </button>
             </header>
 
-            <section
-                className="riasec-explorer"
-                aria-labelledby="riasec-explorer-title"
-            >
             <div className="riasec-explorer-grid">
                 <div className="riasec-panel">
                     <div className="riasec-panel-head">
